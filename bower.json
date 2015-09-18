@@ -1,0 +1,20 @@
+{
+  "name": "foodbox-api-client-admin",
+  "version": "0.0.1",
+  "authors": [
+    "Rafael Motta <rafaelmotta021@gmail.com>"
+  ],
+  "description": "AngularJS rest cient for foodbox admin",
+  "main": "foodbox-api-client-admin.js",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
