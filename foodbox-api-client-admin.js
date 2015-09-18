@@ -605,7 +605,7 @@ var service = function service(Restangular, DeviseBase) {
     _createClass(LoginApi, [{
       key: 'loginWithEmail',
       value: function loginWithEmail(employee) {
-        return Restangular.service("${this.deviseBaseUrl}/sign_in").post({ employee: employee });
+        return Restangular.service(this.deviseBaseUrl + '/sign_in').post({ employee: employee });
       }
     }]);
 
