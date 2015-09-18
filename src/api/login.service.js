@@ -4,7 +4,7 @@ let service = (Restangular, DeviseBase) => {
 
     loginWithEmail(employee) {
       return Restangular
-        .service("${this.deviseBaseUrl}/sign_in")
+        .service(`${this.deviseBaseUrl}/sign_in`)
         .post({ employee: employee });
     }
   }
