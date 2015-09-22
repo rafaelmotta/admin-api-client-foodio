@@ -16,7 +16,7 @@ let service = ($q, $filter, Restangular, ApiBase) => {
       });
     }
 
-    fetchSales() {
+    fetchSales(params = {}) {
       return this._serializeBeforeSend(params).then((serializedParams) => {
         return Restangular
           .one('companies', this.company.id)
