@@ -23,7 +23,7 @@ let service = ($q, $filter, Restangular, ApiBase) => {
           .one('stores', this.store.id)
           .one('dashboard')
           .one('sales')
-          .get();
+          .get(serializedParams);
       });
     }
   }

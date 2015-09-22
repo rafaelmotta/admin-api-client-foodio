@@ -354,7 +354,7 @@ var service = function service($q, $filter, Restangular, ApiBase) {
         var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
         return this._serializeBeforeSend(params).then(function (serializedParams) {
-          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).one('dashboard').one('sales').get();
+          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).one('dashboard').one('sales').get(serializedParams);
         });
       }
     }]);
