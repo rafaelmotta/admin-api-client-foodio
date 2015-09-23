@@ -188,18 +188,18 @@ var service = function service(Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('city_operations').get();
       }
     }, {
-      key: 'getAvailable',
-      value: function getAvailable(state) {
+      key: 'fetchAvailable',
+      value: function fetchAvailable(state) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('city_operations').one('available').get({ state_id: state.id });
       }
     }, {
-      key: 'getWithDeliveryAreas',
-      value: function getWithDeliveryAreas() {
+      key: 'fetchWithDeliveryAreas',
+      value: function fetchWithDeliveryAreas() {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('city_operations').one('delivery_areas').get();
       }
     }, {
-      key: 'getAvailableDeliveryAreas',
-      value: function getAvailableDeliveryAreas(cityOperation) {
+      key: 'fetchAvailableDeliveryAreas',
+      value: function fetchAvailableDeliveryAreas(cityOperation) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('city_operations', cityOperation.id).one('available_delivery_areas').get();
       }
     }, {
