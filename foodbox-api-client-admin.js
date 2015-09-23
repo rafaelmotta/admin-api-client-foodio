@@ -13,7 +13,7 @@ angular.module('foodbox.admin.api').config(function (constants, RestangularProvi
 
 app.factory('PublicRestangular', function (constants, Restangular) {
   return Restangular.withConfig(function (RestangularConfigurer) {
-    RestangularConfigurer.setBaseUrl(constants.adminUrl);
+    RestangularConfigurer.setBaseUrl(constants.publicUrl);
   });
 });
 'use strict';
