@@ -1,9 +1,8 @@
-let service = (Restangular) => {
+let service = (PublicRestangular, Restangular) => {
 
   return new class StateApi {
-
     fetch() {
-      return Restangular
+      return PublicRestangular
         .one('states')
         .get();
     }

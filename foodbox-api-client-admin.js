@@ -1196,7 +1196,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var service = function service(Restangular) {
+var service = function service(PublicRestangular, Restangular) {
 
   return new ((function () {
     function StateApi() {
@@ -1206,7 +1206,7 @@ var service = function service(Restangular) {
     _createClass(StateApi, [{
       key: 'fetch',
       value: function fetch() {
-        return Restangular.one('states').get();
+        return PublicRestangular.one('states').get();
       }
     }]);
 
