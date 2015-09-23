@@ -10,7 +10,7 @@ let service = (Restangular, ApiBase) => {
         .get();
     }
 
-    getAvailable() {
+    fetchAvailable() {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)

@@ -421,8 +421,8 @@ var service = function service($q, Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('city_operations', cityOperation.id).one('delivery_areas', deliveryArea.id).remove();
       }
     }, {
-      key: 'getAvailable',
-      value: function getAvailable(cityOperation) {
+      key: 'fetchAvailable',
+      value: function fetchAvailable(cityOperation) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('city_operations', cityOperation.id).one('delivery_areas').one('available').get();
       }
     }, {
@@ -979,8 +979,8 @@ var service = function service(Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('order_types').get();
       }
     }, {
-      key: 'getAvailable',
-      value: function getAvailable() {
+      key: 'fetchAvailable',
+      value: function fetchAvailable() {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('order_types').one('available').get();
       }
     }, {
@@ -1065,8 +1065,8 @@ var service = function service(Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('payment_methods').get();
       }
     }, {
-      key: 'getAvailable',
-      value: function getAvailable() {
+      key: 'fetchAvailable',
+      value: function fetchAvailable() {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('payment_methods').one('available').get();
       }
     }, {

@@ -42,7 +42,7 @@ let service = ($q, Restangular, ApiBase) => {
     }
 
 
-    getAvailable(cityOperation) {
+    fetchAvailable(cityOperation) {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
