@@ -1313,12 +1313,12 @@ var service = function service(Restangular, ApiBase) {
     _createClass(StoreAddressApi, [{
       key: 'fetch',
       value: function fetch() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('adddress').get();
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('address').get();
       }
     }, {
       key: 'update',
       value: function update(storeAddress) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('adddress', storeAddress.id).patch({ address: storeAddress });
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('address', storeAddress.id).patch({ address: storeAddress });
       }
     }]);
 

@@ -6,7 +6,7 @@ let service = (Restangular, ApiBase) => {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
-        .one('adddress')
+        .one('address')
         .get();
     }
 
@@ -14,7 +14,7 @@ let service = (Restangular, ApiBase) => {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
-        .one('adddress', storeAddress.id)
+        .one('address', storeAddress.id)
         .patch({ address: storeAddress });
     }
   }
