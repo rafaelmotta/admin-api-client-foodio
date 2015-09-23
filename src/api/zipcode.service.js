@@ -1,7 +1,7 @@
-let service = (Restangular) => {
+let service = (PublicRestangular, Restangular) => {
   return new class ZipcodeApi {
     fetch(params) {
-      return Restangular
+      return PublicRestangular
         .one('zipcode')
         .get(params);
     }

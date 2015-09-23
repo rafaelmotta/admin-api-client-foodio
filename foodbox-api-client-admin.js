@@ -1,13 +1,20 @@
 'use strict';
 
-angular.module('foodbox.admin.api', []);
+var app = angular.module('foodbox.admin.api', []);
 
 angular.module('foodbox.admin.api').constant('constants', {
-  baseUrl: "http://speedy.com.br/admin"
+  publicUrl: "http://speedy.com.br",
+  adminUrl: "http://speedy.com.br/admin"
 });
 
 angular.module('foodbox.admin.api').config(function (constants, RestangularProvider) {
-  RestangularProvider.setBaseUrl(constants.baseUrl);
+  RestangularProvider.setBaseUrl(constants.adminUrl);
+});
+
+app.factory('PublicRestangular', function (constants, Restangular) {
+  return Restangular.withConfig(function (RestangularConfigurer) {
+    RestangularConfigurer.setBaseUrl(constants.adminUrl);
+  });
 });
 'use strict';
 
@@ -1444,7 +1451,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var service = function service(Restangular) {
+var service = function service(PublicRestangular, Restangular) {
   return new ((function () {
     function ZipcodeApi() {
       _classCallCheck(this, ZipcodeApi);
@@ -1453,7 +1460,7 @@ var service = function service(Restangular) {
     _createClass(ZipcodeApi, [{
       key: 'fetch',
       value: function fetch(params) {
-        return Restangular.one('zipcode').get(params);
+        return PublicRestangular.one('zipcode').get(params);
       }
     }]);
 
