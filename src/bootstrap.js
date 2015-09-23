@@ -11,6 +11,6 @@ angular.module('foodbox.admin.api').config((constants, RestangularProvider) => {
 
 app.factory('PublicRestangular', (constants, Restangular) => {
   return Restangular.withConfig((RestangularConfigurer) => {
-    RestangularConfigurer.setBaseUrl(constants.adminUrl);
+    RestangularConfigurer.setBaseUrl(constants.publicUrl);
   });
 });
