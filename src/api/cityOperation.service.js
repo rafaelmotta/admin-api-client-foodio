@@ -10,7 +10,7 @@ let service = (Restangular, ApiBase) => {
         .get();
     }
 
-    getAvailable(state) {
+    fetchAvailable(state) {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
@@ -19,7 +19,7 @@ let service = (Restangular, ApiBase) => {
         .get({ state_id: state.id });
     }
 
-    getWithDeliveryAreas() {
+    fetchWithDeliveryAreas() {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
@@ -28,7 +28,7 @@ let service = (Restangular, ApiBase) => {
         .get();
     }
 
-    getAvailableDeliveryAreas(cityOperation) {
+    fetchAvailableDeliveryAreas(cityOperation) {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
