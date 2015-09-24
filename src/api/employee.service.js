@@ -10,7 +10,7 @@ let service = (Restangular, ApiBase) => {
         .get(params);
     }
 
-    getRoles() {
+    fetchRoles() {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)

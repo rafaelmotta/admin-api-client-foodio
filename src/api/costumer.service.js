@@ -2,7 +2,7 @@ let service = (Restangular, ApiBase) => {
 
   return new class CostumerApi extends ApiBase {
 
-    get(params) {
+    fetch(params) {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
