@@ -240,8 +240,8 @@ var service = function service(Restangular, ApiBase) {
     }
 
     _createClass(CostumerApi, [{
-      key: 'get',
-      value: function get(params) {
+      key: 'fetch',
+      value: function fetch(params) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('costumers').get(params);
       }
     }, {
@@ -547,8 +547,8 @@ var service = function service(Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('employees').get(params);
       }
     }, {
-      key: 'getRoles',
-      value: function getRoles() {
+      key: 'fetchRoles',
+      value: function fetchRoles() {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('employees').one('roles').get();
       }
     }, {
