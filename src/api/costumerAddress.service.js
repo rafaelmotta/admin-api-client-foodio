@@ -24,7 +24,8 @@ let service = (Restangular, ApiBase) => {
         .one('companies', this.company.id)
         .one('stores', this.store.id)
         .one('costumers', costumer.id)
-        .patch('addresses', { address: address });
+        .one('addresses', address.id)
+        .patch({ address: address });
     }
 
     destroy(costumer, address) {
