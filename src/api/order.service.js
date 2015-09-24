@@ -2,31 +2,6 @@ let service = ($q, Restangular, ApiBase) => {
 
   return new class OrderApi extends ApiBase {
 
-    _serializeBeforeCreate(order) {
-      return $q((resolve, reject) => {
-        let data = {
-          cart_id: order.cart.id,
-          payment_method_id: order.paymentMethod.id,
-          order_type_id: order.orderType.id,
-          note: order.note || null,
-          change: order.change || null,
-          costumer_id: (order.costumer && order.costumer.id) ? order.costumer.id : null,
-          address_id: (order.address && order.address.id) ? order.address.id : null
-        };
-
-        return resolve(data);
-      });
-    }
-
-    _serializeBeforeUpdate() {
-      return $q((resolve, reject) => {
-        if(order.courier) order.courier_id = order.courier.id;
-        if(order.address) order.address_id = order.address.id;
-
-        return resolve(order);
-      });
-    }
-
     fetch(params) {
       return Restangular
         .one('companies', this.company.id)
@@ -53,7 +28,7 @@ let service = ($q, Restangular, ApiBase) => {
     }
 
     create(order) {
-      this._serializeBeforeCreate(order).then( (serializedData) => {
+      return this._serializeBeforeCreate(order).then( (serializedData) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
@@ -62,12 +37,37 @@ let service = ($q, Restangular, ApiBase) => {
     }
 
     update(order) {
-      this._serializeBeforeUpdate(order).then((serializedData) => {
+      return this._serializeBeforeUpdate(order).then((serializedData) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
           .post('orders', order.id)
           .patch({ order: serializedData });
+      });
+    }
+
+    _serializeBeforeCreate(order) {
+      return $q((resolve, reject) => {
+        let data = {
+          cart_id: order.cart.id,
+          payment_method_id: order.paymentMethod.id,
+          order_type_id: order.orderType.id,
+          note: order.note || null,
+          change: order.change || null,
+          costumer_id: (order.costumer && order.costumer.id) ? order.costumer.id : null,
+          address_id: (order.address && order.address.id) ? order.address.id : null
+        };
+
+        return resolve(data);
+      });
+    }
+
+    _serializeBeforeUpdate() {
+      return $q((resolve, reject) => {
+        if(order.courier) order.courier_id = order.courier.id;
+        if(order.address) order.address_id = order.address.id;
+
+        return resolve(order);
       });
     }
   }

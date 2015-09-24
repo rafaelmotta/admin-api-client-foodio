@@ -2,6 +2,39 @@ let service = ($q, Restangular, ApiBase) => {
 
   return new class MeCartItemApi extends ApiBase {
 
+    create(data) {
+      return this._serializeCartItem.call(data).then((serializedData) => {
+        return Restangular
+          .one('companies', this.company.id)
+          .one('stores', this.store.id)
+          .one('me')
+          .one('cart')
+          .post('cart_items', { cart_item: serializedData });
+      });
+    }
+
+    update(data) {
+      return this._serializeCartItem.call(data).then((serializedData) => {
+        return Restangular
+          .one('companies', this.company.id)
+          .one('stores', this.store.id)
+          .one('me')
+          .one('cart')
+          .one('cart_items', data.id)
+          .patch({ cart_item: data });
+      });
+    }
+
+    destroy() {
+      return Restangular
+        .one('companies', this.company.id)
+        .one('stores', this.store.id)
+        .one('me')
+        .one('cart')
+        .one('cart_items', data.id)
+        .remove();
+    }
+
     _serializeCartItem(data) {
       return $q((resolve, reject) => {
         let cartItem = {};
@@ -26,39 +59,6 @@ let service = ($q, Restangular, ApiBase) => {
 
         return resolve(cartItem);
       });
-    }
-
-    create(data) {
-      this._serializeCartItem.call(data).then((serializedData) => {
-        return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
-          .one('me')
-          .one('cart')
-          .post('cart_items', { cart_item: serializedData });
-      });
-    }
-
-    update(data) {
-      this._serializeCartItem.call(data).then((serializedData) => {
-        return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
-          .one('me')
-          .one('cart')
-          .one('cart_items', data.id)
-          .patch({ cart_item: data });
-      });
-    }
-
-    destroy() {
-      return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
-        .one('me')
-        .one('cart')
-        .one('cart_items', data.id)
-        .remove();
     }
   }
 };

@@ -12,7 +12,7 @@ let service = ($q, Restangular, ApiBase) => {
     }
 
     create(cityOperation, deliveryArea) {
-      this._serializeBeforeCreate(deliveryArea).then( (serializedDeliveryArea) => {
+      return this._serializeBeforeCreate(deliveryArea).then( (serializedDeliveryArea) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
@@ -22,7 +22,7 @@ let service = ($q, Restangular, ApiBase) => {
     }
 
     update(cityOperation, deliveryArea) {
-      this._serializeBeforeEdit(deliveryArea).then((serializedDeliveryArea) => {
+      return this._serializeBeforeEdit(deliveryArea).then((serializedDeliveryArea) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
