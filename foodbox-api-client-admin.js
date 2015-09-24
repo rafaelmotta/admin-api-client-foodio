@@ -302,7 +302,7 @@ var service = function service(Restangular, ApiBase) {
     }, {
       key: 'update',
       value: function update(costumer, address) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('costumers', costumer.id).patch('addresses', { address: address });
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('costumers', costumer.id).one('addresses', address.id).patch({ address: address });
       }
     }, {
       key: 'destroy',
