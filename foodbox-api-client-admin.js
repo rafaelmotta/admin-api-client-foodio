@@ -753,15 +753,12 @@ var service = function service($q, Restangular, ApiBase) {
       }
     }, {
       key: 'destroy',
-      value: function destroy() {
+      value: function destroy(data) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').one('cart_items', data.id).remove();
       }
     }, {
       key: '_serialize',
       value: function _serialize(cartItem) {
-
-        console.log(cartItem);
-
         return $q(function (resolve, reject) {
           var data = {};
 
