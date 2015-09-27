@@ -25,7 +25,7 @@ let service = ($q, Restangular, ApiBase) => {
       });
     }
 
-    destroy() {
+    destroy(data) {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)

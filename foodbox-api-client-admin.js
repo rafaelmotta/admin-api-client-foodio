@@ -759,6 +759,9 @@ var service = function service($q, Restangular, ApiBase) {
     }, {
       key: '_serialize',
       value: function _serialize(cartItem) {
+
+        console.log(cartItem);
+
         return $q(function (resolve, reject) {
           var data = {};
 
