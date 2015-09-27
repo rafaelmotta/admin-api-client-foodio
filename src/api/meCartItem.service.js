@@ -3,7 +3,7 @@ let service = ($q, Restangular, ApiBase) => {
   return new class MeCartItemApi extends ApiBase {
 
     create(data) {
-      return this._serializeCartItem.call(data).then((serializedData) => {
+      return this._serialize(data).then((serializedData) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
@@ -14,14 +14,14 @@ let service = ($q, Restangular, ApiBase) => {
     }
 
     update(data) {
-      return this._serializeCartItem.call(data).then((serializedData) => {
+      return this._serialize(data).then((serializedData) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
           .one('me')
           .one('cart')
           .one('cart_items', data.id)
-          .patch({ cart_item: data });
+          .patch({ cart_item: serializedData });
       });
     }
 
@@ -35,29 +35,27 @@ let service = ($q, Restangular, ApiBase) => {
         .remove();
     }
 
-    _serializeCartItem(data) {
+    _serialize(cartItem) {
       return $q((resolve, reject) => {
-        let cartItem = {};
-        let _cartItem = angular.copy(data);
+        let data = {};
 
-        _.each(_cartItem, (value, key) => {
+        angular.forEach(cartItem, (value, key) => {
           if(key === 'id' || key === 'amount' || key === 'note') {
-            cartItem[key] = value;
+            data[key] = value;
           }
         });
 
-        cartItem.store_product_id = _cartItem.product.id;
+        data.store_product_id = cartItem.product.id;
+        data.customization_fields = JSON.stringify(cartItem.customization_fields);
 
-        cartItem.customization_fields = JSON.stringify(_cartItem.customization_fields);
-
-        cartItem.cart_item_addons_to_put_attributes = _.map(_cartItem.addons, (addon) => {
+        data.cart_item_addons_to_put_attributes = cartItem.addons.map((addon) => {
           return {
             store_addon_id: addon.id,
             product_addon_id: addon.product_addon_id
-          }
+          };
         });
 
-        return resolve(cartItem);
+        resolve(data);
       });
     }
   }
