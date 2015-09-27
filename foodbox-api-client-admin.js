@@ -738,7 +738,7 @@ var service = function service($q, Restangular, ApiBase) {
       value: function create(data) {
         var _this = this;
 
-        return this._serializeCartItem.call(data).then(function (serializedData) {
+        return this._serialize(data).then(function (serializedData) {
           return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).one('me').one('cart').post('cart_items', { cart_item: serializedData });
         });
       }
@@ -747,8 +747,8 @@ var service = function service($q, Restangular, ApiBase) {
       value: function update(data) {
         var _this2 = this;
 
-        return this._serializeCartItem.call(data).then(function (serializedData) {
-          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).one('me').one('cart').one('cart_items', data.id).patch({ cart_item: data });
+        return this._serialize(data).then(function (serializedData) {
+          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).one('me').one('cart').one('cart_items', data.id).patch({ cart_item: serializedData });
         });
       }
     }, {
@@ -757,30 +757,28 @@ var service = function service($q, Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').one('cart_items', data.id).remove();
       }
     }, {
-      key: '_serializeCartItem',
-      value: function _serializeCartItem(data) {
+      key: '_serialize',
+      value: function _serialize(cartItem) {
         return $q(function (resolve, reject) {
-          var cartItem = {};
-          var _cartItem = angular.copy(data);
+          var data = {};
 
-          _.each(_cartItem, function (value, key) {
+          angular.forEach(cartItem, function (value, key) {
             if (key === 'id' || key === 'amount' || key === 'note') {
-              cartItem[key] = value;
+              data[key] = value;
             }
           });
 
-          cartItem.store_product_id = _cartItem.product.id;
+          data.store_product_id = cartItem.product.id;
+          data.customization_fields = JSON.stringify(cartItem.customization_fields);
 
-          cartItem.customization_fields = JSON.stringify(_cartItem.customization_fields);
-
-          cartItem.cart_item_addons_to_put_attributes = _.map(_cartItem.addons, function (addon) {
+          data.cart_item_addons_to_put_attributes = cartItem.addons.map(function (addon) {
             return {
               store_addon_id: addon.id,
               product_addon_id: addon.product_addon_id
             };
           });
 
-          return resolve(cartItem);
+          resolve(data);
         });
       }
     }]);
