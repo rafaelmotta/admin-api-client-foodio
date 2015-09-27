@@ -800,7 +800,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var service = function service(Restangular, ApiBase) {
+var service = function service(PublicRestangular, Restangular, ApiBase) {
 
   return new ((function (_ApiBase) {
     _inherits(MenuApi, _ApiBase);
@@ -816,7 +816,7 @@ var service = function service(Restangular, ApiBase) {
       value: function fetch() {
         var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-        return Restangular.one('companies', this.company.id).one('menu').get(params);
+        return PublicRestangular.one('companies', this.company.id).one('stores', this.store.id).one('menu').get(params);
       }
     }]);
 
