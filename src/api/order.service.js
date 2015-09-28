@@ -18,32 +18,32 @@ let service = ($q, Restangular, ApiBase) => {
         .get();
     }
 
-    getStatusCount() {
+    create(order) {
+      return this._serializeBeforeCreate(order).then((serializedOrder) => {
+        return Restangular
+          .one('companies', this.company.id)
+          .one('stores', this.store.id)
+          .post('orders', { order: serializedOrder });
+      });
+    }
+
+    update(order) {
+      return this._serializeBeforeUpdate(order).then((serializedOrder) => {
+        return Restangular
+          .one('companies', this.company.id)
+          .one('stores', this.store.id)
+          .post('orders', order.id)
+          .patch({ order: serializedOrder });
+      });
+    }
+
+    fetchStatusCount() {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
         .one('orders')
         .one('status_count')
         .get();
-    }
-
-    create(order) {
-      return this._serializeBeforeCreate(order).then( (serializedData) => {
-        return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
-          .post('orders', serializedData.id);
-      });
-    }
-
-    update(order) {
-      return this._serializeBeforeUpdate(order).then((serializedData) => {
-        return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
-          .post('orders', order.id)
-          .patch({ order: serializedData });
-      });
     }
 
     _serializeBeforeCreate(order) {

@@ -893,17 +893,12 @@ var service = function service($q, Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('orders', order.id).get();
       }
     }, {
-      key: 'getStatusCount',
-      value: function getStatusCount() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('orders').one('status_count').get();
-      }
-    }, {
       key: 'create',
       value: function create(order) {
         var _this = this;
 
-        return this._serializeBeforeCreate(order).then(function (serializedData) {
-          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('orders', serializedData.id);
+        return this._serializeBeforeCreate(order).then(function (serializedOrder) {
+          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('orders', { order: serializedOrder });
         });
       }
     }, {
@@ -911,9 +906,14 @@ var service = function service($q, Restangular, ApiBase) {
       value: function update(order) {
         var _this2 = this;
 
-        return this._serializeBeforeUpdate(order).then(function (serializedData) {
-          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).post('orders', order.id).patch({ order: serializedData });
+        return this._serializeBeforeUpdate(order).then(function (serializedOrder) {
+          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).post('orders', order.id).patch({ order: serializedOrder });
         });
+      }
+    }, {
+      key: 'fetchStatusCount',
+      value: function fetchStatusCount() {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('orders').one('status_count').get();
       }
     }, {
       key: '_serializeBeforeCreate',
