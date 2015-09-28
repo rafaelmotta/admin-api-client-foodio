@@ -32,7 +32,7 @@ let service = ($q, Restangular, ApiBase) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
-          .post('orders', order.id)
+          .one('orders', order.id)
           .patch({ order: serializedOrder });
       });
     }

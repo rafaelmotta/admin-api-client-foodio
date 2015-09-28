@@ -907,7 +907,7 @@ var service = function service($q, Restangular, ApiBase) {
         var _this2 = this;
 
         return this._serializeBeforeUpdate(order).then(function (serializedOrder) {
-          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).post('orders', order.id).patch({ order: serializedOrder });
+          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).one('orders', order.id).patch({ order: serializedOrder });
         });
       }
     }, {
