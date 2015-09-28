@@ -62,10 +62,15 @@ let service = ($q, Restangular, ApiBase) => {
       });
     }
 
-    _serializeBeforeUpdate() {
+    _serializeBeforeUpdate(order) {
       return $q((resolve, reject) => {
-        if(order.courier) order.courier_id = order.courier.id;
-        if(order.address) order.address_id = order.address.id;
+
+        if(order.courier) {
+          order.courier_id = order.courier.id;
+        }
+        if(order.address) {
+          order.address_id = order.address.id;
+        }
 
         return resolve(order);
       });

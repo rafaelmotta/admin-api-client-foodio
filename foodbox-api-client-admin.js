@@ -934,10 +934,15 @@ var service = function service($q, Restangular, ApiBase) {
       }
     }, {
       key: '_serializeBeforeUpdate',
-      value: function _serializeBeforeUpdate() {
+      value: function _serializeBeforeUpdate(order) {
         return $q(function (resolve, reject) {
-          if (order.courier) order.courier_id = order.courier.id;
-          if (order.address) order.address_id = order.address.id;
+
+          if (order.courier) {
+            order.courier_id = order.courier.id;
+          }
+          if (order.address) {
+            order.address_id = order.address.id;
+          }
 
           return resolve(order);
         });
