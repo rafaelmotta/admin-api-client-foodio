@@ -54,7 +54,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var apiBase = function apiBase($rootScope, $q) {
+var apiBase = function apiBase($rootScope, $q, Upload) {
   return (function () {
     function ApiBase() {
       _classCallCheck(this, ApiBase);

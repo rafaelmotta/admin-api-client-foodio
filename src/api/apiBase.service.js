@@ -1,4 +1,4 @@
-let apiBase = ($rootScope, $q) => {
+let apiBase = ($rootScope, $q, Upload) => {
   return class ApiBase {
     constructor(){
       this.company = $rootScope.company;
