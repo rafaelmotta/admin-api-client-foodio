@@ -54,7 +54,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var apiBase = function apiBase($rootScope, $q, Upload) {
+var apiBase = function apiBase($rootScope, $q, constants, Upload) {
   return (function () {
     function ApiBase() {
       _classCallCheck(this, ApiBase);
@@ -77,7 +77,7 @@ var apiBase = function apiBase($rootScope, $q, Upload) {
           });
 
           return Upload.upload({
-            url: constants.baseUrl + '/#{params.url}',
+            url: constants.baseUrl + '/' + params.url,
             method: params.method,
             file: params.data[params.imgKeys[0]][0],
             fileFormDataName: params.key + '[' + params.imgKeys[0] + ']',
