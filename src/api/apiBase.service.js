@@ -14,10 +14,10 @@ let apiBase = ($rootScope, $q, Upload) => {
         });
 
         return Upload.upload({
-          url: "#{ constants.baseUrl }/#{ params.url }",
+          url: `${constants.baseUrl}/#{params.url}`,
           method: params.method,
           file: params.data[params.imgKeys[0]][0],
-          fileFormDataName: "#{ params.key }[#{ params.imgKeys[0] }]",
+          fileFormDataName: `${params.key}[${params.imgKeys[0]}]`,
           fields: fields
         }).success((data) => {
           return resolve(data);

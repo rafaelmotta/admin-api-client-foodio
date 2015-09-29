@@ -48,11 +48,11 @@ var service = function service(Restangular, ApiBase) {
 };
 
 angular.module('foodbox.admin.api').factory('addonCategoryApi', service);
-"use strict";
+'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var apiBase = function apiBase($rootScope, $q, Upload) {
   return (function () {
@@ -64,7 +64,7 @@ var apiBase = function apiBase($rootScope, $q, Upload) {
     }
 
     _createClass(ApiBase, [{
-      key: "requestWithImage",
+      key: 'requestWithImage',
       value: function requestWithImage() {
         var _arguments = arguments;
         var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -73,14 +73,14 @@ var apiBase = function apiBase($rootScope, $q, Upload) {
           var fields = {};
 
           angular.forEach(params.extraKeys, function (key) {
-            fields[params.key + "[" + key + "]"] = params.data[key];
+            fields[params.key + '[' + key + ']'] = params.data[key];
           });
 
           return Upload.upload({
-            url: "#{ constants.baseUrl }/#{ params.url }",
+            url: constants.baseUrl + '/#{params.url}',
             method: params.method,
             file: params.data[params.imgKeys[0]][0],
-            fileFormDataName: "#{ params.key }[#{ params.imgKeys[0] }]",
+            fileFormDataName: params.key + '[' + params.imgKeys[0] + ']',
             fields: fields
           }).success(function (data) {
             return resolve(data);
