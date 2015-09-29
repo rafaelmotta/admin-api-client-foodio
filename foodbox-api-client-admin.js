@@ -65,16 +65,16 @@ var apiBase = function apiBase($rootScope, $q) {
 
     _createClass(ApiBase, [{
       key: "requestWithImage",
-      value: function requestWithImage(param) {
+      value: function requestWithImage() {
         var _arguments = arguments;
+        var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
         return $q(function (resolve, reject) {
           var fields = {};
 
-          for (var i in params.extraKeys) {
-            var key = params.extraKeys[i];
+          angular.forEach(params.extraKeys, function (key) {
             fields[params.key + "[" + key + "]"] = params.data[key];
-          }
+          });
 
           return Upload.upload({
             url: "#{ constants.baseUrl }/#{ params.url }",

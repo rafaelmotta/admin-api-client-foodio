@@ -5,14 +5,13 @@ let apiBase = ($rootScope, $q) => {
       this.store = $rootScope.currentStore;
     }
 
-    requestWithImage(param) {
+    requestWithImage(params = {}) {
       return $q((resolve, reject) => {
         let fields = {};
 
-        for(let i in params.extraKeys) {
-          let key = params.extraKeys[i];
+        angular.forEach(params.extraKeys, (key) => {
           fields[`${params.key}[${key}]`] = params.data[key];
-        }
+        });
 
         return Upload.upload({
           url: "#{ constants.baseUrl }/#{ params.url }",
