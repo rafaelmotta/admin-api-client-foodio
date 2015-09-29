@@ -77,7 +77,7 @@ var apiBase = function apiBase($rootScope, $q, constants, Upload) {
           });
 
           return Upload.upload({
-            url: constants.baseUrl + '/' + params.url,
+            url: constants.adminUrl + '/' + params.url,
             method: params.method,
             file: params.data[params.imgKeys[0]][0],
             fileFormDataName: params.key + '[' + params.imgKeys[0] + ']',
@@ -566,7 +566,7 @@ var service = function service(Restangular, ApiBase) {
       value: function update(employee) {
         if (angular.isArray(employee.avatar) && employee.avatar[0]) {
           return this.requestWithImage({
-            url: "admin/companies/${this.company.id}/stores/${this.store.id}/employees/${employee.id}",
+            url: 'companies/' + this.company.id + '/stores/' + this.store.id + '/employees/' + employee.id,
             method: 'PATCH',
             data: employee,
             key: 'employee',

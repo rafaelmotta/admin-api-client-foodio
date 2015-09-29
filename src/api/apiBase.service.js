@@ -14,7 +14,7 @@ let apiBase = ($rootScope, $q, constants, Upload) => {
         });
 
         return Upload.upload({
-          url: `${constants.baseUrl}/${params.url}`,
+          url: `${constants.adminUrl}/${params.url}`,
           method: params.method,
           file: params.data[params.imgKeys[0]][0],
           fileFormDataName: `${params.key}[${params.imgKeys[0]}]`,

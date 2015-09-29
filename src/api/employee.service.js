@@ -37,7 +37,7 @@ let service = (Restangular, ApiBase) => {
     update(employee) {
       if(angular.isArray(employee.avatar) && employee.avatar[0]) {
         return this.requestWithImage({
-          url: "admin/companies/${this.company.id}/stores/${this.store.id}/employees/${employee.id}",
+          url: `companies/${this.company.id}/stores/${this.store.id}/employees/${employee.id}`,
           method: 'PATCH',
           data: employee,
           key: 'employee',
