@@ -1,4 +1,4 @@
-let apiBase = ($rootScope, $q, Upload) => {
+let apiBase = ($rootScope, $q, constants, Upload) => {
   return class ApiBase {
     constructor(){
       this.company = $rootScope.company;
@@ -14,7 +14,7 @@ let apiBase = ($rootScope, $q, Upload) => {
         });
 
         return Upload.upload({
-          url: `${constants.baseUrl}/#{params.url}`,
+          url: `${constants.baseUrl}/${params.url}`,
           method: params.method,
           file: params.data[params.imgKeys[0]][0],
           fileFormDataName: `${params.key}[${params.imgKeys[0]}]`,
