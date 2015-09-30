@@ -1,4 +1,4 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $q, ApiBase) => {
 
   return new class OrderTypeApi extends ApiBase {
 
@@ -37,7 +37,7 @@ let service = (Restangular, ApiBase) => {
     }
 
     _serializeBeforeCreate(order) {
-      return new Promise((resolve, reject) => {
+      return $q((resolve, reject) => {
         let data = angular.copy(order);
 
         data.available_order_type_id = order.availableOrderType.id
