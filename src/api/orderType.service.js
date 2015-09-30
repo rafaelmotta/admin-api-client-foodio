@@ -20,7 +20,7 @@ let service = (Restangular, ApiBase) => {
     }
 
     create(orderType) {
-      this._serializeBeforeCreate(orderType).then((serializedOrderType) => {
+      return this._serializeBeforeCreate(orderType).then((serializedOrderType) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
@@ -40,7 +40,7 @@ let service = (Restangular, ApiBase) => {
       return new Promise((resolve, reject) => {
         let data = angular.copy(order);
 
-        data.available_order_type_id = order.available_order_type.id
+        data.available_order_type_id = order.availableOrderType.id
         data.available_order_type = null;
 
         resolve(data);

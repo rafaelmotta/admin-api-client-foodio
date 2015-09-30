@@ -990,7 +990,7 @@ var service = function service(Restangular, ApiBase) {
       value: function create(orderType) {
         var _this = this;
 
-        this._serializeBeforeCreate(orderType).then(function (serializedOrderType) {
+        return this._serializeBeforeCreate(orderType).then(function (serializedOrderType) {
           return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('order_types', { order_type: serializedOrderType });
         });
       }
@@ -1005,7 +1005,7 @@ var service = function service(Restangular, ApiBase) {
         return new Promise(function (resolve, reject) {
           var data = angular.copy(order);
 
-          data.available_order_type_id = order.available_order_type.id;
+          data.available_order_type_id = order.availableOrderType.id;
           data.available_order_type = null;
 
           resolve(data);
