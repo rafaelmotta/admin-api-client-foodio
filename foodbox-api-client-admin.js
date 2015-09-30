@@ -988,12 +988,28 @@ var service = function service(Restangular, ApiBase) {
     }, {
       key: 'create',
       value: function create(orderType) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('order_types', orderType.id).put();
+        var _this = this;
+
+        this._serializeBeforeCreate(orderType).then(function (serializedOrderType) {
+          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('order_types', { order_type: serializedOrderType });
+        });
       }
     }, {
       key: 'destroy',
       value: function destroy(orderType) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('order_types', orderType.id).remove();
+      }
+    }, {
+      key: '_serializeBeforeCreate',
+      value: function _serializeBeforeCreate(order) {
+        return new Promise(function (resolve, reject) {
+          var data = angular.copy(order);
+
+          data.available_order_type_id = order.available_order_type.id;
+          data.available_order_type = null;
+
+          resolve(data);
+        });
       }
     }]);
 
