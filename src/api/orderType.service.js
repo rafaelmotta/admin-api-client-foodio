@@ -33,7 +33,7 @@ let service = (Restangular, $q, ApiBase) => {
         .one('companies', this.company.id)
         .one('stores', this.store.id)
         .one('order_types', orderType.id)
-        .patch({ orderType: orderType });
+        .patch({ order_type: orderType });
     }
 
     destroy(orderType) {
