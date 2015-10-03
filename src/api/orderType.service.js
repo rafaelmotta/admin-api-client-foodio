@@ -28,6 +28,14 @@ let service = (Restangular, $q, ApiBase) => {
       });
     }
 
+    update(orderType) {
+      return Restangular
+        .one('companies', this.company.id)
+        .one('stores', this.store.id)
+        .post('order_types', orderType.id)
+        .patch({ orderType: orderType });
+    }
+
     destroy(orderType) {
       return Restangular
         .one('companies', this.company.id)

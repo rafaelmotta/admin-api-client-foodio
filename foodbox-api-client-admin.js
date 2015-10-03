@@ -995,6 +995,11 @@ var service = function service(Restangular, $q, ApiBase) {
         });
       }
     }, {
+      key: 'update',
+      value: function update(orderType) {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).post('order_types', orderType.id).patch({ orderType: orderType });
+      }
+    }, {
       key: 'destroy',
       value: function destroy(orderType) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('order_types', orderType.id).remove();
