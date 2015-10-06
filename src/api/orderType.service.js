@@ -2,12 +2,12 @@ let service = (Restangular, $q, ApiBase) => {
 
   return new class OrderTypeApi extends ApiBase {
 
-    fetch() {
+    fetch(params) {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
         .one('order_types')
-        .get();
+        .get(params);
     }
 
     fetchAvailable() {

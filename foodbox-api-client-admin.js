@@ -977,8 +977,8 @@ var service = function service(Restangular, $q, ApiBase) {
 
     _createClass(OrderTypeApi, [{
       key: 'fetch',
-      value: function fetch() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('order_types').get();
+      value: function fetch(params) {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('order_types').get(params);
       }
     }, {
       key: 'fetchAvailable',
