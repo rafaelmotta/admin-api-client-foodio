@@ -244,8 +244,8 @@ var service = function service(Restangular) {
     }
 
     _createClass(companyApi, [{
-      key: 'create',
-      value: function create(company) {
+      key: 'fetch',
+      value: function fetch(company) {
         return Restangular.one('companies', company.id).get();
       }
     }, {

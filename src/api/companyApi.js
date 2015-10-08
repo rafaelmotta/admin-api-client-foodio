@@ -1,7 +1,7 @@
 let service = (Restangular) => {
   return new class companyApi {
 
-    create(company) {
+    fetch(company) {
       return Restangular
         .one('companies', company.id)
         .get();
