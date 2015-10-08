@@ -19,7 +19,7 @@ let service = (Restangular, constants) => {
         });
       } else {
         return Restangular
-          .one('companies', this.company.id)
+          .one('companies', company.id)
           .patch({ company: company });
       }
     }

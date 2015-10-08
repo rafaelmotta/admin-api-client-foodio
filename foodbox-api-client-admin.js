@@ -261,7 +261,7 @@ var service = function service(Restangular, constants) {
             extraKeys: ['name', 'slogan', 'email', 'facebook', 'gplus', 'meta_keywords', 'meta_description', 'subdomain', 'domain', 'layout', 'theme']
           });
         } else {
-          return Restangular.one('companies', this.company.id).patch({ company: company });
+          return Restangular.one('companies', company.id).patch({ company: company });
         }
       }
     }]);
