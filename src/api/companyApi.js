@@ -1,4 +1,4 @@
-let service = (Restangular) => {
+let service = (Restangular, constants) => {
   return new class companyApi {
 
     fetch(company) {
@@ -8,9 +8,20 @@ let service = (Restangular) => {
     }
 
     update(company) {
-      return Restangular
-        .one('companies', this.company.id)
-        .patch({ company: company });
+      if(angular.isArray(company.logo) && company.logo[0]) {
+        return this.requestWithImage({
+          url: `${constants.adminUrl}/companies/${company.id}`,
+          method: 'PATCH',
+          data: company,
+          key: 'company',
+          imgKeys: ['logo'],
+          extraKeys: ['name', 'slogan', 'email', 'facebook', 'gplus', 'meta_keywords', 'meta_description', 'subdomain', 'domain', 'layout', 'theme']
+        });
+      } else {
+        return Restangular
+          .one('companies', this.company.id)
+          .patch({ company: company });
+      }
     }
   }
 };

@@ -237,7 +237,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var service = function service(Restangular) {
+var service = function service(Restangular, constants) {
   return new ((function () {
     function companyApi() {
       _classCallCheck(this, companyApi);
@@ -251,7 +251,18 @@ var service = function service(Restangular) {
     }, {
       key: 'update',
       value: function update(company) {
-        return Restangular.one('companies', this.company.id).patch({ company: company });
+        if (angular.isArray(company.logo) && company.logo[0]) {
+          return this.requestWithImage({
+            url: constants.adminUrl + '/companies/' + company.id,
+            method: 'PATCH',
+            data: company,
+            key: 'company',
+            imgKeys: ['logo'],
+            extraKeys: ['name', 'slogan', 'email', 'facebook', 'gplus', 'meta_keywords', 'meta_description', 'subdomain', 'domain', 'layout', 'theme']
+          });
+        } else {
+          return Restangular.one('companies', this.company.id).patch({ company: company });
+        }
       }
     }]);
 
