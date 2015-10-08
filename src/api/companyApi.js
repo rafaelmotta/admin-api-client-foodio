@@ -1,5 +1,5 @@
-let service = (Restangular, constants) => {
-  return new class companyApi {
+let service = (Restangular, ApiBase, constants) => {
+  return new class companyApi extends ApiBase{
 
     fetch(company) {
       return Restangular
