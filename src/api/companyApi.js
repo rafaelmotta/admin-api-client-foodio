@@ -1,4 +1,4 @@
-let service = (Restangular, ApiBase, constants) => {
+let service = (Restangular, ApiBase) => {
   return new class companyApi extends ApiBase{
 
     fetch(company) {
@@ -10,7 +10,7 @@ let service = (Restangular, ApiBase, constants) => {
     update(company) {
       if(angular.isArray(company.logo) && company.logo[0]) {
         return this.requestWithImage({
-          url: `${constants.adminUrl}/companies/${company.id}`,
+          url: `companies/${company.id}`,
           method: 'PATCH',
           data: company,
           key: 'company',
