@@ -2,6 +2,15 @@ let service = (Restangular, ApiBase) => {
 
   return new class DeliveryTimeApi extends ApiBase {
 
+    fetchForScheduling() {
+      return Restangular
+        .one('companies', this.company.id)
+        .one('stores', this.store.id)
+        .one('delivery_times')
+        .one('scheduling')
+        .get();
+    }
+
     fetch() {
       return Restangular
         .one('companies', this.company.id)

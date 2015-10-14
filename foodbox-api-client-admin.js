@@ -57,10 +57,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var apiBase = function apiBase($rootScope, $q, constants, Upload) {
   return (function () {
     function ApiBase() {
+      var _this = this;
+
       _classCallCheck(this, ApiBase);
 
       this.company = $rootScope.company;
       this.store = $rootScope.currentStore;
+
+      $rootScope.$watch('currentStore', function () {
+        _this.store = $rootScope.currentStore;
+      }, true);
     }
 
     _createClass(ApiBase, [{
@@ -573,6 +579,11 @@ var service = function service(Restangular, ApiBase) {
     }
 
     _createClass(DeliveryTimeApi, [{
+      key: 'fetchForScheduling',
+      value: function fetchForScheduling() {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('delivery_times').one('scheduling').get();
+      }
+    }, {
       key: 'fetch',
       value: function fetch() {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('delivery_times').get();

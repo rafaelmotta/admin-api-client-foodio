@@ -3,6 +3,10 @@ let apiBase = ($rootScope, $q, constants, Upload) => {
     constructor(){
       this.company = $rootScope.company;
       this.store = $rootScope.currentStore;
+
+      $rootScope.$watch('currentStore', () => {
+        this.store = $rootScope.currentStore;
+      }, true);
     }
 
     requestWithImage(params = {}) {
