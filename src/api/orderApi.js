@@ -20,6 +20,8 @@ let service = ($q, Restangular, ApiBase) => {
 
     create(order) {
       return this._serializeBeforeCreate(order).then((serializedOrder) => {
+        console.log(serializedOrder);
+
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
@@ -52,12 +54,18 @@ let service = ($q, Restangular, ApiBase) => {
           cart_id: order.cart.id,
           payment_method_id: order.paymentMethod.id,
           order_type_id: order.orderType.id,
-          delivery_time_id: order.scheduling.time ? order.scheduling.time.id : null,
           note: order.note || null,
           change: order.change || null,
           costumer_id: (order.costumer && order.costumer.id) ? order.costumer.id : null,
           address_id: (order.address && order.address.id) ? order.address.id : null
         };
+
+        if(order.scheduling.date && order.scheduling.time) {
+          data.scheduling_attributes = {
+            date: order.scheduling.day.date,
+            delivery_time_id: order.scheduling.time.id
+          };
+        }
 
         return resolve(data);
       });
