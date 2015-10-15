@@ -1023,10 +1023,11 @@ var service = function service($q, Restangular, ApiBase) {
             address_id: order.address && order.address.id ? order.address.id : null
           };
 
-          if (order.scheduling.date && order.scheduling.time) {
-            data.scheduling_attributes = {
-              date: order.scheduling.day.date,
-              delivery_time_id: order.scheduling.time.id
+          if (order.scheduling.day && order.scheduling.time) {
+            data.delivery_time = {
+              wday: order.scheduling.day.wday,
+              from: order.scheduling.day.date + ' ' + order.scheduling.time.opening,
+              to: order.scheduling.day.date + ' ' + order.scheduling.time.closing
             };
           }
 
