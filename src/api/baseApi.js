@@ -1,4 +1,4 @@
-let apiBase = ($rootScope, $q, constants, Upload) => {
+let service = ($rootScope, $q, constants, Upload) => {
   return class ApiBase {
     constructor(){
       this.company = $rootScope.company;
@@ -33,4 +33,5 @@ let apiBase = ($rootScope, $q, constants, Upload) => {
   };
 };
 
-angular.module('foodbox.admin.api').factory('ApiBase', apiBase);
+service.$inject = ['$rootScope', '$q', 'constants', 'Upload'];
+angular.module('foodbox.admin.api').factory('ApiBase', service);

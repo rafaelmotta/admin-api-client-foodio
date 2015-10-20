@@ -1,4 +1,4 @@
-let deviseBase = () => {
+let service = () => {
   return class DeviseBase {
     constructor(){
       this.deviseBaseUrl = 'employee/sessions';
@@ -6,4 +6,4 @@ let deviseBase = () => {
   };
 };
 
-angular.module('foodbox.admin.api').factory('DeviseBase', deviseBase);
+angular.module('foodbox.admin.api').factory('DeviseBase', service);

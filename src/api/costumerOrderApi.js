@@ -1,4 +1,4 @@
-let factory = (Restangular, ApiBase) => {
+let service = (Restangular, ApiBase) => {
 
   return new class Factory extends ApiBase {
 
@@ -13,4 +13,5 @@ let factory = (Restangular, ApiBase) => {
   }
 };
 
-angular.module('foodbox.admin.api').factory('costumerOrderApi', factory);
+service.$inject = ['Restangular', 'ApiBase'];
+angular.module('foodbox.admin.api').factory('costumerOrderApi', service);

@@ -7,15 +7,21 @@ angular.module('foodbox.admin.api').constant('constants', {
   adminUrl: "http://speedy.com.br/admin"
 });
 
-angular.module('foodbox.admin.api').config(function (constants, RestangularProvider) {
-  RestangularProvider.setBaseUrl(constants.adminUrl);
-});
+var bootstrap = function bootstrap(constants, RestangularProvider) {
+  return RestangularProvider.setBaseUrl(constants.adminUrl);
+};
 
-app.factory('PublicRestangular', function (constants, Restangular) {
+var publicRestangular = function publicRestangular(constants, Restangular) {
   return Restangular.withConfig(function (RestangularConfigurer) {
     RestangularConfigurer.setBaseUrl(constants.publicUrl);
   });
-});
+};
+
+bootstrap.$inject = ['constants', 'RestangularProvider'];
+publicRestangular.$inject = ['constants', 'Restangular'];
+
+angular.module('foodbox.admin.api').config(bootstrap);
+app.factory('PublicRestangular', publicRestangular);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -47,6 +53,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('addonCategoryApi', service);
 'use strict';
 
@@ -54,7 +61,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var apiBase = function apiBase($rootScope, $q, constants, Upload) {
+var service = function service($rootScope, $q, constants, Upload) {
   return (function () {
     function ApiBase() {
       var _this = this;
@@ -101,12 +108,13 @@ var apiBase = function apiBase($rootScope, $q, constants, Upload) {
   })();
 };
 
-angular.module('foodbox.admin.api').factory('ApiBase', apiBase);
+service.$inject = ['$rootScope', '$q', 'constants', 'Upload'];
+angular.module('foodbox.admin.api').factory('ApiBase', service);
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var deviseBase = function deviseBase() {
+var service = function service() {
   return function DeviseBase() {
     _classCallCheck(this, DeviseBase);
 
@@ -114,7 +122,7 @@ var deviseBase = function deviseBase() {
   };
 };
 
-angular.module('foodbox.admin.api').factory('DeviseBase', deviseBase);
+angular.module('foodbox.admin.api').factory('DeviseBase', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -146,6 +154,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('chatApi', service);
 'use strict';
 
@@ -178,6 +187,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('chatMessageApi', service);
 'use strict';
 
@@ -236,6 +246,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('cityOperationApi', service);
 'use strict';
 
@@ -284,6 +295,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('companyApi', service);
 'use strict';
 
@@ -332,6 +344,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('costumerAddressApi', service);
 'use strict';
 
@@ -382,6 +395,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('costumerApi', service);
 'use strict';
 
@@ -393,7 +407,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var factory = function factory(Restangular, ApiBase) {
+var service = function service(Restangular, ApiBase) {
 
   return new ((function (_ApiBase) {
     _inherits(Factory, _ApiBase);
@@ -415,7 +429,8 @@ var factory = function factory(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
-angular.module('foodbox.admin.api').factory('costumerOrderApi', factory);
+service.$inject = ['Restangular', 'ApiBase'];
+angular.module('foodbox.admin.api').factory('costumerOrderApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -469,6 +484,7 @@ var service = function service($q, $filter, Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['$q', '$filter', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('dashboardApi', service);
 'use strict';
 
@@ -556,6 +572,7 @@ var service = function service($q, Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['$q', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('deliveryAreaApi', service);
 'use strict';
 
@@ -609,6 +626,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('deliveryTimeApi', service);
 'use strict';
 
@@ -680,6 +698,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('employeeApi', service);
 'use strict';
 
@@ -713,6 +732,7 @@ var service = function service(Restangular, DeviseBase) {
   })(DeviseBase))();
 };
 
+service.$inject = ['Restangular', 'DeviseBase'];
 angular.module('foodbox.admin.api').factory('loginApi', service);
 'use strict';
 
@@ -765,6 +785,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('meApi', service);
 'use strict';
 
@@ -803,6 +824,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('meCartApi', service);
 'use strict';
 
@@ -879,6 +901,7 @@ var service = function service($q, Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['$q', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('meCartItemApi', service);
 'use strict';
 
@@ -914,6 +937,7 @@ var service = function service(PublicRestangular, Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('menuApi', service);
 'use strict';
 
@@ -952,6 +976,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('messageApi', service);
 'use strict';
 
@@ -1055,6 +1080,7 @@ var service = function service($q, Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['$q', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('orderApi', service);
 'use strict';
 
@@ -1124,6 +1150,7 @@ var service = function service(Restangular, $q, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', '$q', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('orderTypeApi', service);
 'use strict';
 
@@ -1162,6 +1189,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('pauseApi', service);
 'use strict';
 
@@ -1210,6 +1238,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('paymentMethodApi', service);
 'use strict';
 
@@ -1248,6 +1277,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('productCategoryApi', service);
 'use strict';
 
@@ -1281,6 +1311,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('productSubcategoryApi', service);
 'use strict';
 
@@ -1314,6 +1345,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('ratingApi', service);
 'use strict';
 
@@ -1339,6 +1371,7 @@ var service = function service(PublicRestangular, Restangular) {
   })())();
 };
 
+service.$inject = ['PublicRestangular', 'Restangular'];
 angular.module('foodbox.admin.api').factory('stateApi', service);
 'use strict';
 
@@ -1382,6 +1415,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('storeAddonApi', service);
 'use strict';
 
@@ -1420,6 +1454,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('storeAddressApi', service);
 'use strict';
 
@@ -1458,6 +1493,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('storeApi', service);
 'use strict';
 
@@ -1501,6 +1537,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('storeProductApi', service);
 'use strict';
 
@@ -1539,6 +1576,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
+service.$inject = ['Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('trackApi', service);
 'use strict';
 
@@ -1569,6 +1607,7 @@ var service = function service(Restangular) {
   })())();
 };
 
+service.$inject = ['Restangular'];
 angular.module('foodbox.admin.api').factory('utilsApi', service);
 'use strict';
 
@@ -1593,4 +1632,5 @@ var service = function service(PublicRestangular, Restangular) {
   })())();
 };
 
+service.$inject = ['PublicRestangular', 'Restangular'];
 angular.module('foodbox.admin.api').factory('zipcodeApi', service);

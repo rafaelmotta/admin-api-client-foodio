@@ -5,12 +5,19 @@ angular.module('foodbox.admin.api').constant('constants', {
   adminUrl: "http://speedy.com.br/admin",
 });
 
-angular.module('foodbox.admin.api').config((constants, RestangularProvider) => {
-  RestangularProvider.setBaseUrl(constants.adminUrl);
-});
+let bootstrap = (constants, RestangularProvider) => {
+  return RestangularProvider.setBaseUrl(constants.adminUrl);
+};
 
-app.factory('PublicRestangular', (constants, Restangular) => {
+
+let publicRestangular = (constants, Restangular) => {
   return Restangular.withConfig((RestangularConfigurer) => {
     RestangularConfigurer.setBaseUrl(constants.publicUrl);
   });
-});
+};
+
+bootstrap.$inject = ['constants', 'RestangularProvider']
+publicRestangular.$inject = ['constants', 'Restangular'];
+
+angular.module('foodbox.admin.api').config(bootstrap);
+app.factory('PublicRestangular', publicRestangular);

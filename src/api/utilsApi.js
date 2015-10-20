@@ -18,4 +18,5 @@ let service = (Restangular) => {
   }
 };
 
+service.$inject = ['Restangular'];
 angular.module('foodbox.admin.api').factory('utilsApi', service);

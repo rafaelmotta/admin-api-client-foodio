@@ -57,4 +57,5 @@ let service = (Restangular, $q, ApiBase) => {
   }
 };
 
+service.$inject = ['Restangular', '$q', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('orderTypeApi', service);

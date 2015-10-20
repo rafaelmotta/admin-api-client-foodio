@@ -29,4 +29,5 @@ let service = ($q, $filter, Restangular, ApiBase) => {
   }
 };
 
+service.$inject = ['$q', '$filter', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('dashboardApi', service);
