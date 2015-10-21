@@ -1,9 +1,15 @@
-let service = (Restangular, ApiBase) => {
+let service = (PublicRestangular, Restangular, ApiBase) => {
   return new class companyApi extends ApiBase{
 
     fetch(company) {
       return Restangular
         .one('companies', company.id)
+        .get();
+    }
+
+    fetchBySubdomain() {
+      return PublicRestangular
+        .one('companies', company.subdomain)
         .get();
     }
 
@@ -26,5 +32,5 @@ let service = (Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('companyApi', service);

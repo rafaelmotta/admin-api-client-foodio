@@ -258,7 +258,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var service = function service(Restangular, ApiBase) {
+var service = function service(PublicRestangular, Restangular, ApiBase) {
   return new ((function (_ApiBase) {
     _inherits(companyApi, _ApiBase);
 
@@ -272,6 +272,11 @@ var service = function service(Restangular, ApiBase) {
       key: 'fetch',
       value: function fetch(company) {
         return Restangular.one('companies', company.id).get();
+      }
+    }, {
+      key: 'fetchBySubdomain',
+      value: function fetchBySubdomain() {
+        return PublicRestangular.one('companies', company.subdomain).get();
       }
     }, {
       key: 'update',
@@ -295,7 +300,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
 angular.module('foodbox.admin.api').factory('companyApi', service);
 'use strict';
 
