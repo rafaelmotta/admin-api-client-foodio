@@ -7,7 +7,7 @@ let service = (PublicRestangular, Restangular, ApiBase) => {
         .get();
     }
 
-    fetchBySubdomain() {
+    fetchBySubdomain(company) {
       return PublicRestangular
         .one('companies', company.subdomain)
         .get();
