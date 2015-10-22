@@ -3,8 +3,8 @@
 var app = angular.module('foodbox.admin.api', []);
 
 angular.module('foodbox.admin.api').constant('constants', {
-  publicUrl: "https://api-foodbox.herokuapp.com",
-  adminUrl: "https://api-foodbox.herokuapp.com/admin"
+  publicUrl: "http://foodio.com.br/",
+  adminUrl: "http://foodio.com.br/admin"
 });
 
 var bootstrap = function bootstrap(constants, RestangularProvider) {
