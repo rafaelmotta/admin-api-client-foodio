@@ -71,6 +71,10 @@ var service = function service($rootScope, $q, constants, Upload) {
       this.company = $rootScope.company;
       this.store = $rootScope.currentStore;
 
+      $rootScope.$watch('company', function () {
+        _this.company = $rootScope.company;
+      }, true);
+
       $rootScope.$watch('currentStore', function () {
         _this.store = $rootScope.currentStore;
       }, true);
@@ -275,7 +279,7 @@ var service = function service(PublicRestangular, Restangular, ApiBase) {
       }
     }, {
       key: 'fetchBySubdomain',
-      value: function fetchBySubdomain() {
+      value: function fetchBySubdomain(company) {
         return PublicRestangular.one('companies', company.subdomain).get();
       }
     }, {

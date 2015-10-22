@@ -4,6 +4,10 @@ let service = ($rootScope, $q, constants, Upload) => {
       this.company = $rootScope.company;
       this.store = $rootScope.currentStore;
 
+      $rootScope.$watch('company', () => {
+        this.company = $rootScope.company;
+      }, true);
+
       $rootScope.$watch('currentStore', () => {
         this.store = $rootScope.currentStore;
       }, true);
