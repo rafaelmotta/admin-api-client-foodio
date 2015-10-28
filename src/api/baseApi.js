@@ -38,4 +38,4 @@ let service = ($rootScope, $q, constants, Upload) => {
 };
 
 service.$inject = ['$rootScope', '$q', 'constants', 'Upload'];
-angular.module('foodbox.admin.api').factory('ApiBase', service);
+angular.module('admin.api.client.foodio').factory('ApiBase', service);

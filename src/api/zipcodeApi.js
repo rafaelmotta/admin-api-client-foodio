@@ -9,4 +9,4 @@ let service = (PublicRestangular, Restangular) => {
 };
 
 service.$inject = ['PublicRestangular', 'Restangular'];
-angular.module('foodbox.admin.api').factory('zipcodeApi', service);
+angular.module('admin.api.client.foodio').factory('zipcodeApi', service);

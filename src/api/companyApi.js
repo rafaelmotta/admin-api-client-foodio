@@ -33,4 +33,4 @@ let service = (PublicRestangular, Restangular, ApiBase) => {
 };
 
 service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('companyApi', service);
+angular.module('admin.api.client.foodio').factory('companyApi', service);

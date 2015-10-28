@@ -6,4 +6,4 @@ let service = () => {
   };
 };
 
-angular.module('foodbox.admin.api').factory('DeviseBase', service);
+angular.module('admin.api.client.foodio').factory('DeviseBase', service);

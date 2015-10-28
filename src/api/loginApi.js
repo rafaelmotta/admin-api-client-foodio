@@ -11,4 +11,4 @@ let service = (Restangular, DeviseBase) => {
 };
 
 service.$inject = ['Restangular', 'DeviseBase'];
-angular.module('foodbox.admin.api').factory('loginApi', service);
+angular.module('admin.api.client.foodio').factory('loginApi', service);

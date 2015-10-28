@@ -1,26 +1,20 @@
 'use strict';
 
-var app = angular.module('foodbox.admin.api', []);
+var app = angular.module('admin.api.client.foodio', ['constants.foodio']);
 
-angular.module('foodbox.admin.api').constant('constants', {
-  publicUrl: "http://foodio.com.br/",
-  adminUrl: "http://foodio.com.br/admin"
-});
-
-var bootstrap = function bootstrap(constants, RestangularProvider) {
+var adminRestangular = function adminRestangular(constants, RestangularProvider) {
   return RestangularProvider.setBaseUrl(constants.adminUrl);
 };
+
+adminRestangular.$inject = ['constants', 'RestangularProvider'];
+angular.module('admin.api.client.foodio').config(adminRestangular);
 
 var publicRestangular = function publicRestangular(constants, Restangular) {
   return Restangular.withConfig(function (RestangularConfigurer) {
     RestangularConfigurer.setBaseUrl(constants.publicUrl);
   });
 };
-
-bootstrap.$inject = ['constants', 'RestangularProvider'];
 publicRestangular.$inject = ['constants', 'Restangular'];
-
-angular.module('foodbox.admin.api').config(bootstrap);
 app.factory('PublicRestangular', publicRestangular);
 'use strict';
 
@@ -54,7 +48,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('addonCategoryApi', service);
+angular.module('admin.api.client.foodio').factory('addonCategoryApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -113,7 +107,7 @@ var service = function service($rootScope, $q, constants, Upload) {
 };
 
 service.$inject = ['$rootScope', '$q', 'constants', 'Upload'];
-angular.module('foodbox.admin.api').factory('ApiBase', service);
+angular.module('admin.api.client.foodio').factory('ApiBase', service);
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -126,7 +120,7 @@ var service = function service() {
   };
 };
 
-angular.module('foodbox.admin.api').factory('DeviseBase', service);
+angular.module('admin.api.client.foodio').factory('DeviseBase', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -159,7 +153,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('chatApi', service);
+angular.module('admin.api.client.foodio').factory('chatApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -192,7 +186,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('chatMessageApi', service);
+angular.module('admin.api.client.foodio').factory('chatMessageApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -251,7 +245,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('cityOperationApi', service);
+angular.module('admin.api.client.foodio').factory('cityOperationApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -305,7 +299,7 @@ var service = function service(PublicRestangular, Restangular, ApiBase) {
 };
 
 service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('companyApi', service);
+angular.module('admin.api.client.foodio').factory('companyApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -354,7 +348,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('costumerAddressApi', service);
+angular.module('admin.api.client.foodio').factory('costumerAddressApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -405,7 +399,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('costumerApi', service);
+angular.module('admin.api.client.foodio').factory('costumerApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -439,7 +433,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('costumerOrderApi', service);
+angular.module('admin.api.client.foodio').factory('costumerOrderApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -494,7 +488,7 @@ var service = function service($q, $filter, Restangular, ApiBase) {
 };
 
 service.$inject = ['$q', '$filter', 'Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('dashboardApi', service);
+angular.module('admin.api.client.foodio').factory('dashboardApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -582,7 +576,7 @@ var service = function service($q, Restangular, ApiBase) {
 };
 
 service.$inject = ['$q', 'Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('deliveryAreaApi', service);
+angular.module('admin.api.client.foodio').factory('deliveryAreaApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -636,7 +630,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('deliveryTimeApi', service);
+angular.module('admin.api.client.foodio').factory('deliveryTimeApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -708,7 +702,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('employeeApi', service);
+angular.module('admin.api.client.foodio').factory('employeeApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -742,7 +736,7 @@ var service = function service(Restangular, DeviseBase) {
 };
 
 service.$inject = ['Restangular', 'DeviseBase'];
-angular.module('foodbox.admin.api').factory('loginApi', service);
+angular.module('admin.api.client.foodio').factory('loginApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -795,7 +789,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('meApi', service);
+angular.module('admin.api.client.foodio').factory('meApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -834,7 +828,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('meCartApi', service);
+angular.module('admin.api.client.foodio').factory('meCartApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -911,7 +905,7 @@ var service = function service($q, Restangular, ApiBase) {
 };
 
 service.$inject = ['$q', 'Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('meCartItemApi', service);
+angular.module('admin.api.client.foodio').factory('meCartItemApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -947,7 +941,7 @@ var service = function service(PublicRestangular, Restangular, ApiBase) {
 };
 
 service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('menuApi', service);
+angular.module('admin.api.client.foodio').factory('menuApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -986,7 +980,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('messageApi', service);
+angular.module('admin.api.client.foodio').factory('messageApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1090,7 +1084,7 @@ var service = function service($q, Restangular, ApiBase) {
 };
 
 service.$inject = ['$q', 'Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('orderApi', service);
+angular.module('admin.api.client.foodio').factory('orderApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1160,7 +1154,7 @@ var service = function service(Restangular, $q, ApiBase) {
 };
 
 service.$inject = ['Restangular', '$q', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('orderTypeApi', service);
+angular.module('admin.api.client.foodio').factory('orderTypeApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1199,7 +1193,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('pauseApi', service);
+angular.module('admin.api.client.foodio').factory('pauseApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1248,7 +1242,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('paymentMethodApi', service);
+angular.module('admin.api.client.foodio').factory('paymentMethodApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1287,7 +1281,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('productCategoryApi', service);
+angular.module('admin.api.client.foodio').factory('productCategoryApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1321,7 +1315,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('productSubcategoryApi', service);
+angular.module('admin.api.client.foodio').factory('productSubcategoryApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1355,7 +1349,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('ratingApi', service);
+angular.module('admin.api.client.foodio').factory('ratingApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1381,7 +1375,7 @@ var service = function service(PublicRestangular, Restangular) {
 };
 
 service.$inject = ['PublicRestangular', 'Restangular'];
-angular.module('foodbox.admin.api').factory('stateApi', service);
+angular.module('admin.api.client.foodio').factory('stateApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1425,7 +1419,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('storeAddonApi', service);
+angular.module('admin.api.client.foodio').factory('storeAddonApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1464,7 +1458,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('storeAddressApi', service);
+angular.module('admin.api.client.foodio').factory('storeAddressApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1503,7 +1497,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('storeApi', service);
+angular.module('admin.api.client.foodio').factory('storeApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1547,7 +1541,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('storeProductApi', service);
+angular.module('admin.api.client.foodio').factory('storeProductApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1586,7 +1580,7 @@ var service = function service(Restangular, ApiBase) {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('trackApi', service);
+angular.module('admin.api.client.foodio').factory('trackApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1617,7 +1611,7 @@ var service = function service(Restangular) {
 };
 
 service.$inject = ['Restangular'];
-angular.module('foodbox.admin.api').factory('utilsApi', service);
+angular.module('admin.api.client.foodio').factory('utilsApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1642,4 +1636,4 @@ var service = function service(PublicRestangular, Restangular) {
 };
 
 service.$inject = ['PublicRestangular', 'Restangular'];
-angular.module('foodbox.admin.api').factory('zipcodeApi', service);
+angular.module('admin.api.client.foodio').factory('zipcodeApi', service);

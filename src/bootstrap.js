@@ -1,13 +1,11 @@
-let app = angular.module('foodbox.admin.api', []);
+let app = angular.module('admin.api.client.foodio', ['constants.foodio']);
 
-angular.module('foodbox.admin.api').constant('constants', {
-  publicUrl: "https://api-foodio.herokuapp.com",
-  adminUrl: "https://api-foodio.herokuapp.com/admin",
-});
-
-let bootstrap = (constants, RestangularProvider) => {
+let adminRestangular = (constants, RestangularProvider) => {
   return RestangularProvider.setBaseUrl(constants.adminUrl);
 };
+
+adminRestangular.$inject = ['constants', 'RestangularProvider']
+angular.module('admin.api.client.foodio').config(adminRestangular);
 
 
 let publicRestangular = (constants, Restangular) => {
@@ -15,9 +13,5 @@ let publicRestangular = (constants, Restangular) => {
     RestangularConfigurer.setBaseUrl(constants.publicUrl);
   });
 };
-
-bootstrap.$inject = ['constants', 'RestangularProvider']
 publicRestangular.$inject = ['constants', 'Restangular'];
-
-angular.module('foodbox.admin.api').config(bootstrap);
 app.factory('PublicRestangular', publicRestangular);

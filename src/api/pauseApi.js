@@ -20,4 +20,4 @@ let service = (Restangular, ApiBase) => {
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('foodbox.admin.api').factory('pauseApi', service);
+angular.module('admin.api.client.foodio').factory('pauseApi', service);

@@ -8,7 +8,7 @@ var sources = ["./src/bootstrap.js", "./src/**/*.js"];
 gulp.task('babel', function () {
   gulp.src(sources)
     .pipe(babel())
-    .pipe(concat('foodbox-api-client-admin.js'))
+    .pipe(concat('admin-api-client-foodio.js'))
     .pipe(gulp.dest('./'));
 });
 

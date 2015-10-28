@@ -1,8 +1,8 @@
 {
-  "name": "foodbox-api-client-admin",
+  "name": "foodio-api-client-admin",
   "version": "0.0.1",
-  "description": "AngularJS rest cient for foodbox admin",
-  "main": "./foodbox-api-client-admin.js",
+  "description": "AngularJS rest cient for foodio admin",
+  "main": "./admin-api-client-foodio.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

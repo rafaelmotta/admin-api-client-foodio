@@ -1,11 +1,11 @@
 {
-  "name": "foodbox-api-client-admin",
+  "name": "admin-api-client-foodio",
   "version": "0.0.1",
   "authors": [
     "Rafael Motta <rafaelmotta021@gmail.com>"
   ],
-  "description": "AngularJS rest cient for foodbox admin",
-  "main": "foodbox-api-client-admin.js",
+  "description": "AngularJS rest cient for foodio admin",
+  "main": "foodio-api-client-admin.js",
   "moduleType": [
     "es6"
   ],
@@ -16,5 +16,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "constants-foodio": "*"
+  }
 }
