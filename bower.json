@@ -5,7 +5,7 @@
     "Rafael Motta <rafaelmotta021@gmail.com>"
   ],
   "description": "AngularJS rest cient for foodio admin",
-  "main": "foodio-api-client-admin.js",
+  "main": "admin-api-client-foodio.js",
   "moduleType": [
     "es6"
   ],
