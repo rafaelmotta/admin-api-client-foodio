@@ -3,7 +3,7 @@
 var app = angular.module('admin.api.client.foodio', ['constants.foodio']);
 
 var adminRestangular = function adminRestangular(constants, RestangularProvider) {
-  return RestangularProvider.setBaseUrl(constants.adminUrl);
+  return RestangularProvider.setBaseUrl(constants.api + '/admin');
 };
 
 adminRestangular.$inject = ['constants', 'RestangularProvider'];
@@ -11,7 +11,7 @@ angular.module('admin.api.client.foodio').config(adminRestangular);
 
 var publicRestangular = function publicRestangular(constants, Restangular) {
   return Restangular.withConfig(function (RestangularConfigurer) {
-    RestangularConfigurer.setBaseUrl(constants.publicUrl);
+    RestangularConfigurer.setBaseUrl(constants.api);
   });
 };
 publicRestangular.$inject = ['constants', 'Restangular'];
