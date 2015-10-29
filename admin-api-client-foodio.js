@@ -88,7 +88,7 @@ var service = function service($rootScope, $q, constants, Upload) {
           });
 
           return Upload.upload({
-            url: constants.adminUrl + '/' + params.url,
+            url: constants.api + '/admin/' + params.url,
             method: params.method,
             file: params.data[params.imgKeys[0]][0],
             fileFormDataName: params.key + '[' + params.imgKeys[0] + ']',
