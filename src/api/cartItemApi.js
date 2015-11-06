@@ -1,6 +1,6 @@
 let service = ($q, Restangular, ApiBase) => {
 
-  return new class MeCartItemApi extends ApiBase {
+  return new class CartItemApi extends ApiBase {
 
     create(data) {
       return this._serialize(data).then((serializedData) => {
@@ -62,4 +62,4 @@ let service = ($q, Restangular, ApiBase) => {
 };
 
 service.$inject = ['$q', 'Restangular', 'ApiBase'];
-angular.module('admin.api.client.foodio').factory('meCartItemApi', service);
+angular.module('admin.api.client.foodio').factory('cartItemApi', service);

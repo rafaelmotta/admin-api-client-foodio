@@ -132,6 +132,122 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var service = function service(Restangular, ApiBase) {
+
+  return new ((function (_ApiBase) {
+    _inherits(CartApi, _ApiBase);
+
+    function CartApi() {
+      _classCallCheck(this, CartApi);
+
+      _get(Object.getPrototypeOf(CartApi.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(CartApi, [{
+      key: 'fetch',
+      value: function fetch() {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').get();
+      }
+    }, {
+      key: 'create',
+      value: function create() {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').one('new').get();
+      }
+    }]);
+
+    return CartApi;
+  })(ApiBase))();
+};
+
+service.$inject = ['Restangular', 'ApiBase'];
+angular.module('admin.api.client.foodio').factory('cartApi', service);
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var service = function service($q, Restangular, ApiBase) {
+
+  return new ((function (_ApiBase) {
+    _inherits(CartItemApi, _ApiBase);
+
+    function CartItemApi() {
+      _classCallCheck(this, CartItemApi);
+
+      _get(Object.getPrototypeOf(CartItemApi.prototype), 'constructor', this).apply(this, arguments);
+    }
+
+    _createClass(CartItemApi, [{
+      key: 'create',
+      value: function create(data) {
+        var _this = this;
+
+        return this._serialize(data).then(function (serializedData) {
+          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).one('me').one('cart').post('cart_items', { cart_item: serializedData });
+        });
+      }
+    }, {
+      key: 'update',
+      value: function update(data) {
+        var _this2 = this;
+
+        return this._serialize(data).then(function (serializedData) {
+          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).one('me').one('cart').one('cart_items', data.id).patch({ cart_item: serializedData });
+        });
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy(data) {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').one('cart_items', data.id).remove();
+      }
+    }, {
+      key: '_serialize',
+      value: function _serialize(cartItem) {
+        return $q(function (resolve, reject) {
+          var data = {};
+
+          angular.forEach(cartItem, function (value, key) {
+            if (key === 'id' || key === 'amount' || key === 'note') {
+              data[key] = value;
+            }
+          });
+
+          data.store_product_id = cartItem.product.id;
+          data.customization_fields = JSON.stringify(cartItem.customization_fields);
+
+          data.cart_item_addons_to_put_attributes = cartItem.addons.map(function (addon) {
+            return {
+              store_addon_id: addon.id,
+              product_addon_id: addon.product_addon_id
+            };
+          });
+
+          resolve(data);
+        });
+      }
+    }]);
+
+    return CartItemApi;
+  })(ApiBase))();
+};
+
+service.$inject = ['$q', 'Restangular', 'ApiBase'];
+angular.module('admin.api.client.foodio').factory('cartItemApi', service);
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var service = function service(Restangular, ApiBase) {
   return new ((function (_ApiBase) {
     _inherits(ChatApi, _ApiBase);
 
@@ -790,122 +906,6 @@ var service = function service(Restangular, ApiBase) {
 
 service.$inject = ['Restangular', 'ApiBase'];
 angular.module('admin.api.client.foodio').factory('meApi', service);
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var service = function service(Restangular, ApiBase) {
-
-  return new ((function (_ApiBase) {
-    _inherits(MeCartApi, _ApiBase);
-
-    function MeCartApi() {
-      _classCallCheck(this, MeCartApi);
-
-      _get(Object.getPrototypeOf(MeCartApi.prototype), 'constructor', this).apply(this, arguments);
-    }
-
-    _createClass(MeCartApi, [{
-      key: 'fetch',
-      value: function fetch() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').get();
-      }
-    }, {
-      key: 'create',
-      value: function create() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').one('new').get();
-      }
-    }]);
-
-    return MeCartApi;
-  })(ApiBase))();
-};
-
-service.$inject = ['Restangular', 'ApiBase'];
-angular.module('admin.api.client.foodio').factory('meCartApi', service);
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var service = function service($q, Restangular, ApiBase) {
-
-  return new ((function (_ApiBase) {
-    _inherits(MeCartItemApi, _ApiBase);
-
-    function MeCartItemApi() {
-      _classCallCheck(this, MeCartItemApi);
-
-      _get(Object.getPrototypeOf(MeCartItemApi.prototype), 'constructor', this).apply(this, arguments);
-    }
-
-    _createClass(MeCartItemApi, [{
-      key: 'create',
-      value: function create(data) {
-        var _this = this;
-
-        return this._serialize(data).then(function (serializedData) {
-          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).one('me').one('cart').post('cart_items', { cart_item: serializedData });
-        });
-      }
-    }, {
-      key: 'update',
-      value: function update(data) {
-        var _this2 = this;
-
-        return this._serialize(data).then(function (serializedData) {
-          return Restangular.one('companies', _this2.company.id).one('stores', _this2.store.id).one('me').one('cart').one('cart_items', data.id).patch({ cart_item: serializedData });
-        });
-      }
-    }, {
-      key: 'destroy',
-      value: function destroy(data) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('me').one('cart').one('cart_items', data.id).remove();
-      }
-    }, {
-      key: '_serialize',
-      value: function _serialize(cartItem) {
-        return $q(function (resolve, reject) {
-          var data = {};
-
-          angular.forEach(cartItem, function (value, key) {
-            if (key === 'id' || key === 'amount' || key === 'note') {
-              data[key] = value;
-            }
-          });
-
-          data.store_product_id = cartItem.product.id;
-          data.customization_fields = JSON.stringify(cartItem.customization_fields);
-
-          data.cart_item_addons_to_put_attributes = cartItem.addons.map(function (addon) {
-            return {
-              store_addon_id: addon.id,
-              product_addon_id: addon.product_addon_id
-            };
-          });
-
-          resolve(data);
-        });
-      }
-    }]);
-
-    return MeCartItemApi;
-  })(ApiBase))();
-};
-
-service.$inject = ['$q', 'Restangular', 'ApiBase'];
-angular.module('admin.api.client.foodio').factory('meCartItemApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
