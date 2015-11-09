@@ -61,7 +61,7 @@ let service = ($q, Restangular, ApiBase) => {
         };
 
         if (order.scheduling.day && order.scheduling.time) {
-          data.delivery_time = {
+          data.scheduled_to = {
             wday: order.scheduling.day.wday,
             from: order.scheduling.day.date + ' ' + order.scheduling.time.opening,
             to: order.scheduling.day.date + ' ' + order.scheduling.time.closing
