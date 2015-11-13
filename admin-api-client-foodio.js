@@ -1266,7 +1266,18 @@ var service = function service(Restangular, ApiBase) {
     _createClass(ProductApi, [{
       key: 'update',
       value: function update(product) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('products', product.id).patch({ product: product });
+        if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
+          return this.requestWithImage({
+            url: 'companies/' + this.company.id + '/stores/' + this.store.id + '/products/' + product.id,
+            method: 'PATCH',
+            data: product,
+            key: 'product',
+            imgKeys: ['img', 'img_hover'],
+            extraKeys: ['name', 'description', 'base_price']
+          });
+        } else {
+          return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('products', product.id).patch({ product: product });
+        }
       }
     }]);
 
