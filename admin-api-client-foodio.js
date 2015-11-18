@@ -1513,7 +1513,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var service = function service(Restangular, ApiBase) {
+var service = function service(PublicRestangular, Restangular, ApiBase) {
 
   return new ((function (_ApiBase) {
     _inherits(StoreApi, _ApiBase);
@@ -1526,8 +1526,8 @@ var service = function service(Restangular, ApiBase) {
 
     _createClass(StoreApi, [{
       key: 'fetch',
-      value: function fetch() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).get();
+      value: function fetch(params) {
+        return PublicRestangular.one('companies', this.company.id).one('stores', this.store.id).get(params);
       }
     }, {
       key: 'update',
@@ -1540,7 +1540,7 @@ var service = function service(Restangular, ApiBase) {
   })(ApiBase))();
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
 angular.module('admin.api.client.foodio').factory('storeApi', service);
 'use strict';
 
