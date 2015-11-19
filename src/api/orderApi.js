@@ -20,8 +20,6 @@ let service = ($q, Restangular, ApiBase) => {
 
     create(order) {
       return this._serializeBeforeCreate(order).then((serializedOrder) => {
-        console.log(serializedOrder);
-
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
@@ -61,7 +59,7 @@ let service = ($q, Restangular, ApiBase) => {
         };
 
         if (order.scheduling.day && order.scheduling.time) {
-          data.scheduled_to = {
+          data.scheduling_for = {
             wday: order.scheduling.day.wday,
             from: order.scheduling.day.date + ' ' + order.scheduling.time.opening,
             to: order.scheduling.day.date + ' ' + order.scheduling.time.closing
