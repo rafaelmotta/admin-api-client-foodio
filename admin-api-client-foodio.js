@@ -1018,8 +1018,6 @@ var service = function service($q, Restangular, ApiBase) {
         var _this = this;
 
         return this._serializeBeforeCreate(order).then(function (serializedOrder) {
-          console.log(serializedOrder);
-
           return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('orders', { order: serializedOrder });
         });
       }
@@ -1052,7 +1050,7 @@ var service = function service($q, Restangular, ApiBase) {
           };
 
           if (order.scheduling.day && order.scheduling.time) {
-            data.scheduled_to = {
+            data.scheduling_for = {
               wday: order.scheduling.day.wday,
               from: order.scheduling.day.date + ' ' + order.scheduling.time.opening,
               to: order.scheduling.day.date + ' ' + order.scheduling.time.closing
