@@ -58,12 +58,14 @@ let service = ($q, Restangular, ApiBase) => {
           address_id: (order.address && order.address.id) ? order.address.id : null
         };
 
-        if (order.scheduling.day && order.scheduling.time) {
-          data.scheduling_for = {
-            wday: order.scheduling.day.wday,
-            from: order.scheduling.day.date + ' ' + order.scheduling.time.opening,
-            to: order.scheduling.day.date + ' ' + order.scheduling.time.closing
-          };
+        if(order.scheduling) {
+          if (order.scheduling.day && order.scheduling.time) {
+            data.scheduling_for = {
+              wday: order.scheduling.day.wday,
+              from: order.scheduling.day.date + ' ' + order.scheduling.time.opening,
+              to: order.scheduling.day.date + ' ' + order.scheduling.time.closing
+            };
+          }
         }
 
         return resolve(data);
