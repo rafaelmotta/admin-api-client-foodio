@@ -402,7 +402,7 @@ var service = function service(PublicRestangular, Restangular, ApiBase) {
             data: company,
             key: 'company',
             imgKeys: ['logo'],
-            extraKeys: ['name', 'slogan', 'email', 'facebook', 'gplus', 'meta_keywords', 'meta_description', 'subdomain', 'domain', 'layout', 'theme']
+            extraKeys: ['name', 'slogan', 'email', 'phone', 'secondary_phone', 'facebook', 'gplus', 'trip_advisor', 'page_title', 'meta_description', 'meta_keywords', 'description']
           });
         } else {
           return Restangular.one('companies', company.id).patch({ company: company });
