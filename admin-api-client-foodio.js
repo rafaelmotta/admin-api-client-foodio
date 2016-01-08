@@ -1265,19 +1265,23 @@ var service = function service(Restangular, ApiBase) {
 
     _createClass(ProductApi, [{
       key: 'create',
-      value: function create(product) {
-        if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
-          return this.requestWithImage({
-            url: 'companies/' + this.company.id + '/stores/' + this.store.id + '/products',
-            method: 'POST',
-            data: product,
-            key: 'product',
-            imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'description', 'base_price']
-          });
-        } else {
-          return Restangular.one('companies', this.company.id).one('stores', this.store.id).post('products', { product: product });
-        }
+      value: function create(data) {
+        var _this = this;
+
+        this._serializeBeforeCreate(product).then(function (product) {
+          if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
+            return _this.requestWithImage({
+              url: 'companies/' + _this.company.id + '/stores/' + _this.store.id + '/products',
+              method: 'POST',
+              data: product,
+              key: 'product',
+              imgKeys: ['img', 'img_hover'],
+              extraKeys: ['name', 'description', 'base_price']
+            });
+          } else {
+            return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('products', { product: product });
+          }
+        });
       }
     }, {
       key: 'update',
@@ -1294,6 +1298,18 @@ var service = function service(Restangular, ApiBase) {
         } else {
           return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('products', product.id).patch({ product: product });
         }
+      }
+    }, {
+      key: '_serializeBeforeCreate',
+      value: function _serializeBeforeCreate(product) {
+        return $q(function (resolve, reject) {
+          var data = angular.copy(product);
+
+          data.product_subcategory_id = data.category.id;
+          delete data.category;
+
+          resolve(data);
+        });
       }
     }]);
 
