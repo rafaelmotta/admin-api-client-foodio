@@ -1,8 +1,8 @@
 let service = (Restangular, ApiBase) => {
   return new class ProductApi extends ApiBase {
 
-    create(data) {
-      return this._serializeBeforeCreate(data).then((product) => {
+    create(product) {
+      return this._serializeBeforeCreate(product).then((product) => {
         if(angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
           return this.requestWithImage({
             url: `companies/${this.company.id}/stores/${this.store.id}/products`,

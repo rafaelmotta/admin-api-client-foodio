@@ -1265,7 +1265,7 @@ var service = function service(Restangular, ApiBase) {
 
     _createClass(ProductApi, [{
       key: 'create',
-      value: function create(data) {
+      value: function create(product) {
         var _this = this;
 
         return this._serializeBeforeCreate(product).then(function (product) {
