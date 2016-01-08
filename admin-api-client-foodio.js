@@ -1268,7 +1268,7 @@ var service = function service(Restangular, ApiBase) {
       value: function create(data) {
         var _this = this;
 
-        this._serializeBeforeCreate(product).then(function (product) {
+        return this._serializeBeforeCreate(product).then(function (product) {
           if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
             return _this.requestWithImage({
               url: 'companies/' + _this.company.id + '/stores/' + _this.store.id + '/products',
