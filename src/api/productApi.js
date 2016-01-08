@@ -1,4 +1,4 @@
-let service = ($q, Restangular, ApiBase) => {
+let service = (Restangular, ApiBase, $q) => {
   return new class ProductApi extends ApiBase {
 
     create(product) {
@@ -53,5 +53,5 @@ let service = ($q, Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['$q', 'Restangular', 'ApiBase'];
+service.$inject = ['Restangular', 'ApiBase', '$q'];
 angular.module('admin.api.client.foodio').factory('productApi', service);
