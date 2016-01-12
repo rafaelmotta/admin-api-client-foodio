@@ -1680,6 +1680,11 @@ var service = function service(Restangular) {
       value: function getOrderStauses(params) {
         return Restangular.one('utils').one('order_statuses').get();
       }
+    }, {
+      key: 'getMetaTags',
+      value: function getMetaTags(params) {
+        return Restangular.one('utils').one('meta_tag_names').get();
+      }
     }]);
 
     return UtilsApi;

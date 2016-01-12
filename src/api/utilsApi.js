@@ -15,6 +15,13 @@ let service = (Restangular) => {
         .one('order_statuses')
         .get();
     }
+
+    getMetaTags(params) {
+      return Restangular
+        .one('utils')
+        .one('meta_tag_names')
+        .get();
+    }
   }
 };
 
