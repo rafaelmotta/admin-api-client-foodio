@@ -1421,12 +1421,12 @@ var service = function service(Restangular, ApiBase) {
     _createClass(ProductCategoryApi, [{
       key: 'fetch',
       value: function fetch() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('product_categories').get();
+        return Restangular.one('companies', this.company.id).one('product_categories').get();
       }
     }, {
       key: 'show',
       value: function show(productCategory) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('product_categories', productCategory.id).get();
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).get();
       }
     }]);
 

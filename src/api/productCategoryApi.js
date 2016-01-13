@@ -5,7 +5,6 @@ let service = (Restangular, ApiBase) => {
     fetch() {
       return Restangular
         .one('companies', this.company.id)
-        .one('stores', this.store.id)
         .one('product_categories')
         .get();
     }
@@ -13,7 +12,6 @@ let service = (Restangular, ApiBase) => {
     show(productCategory) {
       return Restangular
         .one('companies', this.company.id)
-        .one('stores', this.store.id)
         .one('product_categories', productCategory.id)
         .get();
     }
