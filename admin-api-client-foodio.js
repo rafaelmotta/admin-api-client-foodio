@@ -1458,6 +1458,21 @@ var service = function service(Restangular, ApiBase) {
     }
 
     _createClass(ProductSubcategoryApi, [{
+      key: 'create',
+      value: function create(productCategory, productSubcategor) {
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.type).one('product_subcategories', { product_subcategory: productSubcategory });
+      }
+    }, {
+      key: 'update',
+      value: function update(productCategory, productSubcategory) {
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.type).one('product_subcategories', productCategory.type).patch({ product_subcategory: productSubcategory });
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy(productCategory, productSubcategor) {
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.type).one('product_subcategories', productCategory.type).destroy();
+      }
+    }, {
       key: 'fetch',
       value: function fetch(productCategory) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('product_categories', productCategory.type).one('product_subcategories').one('store_products').get();
