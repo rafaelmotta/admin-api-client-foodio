@@ -1459,7 +1459,7 @@ var service = function service(Restangular, ApiBase) {
 
     _createClass(ProductSubcategoryApi, [{
       key: 'create',
-      value: function create(productCategory, productSubcategor) {
+      value: function create(productCategory, productSubcategory) {
         return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', { product_subcategory: productSubcategory });
       }
     }, {
@@ -1469,8 +1469,8 @@ var service = function service(Restangular, ApiBase) {
       }
     }, {
       key: 'destroy',
-      value: function destroy(productCategory, productSubcategor) {
-        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productCategory.id).remove();
+      value: function destroy(productCategory, productSubcategory) {
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).remove();
       }
     }, {
       key: 'fetch',
