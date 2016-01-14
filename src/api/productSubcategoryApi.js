@@ -22,7 +22,7 @@ let service = (Restangular, ApiBase) => {
         .one('companies', this.company.id)
         .one('product_categories', productCategory.id)
         .one('product_subcategories', productCategory.id)
-        .destroy();
+        .remove();
     }
 
     fetch(productCategory) {

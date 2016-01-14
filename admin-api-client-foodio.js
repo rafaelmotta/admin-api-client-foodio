@@ -1470,7 +1470,7 @@ var service = function service(Restangular, ApiBase) {
     }, {
       key: 'destroy',
       value: function destroy(productCategory, productSubcategor) {
-        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productCategory.id).destroy();
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productCategory.id).remove();
       }
     }, {
       key: 'fetch',
