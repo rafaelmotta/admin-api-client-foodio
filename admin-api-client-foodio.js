@@ -1475,7 +1475,7 @@ var service = function service(Restangular, ApiBase) {
     }, {
       key: 'fetch',
       value: function fetch(productCategory) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('product_categories', productCategory.id).one('product_subcategories').one('store_products').get();
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('product_categories', productCategory.type).one('product_subcategories').one('store_products').get();
       }
     }]);
 
