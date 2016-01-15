@@ -1460,7 +1460,7 @@ var service = function service(Restangular, ApiBase) {
     _createClass(ProductSubcategoryApi, [{
       key: 'create',
       value: function create(productCategory, productSubcategory) {
-        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', { product_subcategory: productSubcategory });
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).post('product_subcategories', { product_subcategory: productSubcategory });
       }
     }, {
       key: 'update',

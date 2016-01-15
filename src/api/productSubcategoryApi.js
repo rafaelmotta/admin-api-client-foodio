@@ -6,7 +6,7 @@ let service = (Restangular, ApiBase) => {
       return Restangular
         .one('companies', this.company.id)
         .one('product_categories', productCategory.id)
-        .one('product_subcategories', { product_subcategory: productSubcategory });
+        .post('product_subcategories', { product_subcategory: productSubcategory });
     }
 
     update(productCategory, productSubcategory) {
