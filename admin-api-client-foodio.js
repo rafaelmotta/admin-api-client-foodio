@@ -1465,7 +1465,7 @@ var service = function service(Restangular, ApiBase) {
     }, {
       key: 'update',
       value: function update(productCategory, productSubcategory) {
-        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productCategory.id).patch({ product_subcategory: productSubcategory });
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).patch({ product_subcategory: productSubcategory });
       }
     }, {
       key: 'destroy',

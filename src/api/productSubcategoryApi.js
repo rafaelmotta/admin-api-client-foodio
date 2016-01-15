@@ -13,7 +13,7 @@ let service = (Restangular, ApiBase) => {
       return Restangular
         .one('companies', this.company.id)
         .one('product_categories', productCategory.id)
-        .one('product_subcategories', productCategory.id)
+        .one('product_subcategories', productSubcategory.id)
         .patch({ product_subcategory: productSubcategory });
     }
 
