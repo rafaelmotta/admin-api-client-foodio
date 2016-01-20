@@ -27,15 +27,6 @@ let service = (Restangular, ApiBase) => {
         .one('addon_categories', addonCategory.id)
         .remove();
     }
-
-    getWithStoreAddons() {
-      return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
-        .one('addon_categories')
-        .one('store_addons')
-        .get();
-    }
   }
 };
 

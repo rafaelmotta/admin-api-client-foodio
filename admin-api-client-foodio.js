@@ -104,11 +104,6 @@ var service = function service(Restangular, ApiBase) {
       value: function destroy(addonCategory) {
         return Restangular.one('companies', this.company.id).one('addon_categories', addonCategory.id).remove();
       }
-    }, {
-      key: 'getWithStoreAddons',
-      value: function getWithStoreAddons() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories').one('store_addons').get();
-      }
     }]);
 
     return AddonCategoryApi;
@@ -1635,19 +1630,24 @@ var service = function service(Restangular, ApiBase) {
     }
 
     _createClass(StoreAddonApi, [{
+      key: 'fetch',
+      value: function fetch() {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('store_addons').get();
+      }
+    }, {
       key: 'show',
-      value: function show(addonCategory, storeAddon) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories', addonCategory.id).one('store_addons', storeAddon.id).get();
+      value: function show(storeAddon) {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('store_addons', storeAddon.id).get();
       }
     }, {
       key: 'update',
-      value: function update(addonCategory, storeAddon) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories', addonCategory.id).one('store_addons', storeAddon.id).patch({ store_addon: storeAddon });
+      value: function update(storeAddon) {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('store_addons', storeAddon.id).patch({ store_addon: storeAddon });
       }
     }, {
       key: 'destroy',
-      value: function destroy(addonCategory, storeAddon) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories', addonCategory.id).one('store_addons', storeAddon.id).remove();
+      value: function destroy(storeAddon) {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('store_addons', storeAddon.id).remove();
       }
     }]);
 
