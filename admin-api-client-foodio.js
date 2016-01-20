@@ -39,22 +39,22 @@ var service = function service(Restangular, ApiBase) {
     _createClass(AddonApi, [{
       key: 'fetch',
       value: function fetch() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories').one('addons').get();
+        return Restangular.one('companies', this.company.id).one('addon_categories').one('addons').get();
       }
     }, {
       key: 'create',
       value: function create(addonCategory, addon) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories', addonCategory.id).post('addons', { addon: addon });
+        return Restangular.one('companies', this.company.id).one('addon_categories', addonCategory.id).post('addons', { addon: addon });
       }
     }, {
       key: 'update',
       value: function update(addonCategory, addon) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories', addonCategory.id).one('addons', addon.id).patch({ addon: addon });
+        return Restangular.one('companies', this.company.id).one('addon_categories', addonCategory.id).one('addons', addon.id).patch({ addon: addon });
       }
     }, {
       key: 'destroy',
       value: function destroy(addonCategory, addon) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories', addonCategory.id).one('addons', addon.id).remove();
+        return Restangular.one('companies', this.company.id).one('addon_categories', addonCategory.id).one('addons', addon.id).remove();
       }
     }]);
 

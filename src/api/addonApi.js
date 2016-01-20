@@ -4,7 +4,6 @@ let service = (Restangular, ApiBase) => {
     fetch() {
       return Restangular
         .one('companies', this.company.id)
-        .one('stores', this.store.id)
         .one('addon_categories')
         .one('addons')
         .get();
@@ -13,7 +12,6 @@ let service = (Restangular, ApiBase) => {
     create(addonCategory, addon) {
       return Restangular
         .one('companies', this.company.id)
-        .one('stores', this.store.id)
         .one('addon_categories', addonCategory.id)
         .post('addons', { addon: addon });
     }
@@ -21,7 +19,6 @@ let service = (Restangular, ApiBase) => {
     update(addonCategory, addon) {
       return Restangular
         .one('companies', this.company.id)
-        .one('stores', this.store.id)
         .one('addon_categories', addonCategory.id)
         .one('addons', addon.id)
         .patch({ addon: addon })
@@ -30,7 +27,6 @@ let service = (Restangular, ApiBase) => {
     destroy(addonCategory, addon) {
       return Restangular
         .one('companies', this.company.id)
-        .one('stores', this.store.id)
         .one('addon_categories', addonCategory.id)
         .one('addons', addon.id)
         .remove();
