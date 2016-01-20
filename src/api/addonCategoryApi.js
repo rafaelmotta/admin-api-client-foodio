@@ -8,6 +8,14 @@ let service = (Restangular, ApiBase) => {
         .get();
     }
 
+    fetchWithAddons() {
+      return Restangular
+        .one('companies', this.company.id)
+        .one('addon_categories')
+        .one('addons')
+        .get();
+    }
+
     create(addonCategory) {
       return Restangular
         .one('companies', this.company.id)
