@@ -1,11 +1,11 @@
 let service = (Restangular, ApiBase) => {
   return new class AddonApi extends ApiBase {
 
-    fetch(addonCategory) {
+    fetch() {
       return Restangular
         .one('companies', this.company.id)
         .one('stores', this.store.id)
-        .one('addon_categories', addonCategory.id)
+        .one('addon_categories')
         .one('addons')
         .get();
     }

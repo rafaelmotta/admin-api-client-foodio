@@ -38,8 +38,8 @@ var service = function service(Restangular, ApiBase) {
 
     _createClass(AddonApi, [{
       key: 'fetch',
-      value: function fetch(addonCategory) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories', addonCategory.id).one('addons').get();
+      value: function fetch() {
+        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('addon_categories').one('addons').get();
       }
     }, {
       key: 'create',
