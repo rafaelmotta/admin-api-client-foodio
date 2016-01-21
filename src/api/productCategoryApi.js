@@ -9,6 +9,15 @@ let service = (Restangular, ApiBase) => {
         .get();
     }
 
+    fetchWithProducts() {
+      return Restangular
+        .one('companies', this.company.id)
+        .one('product_categories')
+        .one('product_subcategories')
+        .one('products')
+        .get();
+    }
+
     show(productCategory) {
       return Restangular
         .one('companies', this.company.id)
