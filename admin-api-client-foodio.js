@@ -1405,6 +1405,11 @@ var service = function service(Restangular, ApiBase, $q) {
     }
 
     _createClass(ProductApi, [{
+      key: 'fetch',
+      value: function fetch() {
+        return Restangular.one('companies', this.company.id).one('product_categories').one('product_subcategories').one('products').get();
+      }
+    }, {
       key: 'create',
       value: function create(product) {
         var _this = this;

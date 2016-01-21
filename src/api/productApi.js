@@ -1,6 +1,15 @@
 let service = (Restangular, ApiBase, $q) => {
   return new class ProductApi extends ApiBase {
 
+    fetch() {
+      return Restangular
+        .one('companies', this.company.id)
+        .one('product_categories')
+        .one('product_subcategories')
+        .one('products')
+        .get();
+    }
+
     create(product) {
       return this._serializeBeforeCreate(product).then((product) => {
         if(angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
