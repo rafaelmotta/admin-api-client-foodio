@@ -1411,30 +1411,26 @@ var service = function service(Restangular, ApiBase, $q) {
       }
     }, {
       key: 'create',
-      value: function create(product) {
-        var _this = this;
-
-        return this._serializeBeforeCreate(product).then(function (product) {
-          if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
-            return _this.requestWithImage({
-              url: 'companies/' + _this.company.id + '/stores/' + _this.store.id + '/products',
-              method: 'POST',
-              data: product,
-              key: 'product',
-              imgKeys: ['img', 'img_hover'],
-              extraKeys: ['name', 'description', 'base_price']
-            });
-          } else {
-            return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('products', { product: product });
-          }
-        });
+      value: function create(productCategory, productSubcategory, product) {
+        if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
+          return this.requestWithImage({
+            url: 'companies/' + this.company.id + '/stores/' + this.store.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products/' + product.id,
+            method: 'POST',
+            data: product,
+            key: 'product',
+            imgKeys: ['img', 'img_hover'],
+            extraKeys: ['name', 'description', 'base_price']
+          });
+        } else {
+          return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
+        }
       }
     }, {
       key: 'update',
-      value: function update(product) {
+      value: function update(productCategory, productSubcategory, product) {
         if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
           return this.requestWithImage({
-            url: 'companies/' + this.company.id + '/stores/' + this.store.id + '/products/' + product.id,
+            url: 'companies/' + this.company.id + '/stores/' + this.store.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products/' + product.id,
             method: 'PATCH',
             data: product,
             key: 'product',
@@ -1442,20 +1438,8 @@ var service = function service(Restangular, ApiBase, $q) {
             extraKeys: ['name', 'description', 'base_price']
           });
         } else {
-          return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('products', product.id).patch({ product: product });
+          return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
         }
-      }
-    }, {
-      key: '_serializeBeforeCreate',
-      value: function _serializeBeforeCreate(product) {
-        return $q(function (resolve, reject) {
-          var data = angular.copy(product);
-
-          data.product_subcategory_id = data.category.id;
-          delete data.category;
-
-          resolve(data);
-        });
       }
     }]);
 
