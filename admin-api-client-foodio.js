@@ -1441,6 +1441,11 @@ var service = function service(Restangular, ApiBase, $q) {
           return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
         }
       }
+    }, {
+      key: 'destroy',
+      value: function destroy(productCategory, productSubcategory, product) {
+        return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).remove();
+      }
     }]);
 
     return ProductApi;
