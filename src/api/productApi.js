@@ -47,6 +47,15 @@ let service = (Restangular, ApiBase, $q) => {
           .one('products', product.id)
           .patch({ product: product });
       }
+
+      destroy(productCategory, productSubcategory, product) {
+        return Restangular
+          .one('companies', this.company.id)
+          .one('product_categories', productCategory.id)
+          .one('product_subcategories', productSubcategory.id)
+          .one('products', product.id)
+          .remove();
+      }
     }
   }
 };
