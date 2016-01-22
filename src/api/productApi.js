@@ -1,7 +1,7 @@
 let service = (Restangular, ApiBase, $q) => {
   return new class ProductApi extends ApiBase {
 
-    fetch(productCategory, productSubcategory, product) {
+    show(productCategory, productSubcategory, product) {
       return Restangular
         .one('companies', this.company.id)
         .one('product_categories', productCategory.id)
