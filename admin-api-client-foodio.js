@@ -1299,8 +1299,8 @@ var service = function service(Restangular, ApiBase) {
         return Restangular.one('companies', this.company.id).one('pages', page.id).patch({ page: page });
       }
     }, {
-      key: 'delete',
-      value: function _delete() {
+      key: 'remove',
+      value: function remove(page) {
         return Restangular.one('companies', this.company.id).one('pages', page.id).destroy();
       }
     }]);

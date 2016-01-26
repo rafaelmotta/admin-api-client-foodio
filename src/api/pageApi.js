@@ -29,7 +29,7 @@ let service = (Restangular, ApiBase) => {
         .patch({ page: page });
     }
 
-    delete() {
+    remove(page) {
       return Restangular
         .one('companies', this.company.id)
         .one('pages', page.id)
