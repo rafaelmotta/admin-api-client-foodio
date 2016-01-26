@@ -1270,32 +1270,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 var service = function service(Restangular, ApiBase) {
 
   return new ((function (_ApiBase) {
-    _inherits(PagesApi, _ApiBase);
+    _inherits(PageApi, _ApiBase);
 
-    function PagesApi() {
-      _classCallCheck(this, PagesApi);
+    function PageApi() {
+      _classCallCheck(this, PageApi);
 
-      _get(Object.getPrototypeOf(PagesApi.prototype), 'constructor', this).apply(this, arguments);
+      _get(Object.getPrototypeOf(PageApi.prototype), 'constructor', this).apply(this, arguments);
     }
 
-    _createClass(PagesApi, [{
+    _createClass(PageApi, [{
       key: 'fetch',
       value: function fetch() {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('pages').get();
+        return Restangular.one('companies', this.company.id).one('pages').get();
+      }
+    }, {
+      key: 'show',
+      value: function show() {
+        return Restangular.one('companies', this.company.id).one('pages', page.id).get();
+      }
+    }, {
+      key: 'create',
+      value: function create(page) {
+        return Restangular.one('companies', this.company.id).post('pages', { page: page });
       }
     }, {
       key: 'update',
-      value: function update(data) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('pages', data.id).patch({ page: data });
+      value: function update(page) {
+        return Restangular.one('companies', this.company.id).one('pages', page.id).patch({ page: page });
+      }
+    }, {
+      key: 'delete',
+      value: function _delete() {
+        return Restangular.one('companies', this.company.id).one('pages', page.id).destroy();
       }
     }]);
 
-    return PagesApi;
+    return PageApi;
   })(ApiBase))();
 };
 
 service.$inject = ['Restangular', 'ApiBase'];
-angular.module('admin.api.client.foodio').factory('pagesApi', service);
+angular.module('admin.api.client.foodio').factory('pageApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
