@@ -33,7 +33,7 @@ let service = (Restangular, ApiBase) => {
       return Restangular
         .one('companies', this.company.id)
         .one('pages', page.id)
-        .destroy();
+        .remove();
     }
   }
 };
