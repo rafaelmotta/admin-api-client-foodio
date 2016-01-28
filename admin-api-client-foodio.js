@@ -1429,12 +1429,12 @@ var service = function service(Restangular, ApiBase, $q) {
       value: function create(productCategory, productSubcategory, product) {
         if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
           return this.requestWithImage({
-            url: 'companies/' + this.company.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products/' + product.id,
+            url: 'companies/' + this.company.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products',
             method: 'POST',
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'description', 'base_price']
+            extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
           });
         } else {
           return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
@@ -1450,7 +1450,7 @@ var service = function service(Restangular, ApiBase, $q) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'description', 'base_price']
+            extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
           });
         } else {
           return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
