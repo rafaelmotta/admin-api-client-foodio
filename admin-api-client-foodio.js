@@ -1433,7 +1433,7 @@ var service = function service(Restangular, ApiBase, $q) {
             method: 'POST',
             data: product,
             key: 'product',
-            imgKeys: ['img', 'img_hover'],
+            imgKeys: ['img', 'img_hover', 'stores'],
             extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
           });
         } else {
@@ -1449,7 +1449,7 @@ var service = function service(Restangular, ApiBase, $q) {
             method: 'PATCH',
             data: product,
             key: 'product',
-            imgKeys: ['img', 'img_hover'],
+            imgKeys: ['img', 'img_hover', 'stores'],
             extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
           });
         } else {
