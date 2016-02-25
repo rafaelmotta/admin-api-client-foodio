@@ -17,7 +17,7 @@ let service = (Restangular, ApiBase, $q) => {
           method: 'POST',
           data: product,
           key: 'product',
-          imgKeys: ['img', 'img_hover', 'stores'],
+          imgKeys: ['img', 'img_hover'],
           extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
         });
       } else {
@@ -36,7 +36,7 @@ let service = (Restangular, ApiBase, $q) => {
           method: 'PATCH',
           data: product,
           key: 'product',
-          imgKeys: ['img', 'img_hover', 'stores'],
+          imgKeys: ['img', 'img_hover'],
           extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
         });
       } else {
