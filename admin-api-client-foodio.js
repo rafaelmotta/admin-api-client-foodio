@@ -147,7 +147,9 @@ var service = function service($rootScope, $q, constants, Upload) {
           var fields = {};
 
           angular.forEach(params.extraKeys, function (key) {
-            fields[params.key + '[' + key + ']'] = params.data[key];
+            if (params.data[key]) {
+              fields[params.key + '[' + key + ']'] = params.data[key];
+            }
           });
 
           return Upload.upload({

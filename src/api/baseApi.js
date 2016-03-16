@@ -18,7 +18,9 @@ let service = ($rootScope, $q, constants, Upload) => {
         let fields = {};
 
         angular.forEach(params.extraKeys, (key) => {
-          fields[`${params.key}[${key}]`] = params.data[key];
+          if(params.data[key]) {
+            fields[`${params.key}[${key}]`] = params.data[key];
+          }
         });
 
         return Upload.upload({
