@@ -17,6 +17,12 @@ let service = ($rootScope, $q, constants, Upload) => {
       return $q((resolve, reject) => {
         let fields = {};
 
+        angular.forEach(params.imgKeys, (key) => {
+          if(params.data[key]) {
+            fields[`${params.key}[${key}]`] = params.data[key][0];
+          }
+        });
+
         angular.forEach(params.extraKeys, (key) => {
           if(params.data[key]) {
             fields[`${params.key}[${key}]`] = params.data[key];
@@ -26,8 +32,6 @@ let service = ($rootScope, $q, constants, Upload) => {
         return Upload.upload({
           url: `${constants.api}/admin/${params.url}`,
           method: params.method,
-          file: params.data[params.imgKeys[0]][0],
-          fileFormDataName: `${params.key}[${params.imgKeys[0]}]`,
           fields: fields
         }).success((data) => {
           return resolve(data);

@@ -146,6 +146,12 @@ var service = function service($rootScope, $q, constants, Upload) {
         return $q(function (resolve, reject) {
           var fields = {};
 
+          angular.forEach(params.imgKeys, function (key) {
+            if (params.data[key]) {
+              fields[params.key + '[' + key + ']'] = params.data[key][0];
+            }
+          });
+
           angular.forEach(params.extraKeys, function (key) {
             if (params.data[key]) {
               fields[params.key + '[' + key + ']'] = params.data[key];
@@ -155,8 +161,6 @@ var service = function service($rootScope, $q, constants, Upload) {
           return Upload.upload({
             url: constants.api + '/admin/' + params.url,
             method: params.method,
-            file: params.data[params.imgKeys[0]][0],
-            fileFormDataName: params.key + '[' + params.imgKeys[0] + ']',
             fields: fields
           }).success(function (data) {
             return resolve(data);
@@ -1484,7 +1488,7 @@ var service = function service(Restangular, ApiBase, $q) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
+            extraKeys: ['name', 'title', 'description', 'order', 'base_price', 'stores', 'addon_categories']
           });
         } else {
           return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
@@ -1500,7 +1504,7 @@ var service = function service(Restangular, ApiBase, $q) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'description', 'order', 'base_price', 'stores', 'addon_categories']
+            extraKeys: ['name', 'title', 'description', 'order', 'base_price', 'stores', 'addon_categories']
           });
         } else {
           return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
