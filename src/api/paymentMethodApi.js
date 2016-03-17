@@ -37,8 +37,8 @@ let service = (Restangular, ApiBase) => {
         .remove();
     }
 
-     _serializeBeforeCreate(params) {
-      return $q((resolve, reject) => {
+    _serializeBeforeCreate(params) {
+      return new Promise((resolve, reject) => {
         let data = {
           available_payment_method_id: params.availablePaymentMethod.id
         };

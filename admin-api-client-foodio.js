@@ -1404,7 +1404,7 @@ var service = function service(Restangular, ApiBase) {
     }, {
       key: '_serializeBeforeCreate',
       value: function _serializeBeforeCreate(params) {
-        return $q(function (resolve, reject) {
+        return new Promise(function (resolve, reject) {
           var data = {
             available_payment_method_id: params.availablePaymentMethod.id
           };
