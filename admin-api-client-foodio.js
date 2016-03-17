@@ -1250,7 +1250,6 @@ var service = function service(Restangular, $q, ApiBase) {
           var data = angular.copy(order);
 
           data.available_order_type_id = order.availableOrderType.id;
-          data.available_order_type_alias = order.availableOrderType.alias;
           data.available_order_type = null;
 
           resolve(data);
@@ -1391,12 +1390,27 @@ var service = function service(Restangular, ApiBase) {
     }, {
       key: 'create',
       value: function create(paymentMethod) {
-        return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('payment_methods', paymentMethod.id).put();
+        var _this = this;
+
+        return this._serializeBeforeCreate(paymentMethod).then(function (serializedData) {
+          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).one('payment_methods', serializedData.id).put();
+        });
       }
     }, {
       key: 'destroy',
       value: function destroy(paymentMethod) {
         return Restangular.one('companies', this.company.id).one('stores', this.store.id).one('payment_methods', paymentMethod.id).remove();
+      }
+    }, {
+      key: '_serializeBeforeCreate',
+      value: function _serializeBeforeCreate(params) {
+        return $q(function (resolve, reject) {
+          var data = {
+            available_payment_method_id: params.availablePaymentMethod.id
+          };
+
+          resolve(data);
+        });
       }
     }]);
 

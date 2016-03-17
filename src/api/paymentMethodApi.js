@@ -20,11 +20,13 @@ let service = (Restangular, ApiBase) => {
     }
 
     create(paymentMethod) {
-      return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
-        .one('payment_methods', paymentMethod.id)
-        .put();
+      return this._serializeBeforeCreate(paymentMethod).then((serializedData) => {
+        return Restangular
+          .one('companies', this.company.id)
+          .one('stores', this.store.id)
+          .one('payment_methods', serializedData.id)
+          .put();
+      });
     }
 
     destroy(paymentMethod) {
@@ -33,6 +35,16 @@ let service = (Restangular, ApiBase) => {
         .one('stores', this.store.id)
         .one('payment_methods', paymentMethod.id)
         .remove();
+    }
+
+     _serializeBeforeCreate(params) {
+      return $q((resolve, reject) => {
+        let data = {
+          available_payment_method_id: params.availablePaymentMethod.id
+        };
+
+        resolve(data);
+      });
     }
 
   }

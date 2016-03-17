@@ -49,7 +49,6 @@ let service = (Restangular, $q, ApiBase) => {
         let data = angular.copy(order);
 
         data.available_order_type_id = order.availableOrderType.id
-        data.available_order_type_alias = order.availableOrderType.alias
         data.available_order_type = null;
 
         resolve(data);
