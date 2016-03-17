@@ -1488,7 +1488,7 @@ var service = function service(Restangular, ApiBase, $q) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'title', 'description', 'order', 'base_price', 'stores', 'addon_categories']
+            extraKeys: ['name', 'title', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
           });
         } else {
           return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
@@ -1504,7 +1504,7 @@ var service = function service(Restangular, ApiBase, $q) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'title', 'description', 'order', 'base_price', 'stores', 'addon_categories']
+            extraKeys: ['name', 'title', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
           });
         } else {
           return Restangular.one('companies', this.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
