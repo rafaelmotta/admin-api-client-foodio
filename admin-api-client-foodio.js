@@ -1393,7 +1393,7 @@ var service = function service(Restangular, ApiBase) {
         var _this = this;
 
         return this._serializeBeforeCreate(paymentMethod).then(function (serializedData) {
-          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).one('payment_methods', serializedData.id).put();
+          return Restangular.one('companies', _this.company.id).one('stores', _this.store.id).post('payment_methods', { payment_method: serializedData });
         });
       }
     }, {

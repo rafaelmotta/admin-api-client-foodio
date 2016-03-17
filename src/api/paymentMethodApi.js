@@ -24,8 +24,7 @@ let service = (Restangular, ApiBase) => {
         return Restangular
           .one('companies', this.company.id)
           .one('stores', this.store.id)
-          .one('payment_methods', serializedData.id)
-          .put();
+          .post('payment_methods', { payment_method: serializedData });
       });
     }
 
