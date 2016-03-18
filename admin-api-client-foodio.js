@@ -143,6 +143,9 @@ var service = function service($rootScope, $q, constants, Upload) {
         var _arguments = arguments;
         var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
+        // Emite evento informando que request está começando
+        $rootScope.$emit('request:start');
+
         return $q(function (resolve, reject) {
           var fields = {};
 
@@ -163,6 +166,9 @@ var service = function service($rootScope, $q, constants, Upload) {
             method: params.method,
             fields: fields
           }).success(function (data) {
+            // Emite evento informando que request acabou
+            $rootScope.$emit('request:end');
+
             return resolve(data);
           }).error(function () {
             return reject(_arguments);

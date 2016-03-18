@@ -14,6 +14,10 @@ let service = ($rootScope, $q, constants, Upload) => {
     }
 
     requestWithImage(params = {}) {
+
+      // Emite evento informando que request está começando
+      $rootScope.$emit('request:start');
+
       return $q((resolve, reject) => {
         let fields = {};
 
@@ -34,6 +38,9 @@ let service = ($rootScope, $q, constants, Upload) => {
           method: params.method,
           fields: fields
         }).success((data) => {
+          // Emite evento informando que request acabou
+          $rootScope.$emit('request:end');
+
           return resolve(data);
         }).error(() => {
           return reject(arguments);
