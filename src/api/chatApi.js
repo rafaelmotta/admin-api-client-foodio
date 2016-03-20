@@ -1,9 +1,9 @@
-let service = (Restangular, ApiBase) => {
-  return new class ChatApi extends ApiBase {
+let service = (Restangular, $rootScope) => {
+  return new class ChatApi {
 
     show(store, resource) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('stores', store.id)
         .one(resource.name, resource.id)
         .one('chat')
@@ -12,5 +12,5 @@ let service = (Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('chatApi', service);

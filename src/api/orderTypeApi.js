@@ -1,19 +1,19 @@
-let service = (Restangular, $q, ApiBase) => {
+let service = (Restangular, $q, $rootScope) => {
 
-  return new class OrderTypeApi extends ApiBase {
+  return new class OrderTypeApi {
 
     fetch(params) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('order_types')
         .get(params);
     }
 
     fetchAvailable() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('order_types')
         .one('available')
         .get();
@@ -22,24 +22,24 @@ let service = (Restangular, $q, ApiBase) => {
     create(orderType) {
       return this._serializeBeforeCreate(orderType).then((serializedOrderType) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .post('order_types', { order_type: serializedOrderType });
       });
     }
 
     update(orderType) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('order_types', orderType.id)
         .patch({ order_type: orderType });
     }
 
     destroy(orderType) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('order_types', orderType.id)
         .remove();
     }
@@ -57,5 +57,5 @@ let service = (Restangular, $q, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', '$q', 'ApiBase'];
+service.$inject = ['Restangular', '$q', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('orderTypeApi', service);

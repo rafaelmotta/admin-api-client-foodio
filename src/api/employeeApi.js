@@ -1,19 +1,19 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class EmployeeApi extends ApiBase {
+  return new class EmployeeApi {
 
     fetch(params = {}) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('employees')
         .get(params);
     }
 
     fetchRoles() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('employees')
         .one('roles')
         .get();
@@ -21,23 +21,23 @@ let service = (Restangular, ApiBase) => {
 
     show(employee) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('employees', employee.id)
         .get();
     }
 
     create(employee) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .post('employees', { employee: employee });
     }
 
     update(employee) {
       if(angular.isArray(employee.avatar) && employee.avatar[0]) {
         return this.requestWithImage({
-          url: `companies/${this.company.id}/stores/${this.store.id}/employees/${employee.id}`,
+          url: `companies/${$rootScope.company.id}/stores/${$rootScope.currentStore.id}/employees/${employee.id}`,
           method: 'PATCH',
           data: employee,
           key: 'employee',
@@ -47,22 +47,22 @@ let service = (Restangular, ApiBase) => {
       }
 
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('employees', employee.id)
         .patch({ employee: employee });
     }
 
     destroy(employee) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('employees', employee.id)
         .remove();
     }
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('employeeApi', service);
 

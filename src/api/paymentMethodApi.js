@@ -1,19 +1,19 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class PaymentMethodApi extends ApiBase {
+  return new class PaymentMethodApi {
 
     fetch() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('payment_methods')
         .get();
     }
 
     fetchAvailable() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('payment_methods')
         .one('available')
         .get();
@@ -22,16 +22,16 @@ let service = (Restangular, ApiBase) => {
     create(paymentMethod) {
       return this._serializeBeforeCreate(paymentMethod).then((serializedData) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .post('payment_methods', { payment_method: serializedData });
       });
     }
 
     destroy(paymentMethod) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('payment_methods', paymentMethod.id)
         .remove();
     }
@@ -49,5 +49,5 @@ let service = (Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('paymentMethodApi', service);

@@ -1,11 +1,11 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class Factory extends ApiBase {
+  return new class Factory {
 
     fetch(costumer) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('costumers', costumer.id)
         .one('orders')
         .get();
@@ -13,5 +13,5 @@ let service = (Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('costumerOrderApi', service);

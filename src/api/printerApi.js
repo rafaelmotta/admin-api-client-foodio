@@ -1,38 +1,38 @@
-let service = (Restangular, ApiBase, $q) => {
-  return new class PrinterApi extends ApiBase {
+let service = (Restangular, ApiBase, $q, $rootScope) => {
+  return new class PrinterApi {
 
     fetch() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('printers')
         .get();
     }
 
     create(printer) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .post('printers', { printer: printer });
     }
 
     update(printer) {
        return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('printers', printer.id)
           .patch({ printer: printer });
     }
 
     destroy(printer) {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('printers', printer.id)
           .remove();
       }
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase', '$q'];
+service.$inject = ['Restangular', 'ApiBase', '$q', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('printerApi', service);

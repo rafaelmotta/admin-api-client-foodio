@@ -1,16 +1,16 @@
-let service = (PublicRestangular, Restangular, ApiBase) => {
+let service = (PublicRestangular, Restangular, $rootScope) => {
 
-  return new class MenuApi extends ApiBase {
+  return new class MenuApi {
 
     fetch(params = {}) {
       return PublicRestangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('menu')
         .get(params);
     }
   }
 };
 
-service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase'];
+service.$inject = ['PublicRestangular', 'Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('menuApi', service);

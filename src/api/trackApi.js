@@ -1,23 +1,23 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class TrackApi extends ApiBase {
+  return new class TrackApi {
     fetch() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('tracks')
         .get();
     }
 
     update(data) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('tracks', data.id)
         .patch({ track: data });
     }
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('trackApi', service);

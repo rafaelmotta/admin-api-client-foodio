@@ -1,6 +1,6 @@
-let service = ($q, $filter, Restangular, ApiBase) => {
+let service = ($q, $filter, Restangular, $rootScope) => {
 
-  return new class DashboardApi extends ApiBase {
+  return new class DashboardApi  {
 
     _serializeBeforeSend(params) {
       return $q((resolve, reject) => {
@@ -19,8 +19,8 @@ let service = ($q, $filter, Restangular, ApiBase) => {
     fetchSales(params = {}) {
       return this._serializeBeforeSend(params).then((serializedParams) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('dashboard')
           .one('sales')
           .get(serializedParams);
@@ -29,5 +29,5 @@ let service = ($q, $filter, Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['$q', '$filter', 'Restangular', 'ApiBase'];
+service.$inject = ['$q', '$filter', 'Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('dashboardApi', service);

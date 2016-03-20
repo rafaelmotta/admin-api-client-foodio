@@ -1,16 +1,6 @@
 let service = ($rootScope, $q, constants, Upload) => {
   return class ApiBase {
     constructor(){
-      this.company = $rootScope.company;
-      this.store = $rootScope.currentStore;
-
-      $rootScope.$watch('company', () => {
-        this.company = $rootScope.company;
-      }, true);
-
-      $rootScope.$watch('currentStore', () => {
-        this.store = $rootScope.currentStore;
-      }, true);
     }
 
     requestWithImage(params = {}) {

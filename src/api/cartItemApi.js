@@ -1,12 +1,12 @@
-let service = ($q, Restangular, ApiBase) => {
+let service = ($q, Restangular, $rootScope) => {
 
-  return new class CartItemApi extends ApiBase {
+  return new class CartItemApi {
 
     create(data) {
       return this._serialize(data).then((serializedData) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('me')
           .one('cart')
           .post('cart_items', { cart_item: serializedData });
@@ -16,8 +16,8 @@ let service = ($q, Restangular, ApiBase) => {
     update(data) {
       return this._serialize(data).then((serializedData) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('me')
           .one('cart')
           .one('cart_items', data.id)
@@ -27,8 +27,8 @@ let service = ($q, Restangular, ApiBase) => {
 
     destroy(data) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('me')
         .one('cart')
         .one('cart_items', data.id)
@@ -61,5 +61,5 @@ let service = ($q, Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['$q', 'Restangular', 'ApiBase'];
+service.$inject = ['$q', 'Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('cartItemApi', service);

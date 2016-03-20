@@ -1,11 +1,11 @@
-let service = ($q, Restangular, ApiBase) => {
+let service = ($q, Restangular, $rootScope) => {
 
-  return new class DeliveryAreaApi extends ApiBase {
+  return new class DeliveryAreaApi {
 
     fetch(cityOperation) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations', cityOperation.id)
         .one('delivery_areas')
         .get();
@@ -14,8 +14,8 @@ let service = ($q, Restangular, ApiBase) => {
     create(cityOperation, deliveryArea) {
       return this._serializeBeforeCreate(deliveryArea).then( (serializedDeliveryArea) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('city_operations', cityOperation.id)
           .post('delivery_areas', { delivery_area: serializedDeliveryArea });
       });
@@ -24,8 +24,8 @@ let service = ($q, Restangular, ApiBase) => {
     update(cityOperation, deliveryArea) {
       return this._serializeBeforeEdit(deliveryArea).then((serializedDeliveryArea) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('city_operations', cityOperation.id)
           .one('delivery_areas', deliveryArea.id)
           .patch({ delivery_area: serializedDeliveryArea });
@@ -34,8 +34,8 @@ let service = ($q, Restangular, ApiBase) => {
 
     destroy(cityOperation, deliveryArea) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations', cityOperation.id)
         .one('delivery_areas', deliveryArea.id)
         .remove();
@@ -44,8 +44,8 @@ let service = ($q, Restangular, ApiBase) => {
 
     fetchAvailable(cityOperation) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations', cityOperation.id)
         .one('delivery_areas')
         .one('available')
@@ -78,5 +78,5 @@ let service = ($q, Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['$q', 'Restangular', 'ApiBase'];
+service.$inject = ['$q', 'Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('deliveryAreaApi', service);

@@ -1,11 +1,11 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class meApi extends ApiBase {
+  return new class meApi {
 
     fetch() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('me')
         .get();
     }
@@ -16,7 +16,7 @@ let service = (Restangular, ApiBase) => {
 
       if(angular.isArray(employee.avatar) && employee.avatar[0]) {
         return this.requestWithImage({
-          url: `companies/${this.company.id}/stores/${this.store.id}/me`,
+          url: `companies/${$rootScope.company.id}/stores/${$rootScope.currentStore.id}/me`,
           method: 'PATCH',
           data: employee,
           key: 'employee',
@@ -26,13 +26,13 @@ let service = (Restangular, ApiBase) => {
       }
 
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('me')
         .patch({ employee: employee });
     }
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('meApi', service);

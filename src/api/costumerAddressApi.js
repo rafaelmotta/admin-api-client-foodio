@@ -1,11 +1,11 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class CostumerAddressApi extends ApiBase {
+  return new class CostumerAddressApi {
 
     fetch(costumer) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('costumers', costumer.id)
         .one('addresses')
         .get();
@@ -13,16 +13,16 @@ let service = (Restangular, ApiBase) => {
 
     create(costumer, address) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('costumers', costumer.id)
         .post('addresses', { address: address });
     }
 
     update(costumer, address) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('costumers', costumer.id)
         .one('addresses', address.id)
         .patch({ address: address });
@@ -30,8 +30,8 @@ let service = (Restangular, ApiBase) => {
 
     destroy(costumer, address) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('costumers', costumer.id)
         .one('addresses', address.id)
         .remove();
@@ -39,5 +39,5 @@ let service = (Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('costumerAddressApi', service);

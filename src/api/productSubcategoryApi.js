@@ -1,17 +1,17 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class ProductSubcategoryApi extends ApiBase {
+  return new class ProductSubcategoryApi {
 
     create(productCategory, productSubcategory) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('product_categories', productCategory.id)
         .post('product_subcategories', { product_subcategory: productSubcategory });
     }
 
     update(productCategory, productSubcategory) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('product_categories', productCategory.id)
         .one('product_subcategories', productSubcategory.id)
         .patch({ product_subcategory: productSubcategory });
@@ -19,7 +19,7 @@ let service = (Restangular, ApiBase) => {
 
     destroy(productCategory, productSubcategory) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('product_categories', productCategory.id)
         .one('product_subcategories', productSubcategory.id)
         .remove();
@@ -27,8 +27,8 @@ let service = (Restangular, ApiBase) => {
 
     fetch(productCategory) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('product_categories', productCategory.type)
         .one('product_subcategories')
         .one('store_products')
@@ -37,5 +37,5 @@ let service = (Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('productSubcategoryApi', service);

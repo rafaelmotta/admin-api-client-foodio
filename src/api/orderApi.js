@@ -1,19 +1,19 @@
-let service = ($q, Restangular, ApiBase) => {
+let service = ($q, Restangular, $rootScope) => {
 
-  return new class OrderApi extends ApiBase {
+  return new class OrderApi {
 
     fetch(params) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('orders')
         .get(params);
     }
 
     show(order) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('orders', order.id)
         .get();
     }
@@ -21,8 +21,8 @@ let service = ($q, Restangular, ApiBase) => {
     create(order) {
       return this._serializeBeforeCreate(order).then((serializedOrder) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .post('orders', { order: serializedOrder });
       });
     }
@@ -30,8 +30,8 @@ let service = ($q, Restangular, ApiBase) => {
     update(order) {
       return this._serializeBeforeUpdate(order).then((serializedOrder) => {
         return Restangular
-          .one('companies', this.company.id)
-          .one('stores', this.store.id)
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('orders', order.id)
           .patch({ order: serializedOrder });
       });
@@ -39,8 +39,8 @@ let service = ($q, Restangular, ApiBase) => {
 
     fetchStatusCount() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('orders')
         .one('status_count')
         .get();
@@ -88,5 +88,5 @@ let service = ($q, Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['$q', 'Restangular', 'ApiBase'];
+service.$inject = ['$q', 'Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('orderApi', service);

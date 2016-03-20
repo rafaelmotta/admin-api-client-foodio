@@ -1,16 +1,16 @@
-let service = (Restangular, ApiBase) => {
-  return new class AddonCategoryApi extends ApiBase {
+let service = (Restangular, $rootScope) => {
+  return new class AddonCategoryApi {
 
     fetch() {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('addon_categories')
         .get();
     }
 
     fetchWithAddons() {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('addon_categories')
         .one('addons')
         .get();
@@ -18,25 +18,25 @@ let service = (Restangular, ApiBase) => {
 
     create(addonCategory) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .post('addon_categories', { addon_category: addonCategory })
     }
 
     update(addonCategory) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('addon_categories', addonCategory.id)
         .patch({ addon_category: addonCategory })
     }
 
     destroy(addonCategory) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('addon_categories', addonCategory.id)
         .remove();
     }
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('addonCategoryApi', service);

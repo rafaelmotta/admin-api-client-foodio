@@ -1,19 +1,19 @@
-let service = (Restangular, ApiBase) => {
+let service = (Restangular, $rootScope) => {
 
-  return new class CityOperationApi extends ApiBase {
+  return new class CityOperationApi {
 
     fetch() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations')
         .get();
     }
 
     fetchAvailable(state) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations')
         .one('available')
         .get({ state_id: state.id });
@@ -21,8 +21,8 @@ let service = (Restangular, ApiBase) => {
 
     fetchWithDeliveryAreas() {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations')
         .one('delivery_areas')
         .get();
@@ -30,8 +30,8 @@ let service = (Restangular, ApiBase) => {
 
     fetchAvailableDeliveryAreas(cityOperation) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations', cityOperation.id)
         .one('available_delivery_areas')
         .get();
@@ -39,21 +39,21 @@ let service = (Restangular, ApiBase) => {
 
     create(cityOperation) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations', cityOperation.id)
         .put();
     }
 
     destroy(cityOperation) {
       return Restangular
-        .one('companies', this.company.id)
-        .one('stores', this.store.id)
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('city_operations', cityOperation.id)
         .remove();
     }
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('cityOperationApi', service);

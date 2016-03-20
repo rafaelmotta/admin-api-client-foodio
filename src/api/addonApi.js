@@ -1,16 +1,16 @@
-let service = (Restangular, ApiBase) => {
-  return new class AddonApi extends ApiBase {
+let service = (Restangular, $rootScope) => {
+  return new class AddonApi {
 
     create(addonCategory, addon) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('addon_categories', addonCategory.id)
         .post('addons', { addon: addon });
     }
 
     update(addonCategory, addon) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('addon_categories', addonCategory.id)
         .one('addons', addon.id)
         .patch({ addon: addon })
@@ -18,7 +18,7 @@ let service = (Restangular, ApiBase) => {
 
     destroy(addonCategory, addon) {
       return Restangular
-        .one('companies', this.company.id)
+        .one('companies', $rootScope.company.id)
         .one('addon_categories', addonCategory.id)
         .one('addons', addon.id)
         .remove();
@@ -26,5 +26,5 @@ let service = (Restangular, ApiBase) => {
   }
 };
 
-service.$inject = ['Restangular', 'ApiBase'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('addonApi', service);
