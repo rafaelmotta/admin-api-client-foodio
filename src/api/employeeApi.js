@@ -1,4 +1,4 @@
-let service = (Restangular, $rootScope) => {
+let service = (Restangular, ApiBase, $rootScope) => {
 
   return new class EmployeeApi {
 
@@ -63,6 +63,6 @@ let service = (Restangular, $rootScope) => {
   }
 };
 
-service.$inject = ['Restangular', '$rootScope'];
+service.$inject = ['Restangular', 'ApiBase', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('employeeApi', service);
 

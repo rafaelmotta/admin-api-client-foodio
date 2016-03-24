@@ -1,5 +1,5 @@
 let service = (Restangular, ApiBase, $q, $rootScope) => {
-  return new class ProductApi {
+  return new class ProductApi extends ApiBase {
 
     show(productCategory, productSubcategory, product) {
       return Restangular
