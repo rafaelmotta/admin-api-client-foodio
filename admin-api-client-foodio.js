@@ -277,8 +277,8 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(ChatApi, [{
       key: 'show',
-      value: function show(store, resource) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', store.id).one(resource.name, resource.id).one('chat').get();
+      value: function show(resource) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one(resource.name, resource.id).one('chat').get();
       }
     }]);
 
