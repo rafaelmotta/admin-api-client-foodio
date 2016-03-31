@@ -1,5 +1,5 @@
-let service = (PublicRestangular, Restangular, $rootScope) => {
-  return new class companyApi {
+let service = (PublicRestangular, Restangular, ApiBase, $rootScope) => {
+  return new class companyApi extends ApiBase {
 
     fetch(company) {
       return Restangular
@@ -32,5 +32,5 @@ let service = (PublicRestangular, Restangular, $rootScope) => {
   }
 };
 
-service.$inject = ['PublicRestangular', 'Restangular', '$rootScope'];
+service.$inject = ['PublicRestangular', 'Restangular', 'ApiBase', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('companyApi', service);
