@@ -852,7 +852,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var service = function service(PublicRestangular, Restangular, $rootScope) {
+var service = function service(Restangular, $rootScope) {
 
   return new ((function () {
     function MenuApi() {
@@ -864,7 +864,7 @@ var service = function service(PublicRestangular, Restangular, $rootScope) {
       value: function fetch() {
         var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-        return PublicRestangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('menu').get(params);
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('menu').get(params);
       }
     }]);
 
@@ -872,7 +872,7 @@ var service = function service(PublicRestangular, Restangular, $rootScope) {
   })())();
 };
 
-service.$inject = ['PublicRestangular', 'Restangular', '$rootScope'];
+service.$inject = ['Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('menuApi', service);
 'use strict';
 
