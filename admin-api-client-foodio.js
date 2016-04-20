@@ -534,6 +534,42 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+var service = function service(Restangular, $rootScope) {
+
+  return new ((function () {
+    function CouponApi() {
+      _classCallCheck(this, CouponApi);
+    }
+
+    _createClass(CouponApi, [{
+      key: 'fetch',
+      value: function fetch() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('coupons').get();
+      }
+    }, {
+      key: 'create',
+      value: function create(coupon) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('coupons', { coupon: coupon });
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy(coupon) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('coupons', coupon.id).remove();
+      }
+    }]);
+
+    return CouponApi;
+  })())();
+};
+
+service.$inject = ['Restangular', '$rootScope'];
+angular.module('admin.api.client.foodio').factory('CouponApi', service);
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 var service = function service($q, $filter, Restangular, $rootScope) {
 
   return new ((function () {
@@ -1294,7 +1330,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'title', 'local', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
+            extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
           });
         } else {
           return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
@@ -1310,7 +1346,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'title', 'local', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
+            extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
           });
         } else {
           return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
