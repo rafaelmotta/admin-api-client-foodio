@@ -547,6 +547,11 @@ var service = function service(Restangular, $rootScope) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('coupons').get();
       }
     }, {
+      key: 'show',
+      value: function show(coupon) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('coupons', coupon.id).get();
+      }
+    }, {
       key: 'create',
       value: function create(coupon) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('coupons', { coupon: coupon });
