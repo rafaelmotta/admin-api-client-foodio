@@ -543,8 +543,8 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(CouponApi, [{
       key: 'fetch',
-      value: function fetch() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('coupons').get();
+      value: function fetch(params) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('coupons').get(params);
       }
     }, {
       key: 'show',

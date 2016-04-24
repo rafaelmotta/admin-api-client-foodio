@@ -2,12 +2,12 @@ let service = (Restangular, $rootScope) => {
 
   return new class CouponApi {
 
-    fetch() {
+    fetch(params) {
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
         .one('coupons')
-        .get();
+        .get(params);
     }
 
     show(coupon) {
