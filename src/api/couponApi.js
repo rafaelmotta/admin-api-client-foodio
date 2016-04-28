@@ -19,18 +19,13 @@ let service = (Restangular, $rootScope) => {
     }
 
     create(coupon) {
-      let _conditions = angular.copy(coupon.conditions);
-      coupon.conditions = [];
+      let conditions = angular.copy(coupon.conditions);
+      coupon.coupon_conditions_attributes = [];
 
       for(let i in _conditions) {
-        let type = _conditions[i].type
-        let itens = [];
-
         for(let j in _conditions[i].itens) {
-          itens.push({ id: _conditions[i].itens[j].id });
+          coupon.coupon_conditions_attributes.push({ targetable_type: _conditions[i].type, targetable_id: _conditions[i].itens[j].id });
         }
-
-        coupon.conditions.push({ type: type, itens: itens });
       }
 
       return Restangular
