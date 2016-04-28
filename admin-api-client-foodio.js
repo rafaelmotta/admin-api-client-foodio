@@ -563,8 +563,6 @@ var service = function service(Restangular, $rootScope) {
           }
         }
 
-        delete coupon.conditions;
-
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('coupons', { coupon: coupon });
       }
     }, {
