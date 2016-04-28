@@ -22,11 +22,13 @@ let service = (Restangular, $rootScope) => {
       let conditions = angular.copy(coupon.conditions);
       coupon.coupon_conditions_attributes = [];
 
-      for(let i in _conditions) {
-        for(let j in _conditions[i].itens) {
-          coupon.coupon_conditions_attributes.push({ targetable_type: _conditions[i].type, targetable_id: _conditions[i].itens[j].id });
+      for(let i in conditions) {
+        for(let j in conditions[i].itens) {
+          coupon.coupon_conditions_attributes.push({ targetable_type: conditions[i].type, targetable_id: conditions[i].itens[j].id });
         }
       }
+
+      delete coupon.conditions;
 
       return Restangular
         .one('companies', $rootScope.company.id)

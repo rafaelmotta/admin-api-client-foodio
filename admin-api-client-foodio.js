@@ -557,11 +557,13 @@ var service = function service(Restangular, $rootScope) {
         var conditions = angular.copy(coupon.conditions);
         coupon.coupon_conditions_attributes = [];
 
-        for (var i in _conditions) {
-          for (var j in _conditions[i].itens) {
-            coupon.coupon_conditions_attributes.push({ targetable_type: _conditions[i].type, targetable_id: _conditions[i].itens[j].id });
+        for (var i in conditions) {
+          for (var j in conditions[i].itens) {
+            coupon.coupon_conditions_attributes.push({ targetable_type: conditions[i].type, targetable_id: conditions[i].itens[j].id });
           }
         }
+
+        delete coupon.conditions;
 
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('coupons', { coupon: coupon });
       }
