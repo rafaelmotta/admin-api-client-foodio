@@ -554,6 +554,20 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'create',
       value: function create(coupon) {
+        var _conditions = angular.copy(coupon.conditions);
+        coupon.conditions = [];
+
+        for (var i in _conditions) {
+          var type = _conditions[i].type;
+          var itens = [];
+
+          for (var j in _conditions[i].itens) {
+            itens.push({ id: _conditions[i].itens[j].id });
+          }
+
+          coupon.conditions.push({ type: type, itens: itens });
+        }
+
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('coupons', { coupon: coupon });
       }
     }, {
