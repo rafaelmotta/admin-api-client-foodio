@@ -560,7 +560,12 @@ var service = function service(Restangular, $rootScope) {
         for (var i in conditions) {
           if (conditions[i].itens.length) {
             for (var j in conditions[i].itens) {
-              coupon.coupon_conditions_attributes.push({ targetable_type: conditions[i].type, targetable_id: conditions[i].itens[j].id });
+              var type = conditions[i].type;
+              var id = conditions[i].itens[j].id;
+
+              if (id) {
+                coupon.coupon_conditions_attributes.push({ targetable_type: type, targetable_id: id });
+              }
             }
           }
         }
