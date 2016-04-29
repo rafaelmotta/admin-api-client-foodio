@@ -23,8 +23,10 @@ let service = (Restangular, $rootScope) => {
       coupon.coupon_conditions_attributes = [];
 
       for(let i in conditions) {
-        for(let j in conditions[i].itens) {
-          coupon.coupon_conditions_attributes.push({ targetable_type: conditions[i].type, targetable_id: conditions[i].itens[j].id });
+        if(conditions[i].itens.length) {
+          for(let j in conditions[i].itens) {
+            coupon.coupon_conditions_attributes.push({ targetable_type: conditions[i].type, targetable_id: conditions[i].itens[j].id });
+          }
         }
       }
 
