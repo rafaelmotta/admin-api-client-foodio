@@ -26,7 +26,7 @@ let service = (Restangular, $rootScope) => {
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
-        .post('payment_methods', { payment_method: serializedData });
+        .post('payment_methods', { payment_method: paymentMethod });
     }
 
     // DELETE admin/companies/:company_id/stores/:store_id/payment_methods/:id

@@ -1147,7 +1147,7 @@ var service = function service(Restangular, $q, $rootScope) {
     }, {
       key: 'create',
       value: function create(orderType) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('order_types', { order_type: serializedOrderType });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('order_types', { order_type: orderType });
       }
 
       // PUT admin/companies/:company_id/stores/:store_id/order_types/:id
@@ -1280,7 +1280,7 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'create',
       value: function create(paymentMethod) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('payment_methods', { payment_method: serializedData });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('payment_methods', { payment_method: paymentMethod });
       }
 
       // DELETE admin/companies/:company_id/stores/:store_id/payment_methods/:id

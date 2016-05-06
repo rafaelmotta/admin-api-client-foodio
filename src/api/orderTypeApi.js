@@ -26,7 +26,7 @@ let service = (Restangular, $q, $rootScope) => {
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
-        .post('order_types', { order_type: serializedOrderType });
+        .post('order_types', { order_type: orderType });
     }
 
     // PUT admin/companies/:company_id/stores/:store_id/order_types/:id
