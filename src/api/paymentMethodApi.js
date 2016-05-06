@@ -2,6 +2,7 @@ let service = (Restangular, $rootScope) => {
 
   return new class PaymentMethodApi {
 
+    // GET admin/companies/:company_id/stores/:store_id/payment_methods
     fetch() {
       return Restangular
         .one('companies', $rootScope.company.id)
@@ -10,6 +11,7 @@ let service = (Restangular, $rootScope) => {
         .get();
     }
 
+    // GET admin/companies/:company_id/stores/:store_id/payment_methods/available
     fetchAvailable() {
       return Restangular
         .one('companies', $rootScope.company.id)
@@ -19,15 +21,15 @@ let service = (Restangular, $rootScope) => {
         .get();
     }
 
+    // CREATE admin/companies/:company_id/stores/:store_id/payment_methods
     create(paymentMethod) {
-      return this._serializeBeforeCreate(paymentMethod).then((serializedData) => {
-        return Restangular
-          .one('companies', $rootScope.company.id)
-          .one('stores', $rootScope.currentStore.id)
-          .post('payment_methods', { payment_method: serializedData });
-      });
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .post('payment_methods', { payment_method: serializedData });
     }
 
+    // DELETE admin/companies/:company_id/stores/:store_id/payment_methods/:id
     destroy(paymentMethod) {
       return Restangular
         .one('companies', $rootScope.company.id)
@@ -35,17 +37,6 @@ let service = (Restangular, $rootScope) => {
         .one('payment_methods', paymentMethod.id)
         .remove();
     }
-
-    _serializeBeforeCreate(params) {
-      return new Promise((resolve, reject) => {
-        let data = {
-          available_payment_method_id: params.availablePaymentMethod.id
-        };
-
-        resolve(data);
-      });
-    }
-
   }
 };
 

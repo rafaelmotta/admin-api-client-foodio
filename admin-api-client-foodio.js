@@ -30,18 +30,24 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(AddonApi, [{
       key: 'create',
+
+      // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons
       value: function create(addonCategory, addon) {
-        return Restangular.one('companies', $rootScope.company.id).one('addon_categories', addonCategory.id).post('addons', { addon: addon });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).post('addons', { addon: addon });
       }
+
+      // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons/:id
     }, {
       key: 'update',
       value: function update(addonCategory, addon) {
-        return Restangular.one('companies', $rootScope.company.id).one('addon_categories', addonCategory.id).one('addons', addon.id).patch({ addon: addon });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).one('addons', addon.id).patch({ addon: addon });
       }
+
+      // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons/:id
     }, {
       key: 'destroy',
       value: function destroy(addonCategory, addon) {
-        return Restangular.one('companies', $rootScope.company.id).one('addon_categories', addonCategory.id).one('addons', addon.id).remove();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).one('addons', addon.id).remove();
       }
     }]);
 
@@ -65,28 +71,38 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(AddonCategoryApi, [{
       key: 'fetch',
+
+      // GET admin/companies/:company_id/stores/:store_id/addon_categories
       value: function fetch() {
-        return Restangular.one('companies', $rootScope.company.id).one('addon_categories').get();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories').get();
       }
-    }, {
-      key: 'fetchWithAddons',
-      value: function fetchWithAddons() {
-        return Restangular.one('companies', $rootScope.company.id).one('addon_categories').one('addons').get();
-      }
+
+      // POST admin/companies/:company_id/stores/:store_id/addon_categories
     }, {
       key: 'create',
       value: function create(addonCategory) {
-        return Restangular.one('companies', $rootScope.company.id).post('addon_categories', { addon_category: addonCategory });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('addon_categories', { addon_category: addonCategory });
       }
+
+      // PATCH admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_d
     }, {
       key: 'update',
       value: function update(addonCategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('addon_categories', addonCategory.id).patch({ addon_category: addonCategory });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).patch({ addon_category: addonCategory });
       }
+
+      // DELETE admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id
     }, {
       key: 'destroy',
       value: function destroy(addonCategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('addon_categories', addonCategory.id).remove();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).remove();
+      }
+
+      // GET admin/companies/:company_id/stores/:store_id/addon_categories/addons
+    }, {
+      key: 'fetchWithAddons',
+      value: function fetchWithAddons() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories').one('addons').get();
       }
     }]);
 
@@ -182,13 +198,17 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(CartApi, [{
       key: 'fetch',
+
+      // GET admin/companies/:company_id/stores/:store_id/me/cart
       value: function fetch() {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').get();
       }
+
+      // POST admin/companies/:company_id/stores/:store_id/me/cart
     }, {
       key: 'create',
       value: function create() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').one('new').get();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').get();
       }
     }]);
 
@@ -213,11 +233,15 @@ var service = function service($q, Restangular, $rootScope) {
 
     _createClass(CartItemApi, [{
       key: 'create',
+
+      // POST admin/companies/:company_id/stores/:store_id/me/cart/cart_items
       value: function create(data) {
         return this._serialize(data).then(function (serializedData) {
           return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').post('cart_items', { cart_item: serializedData });
         });
       }
+
+      // PATCH admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
     }, {
       key: 'update',
       value: function update(data) {
@@ -225,6 +249,8 @@ var service = function service($q, Restangular, $rootScope) {
           return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').one('cart_items', data.id).patch({ cart_item: serializedData });
         });
       }
+
+      // DELETE admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
     }, {
       key: 'destroy',
       value: function destroy(data) {
@@ -277,6 +303,8 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(ChatApi, [{
       key: 'show',
+
+      // GET admin/companies/:company_id/stores/:store_id/:resource_name/:resouce_id/chat
       value: function show(resource) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one(resource.name, resource.id).one('chat').get();
       }
@@ -302,6 +330,8 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(chatMessageApi, [{
       key: 'create',
+
+      // POST admin/companies/:company_id/stores/:store_id/chats/:chat_id/chat_messages
       value: function create(chat, chatMessage) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('chats', chat.id).post('chat_messages', { chat_message: chatMessage });
       }
@@ -1100,42 +1130,38 @@ var service = function service(Restangular, $q, $rootScope) {
 
     _createClass(OrderTypeApi, [{
       key: 'fetch',
+
+      // GET admin/companies/:company_id/stores/:store_id/order_types
       value: function fetch(params) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('order_types').get(params);
       }
+
+      // GET admin/companies/:company_id/stores/:store_id/order_types/available
     }, {
       key: 'fetchAvailable',
       value: function fetchAvailable() {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('order_types').one('available').get();
       }
+
+      // POST admin/companies/:company_id/stores/:store_id/order_types
     }, {
       key: 'create',
       value: function create(orderType) {
-        return this._serializeBeforeCreate(orderType).then(function (serializedOrderType) {
-          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('order_types', { order_type: serializedOrderType });
-        });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('order_types', { order_type: serializedOrderType });
       }
+
+      // PUT admin/companies/:company_id/stores/:store_id/order_types/:id
     }, {
       key: 'update',
       value: function update(orderType) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('order_types', orderType.id).patch({ order_type: orderType });
       }
+
+      // DELETE admin/companies/:company_id/stores/:store_id/order_types/:id
     }, {
       key: 'destroy',
       value: function destroy(orderType) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('order_types', orderType.id).remove();
-      }
-    }, {
-      key: '_serializeBeforeCreate',
-      value: function _serializeBeforeCreate(order) {
-        return $q(function (resolve, reject) {
-          var data = angular.copy(order);
-
-          data.available_order_type_id = order.availableOrderType.id;
-          data.available_order_type = null;
-
-          resolve(data);
-        });
       }
     }]);
 
@@ -1237,36 +1263,31 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(PaymentMethodApi, [{
       key: 'fetch',
+
+      // GET admin/companies/:company_id/stores/:store_id/payment_methods
       value: function fetch() {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('payment_methods').get();
       }
+
+      // GET admin/companies/:company_id/stores/:store_id/payment_methods/available
     }, {
       key: 'fetchAvailable',
       value: function fetchAvailable() {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('payment_methods').one('available').get();
       }
+
+      // CREATE admin/companies/:company_id/stores/:store_id/payment_methods
     }, {
       key: 'create',
       value: function create(paymentMethod) {
-        return this._serializeBeforeCreate(paymentMethod).then(function (serializedData) {
-          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('payment_methods', { payment_method: serializedData });
-        });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('payment_methods', { payment_method: serializedData });
       }
+
+      // DELETE admin/companies/:company_id/stores/:store_id/payment_methods/:id
     }, {
       key: 'destroy',
       value: function destroy(paymentMethod) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('payment_methods', paymentMethod.id).remove();
-      }
-    }, {
-      key: '_serializeBeforeCreate',
-      value: function _serializeBeforeCreate(params) {
-        return new Promise(function (resolve, reject) {
-          var data = {
-            available_payment_method_id: params.availablePaymentMethod.id
-          };
-
-          resolve(data);
-        });
       }
     }]);
 
@@ -1524,47 +1545,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var service = function service(Restangular, $rootScope) {
 
   return new ((function () {
-    function StoreAddonApi() {
-      _classCallCheck(this, StoreAddonApi);
-    }
-
-    _createClass(StoreAddonApi, [{
-      key: 'fetch',
-      value: function fetch() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('store_addons').get();
-      }
-    }, {
-      key: 'show',
-      value: function show(storeAddon) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('store_addons', storeAddon.id).get();
-      }
-    }, {
-      key: 'update',
-      value: function update(storeAddon) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('store_addons', storeAddon.id).patch({ store_addon: storeAddon });
-      }
-    }, {
-      key: 'destroy',
-      value: function destroy(storeAddon) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('store_addons', storeAddon.id).remove();
-      }
-    }]);
-
-    return StoreAddonApi;
-  })())();
-};
-
-service.$inject = ['Restangular', '$rootScope'];
-angular.module('admin.api.client.foodio').factory('storeAddonApi', service);
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var service = function service(Restangular, $rootScope) {
-
-  return new ((function () {
     function StoreAddressApi() {
       _classCallCheck(this, StoreAddressApi);
     }
@@ -1618,42 +1598,6 @@ var service = function service(PublicRestangular, Restangular, $rootScope) {
 
 service.$inject = ['PublicRestangular', 'Restangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('storeApi', service);
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var service = function service(Restangular, $rootScope) {
-
-  return new ((function () {
-    function StoreProductApi() {
-      _classCallCheck(this, StoreProductApi);
-    }
-
-    _createClass(StoreProductApi, [{
-      key: 'show',
-      value: function show(storeProduct) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('store_products', storeProduct.id).get();
-      }
-    }, {
-      key: 'update',
-      value: function update(storeProduct) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('store_products', storeProduct.id).patch({ store_product: storeProduct });
-      }
-    }, {
-      key: 'destroy',
-      value: function destroy(storeProduct) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('store_products', storeProduct.id).remove();
-      }
-    }]);
-
-    return StoreProductApi;
-  })())();
-};
-
-service.$inject = ['Restangular', '$rootScope'];
-angular.module('admin.api.client.foodio').factory('storeProductApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();

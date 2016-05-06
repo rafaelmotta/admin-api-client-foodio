@@ -2,6 +2,7 @@ let service = ($q, Restangular, $rootScope) => {
 
   return new class CartItemApi {
 
+    // POST admin/companies/:company_id/stores/:store_id/me/cart/cart_items
     create(data) {
       return this._serialize(data).then((serializedData) => {
         return Restangular
@@ -13,6 +14,7 @@ let service = ($q, Restangular, $rootScope) => {
       });
     }
 
+    // PATCH admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
     update(data) {
       return this._serialize(data).then((serializedData) => {
         return Restangular
@@ -25,6 +27,7 @@ let service = ($q, Restangular, $rootScope) => {
       });
     }
 
+    // DELETE admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
     destroy(data) {
       return Restangular
         .one('companies', $rootScope.company.id)
