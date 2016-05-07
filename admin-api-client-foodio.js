@@ -1315,6 +1315,11 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('printers').get();
       }
     }, {
+      key: 'show',
+      value: function show(printer) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('printers', printer.id).get();
+      }
+    }, {
       key: 'create',
       value: function create(printer) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('printers', { printer: printer });

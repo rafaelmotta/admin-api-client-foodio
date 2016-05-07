@@ -9,6 +9,14 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
         .get();
     }
 
+    show(printer) {
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .one('printers', printer.id)
+        .get();
+    }
+
     create(printer) {
       return Restangular
         .one('companies', $rootScope.company.id)
