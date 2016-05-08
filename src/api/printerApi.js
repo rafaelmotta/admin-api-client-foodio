@@ -25,13 +25,13 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     }
 
     update(printer) {
-      return this._serializeBeforeUpdate(printer, (printer) => {
+      return this._serializeBeforeUpdate(printer).then((printer) => {
         return Restangular
            .one('companies', $rootScope.company.id)
            .one('stores', $rootScope.currentStore.id)
            .one('printers', printer.id)
            .patch({ printer: printer });
-      });
+      })
     }
 
     destroy(printer) {
