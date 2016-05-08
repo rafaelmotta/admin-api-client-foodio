@@ -25,20 +25,31 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     }
 
     update(printer) {
-       return Restangular
-          .one('companies', $rootScope.company.id)
-          .one('stores', $rootScope.currentStore.id)
-          .one('printers', printer.id)
-          .patch({ printer: printer });
+      this._serializeBeforeUpdate(printer, (printer) => {
+        return Restangular
+           .one('companies', $rootScope.company.id)
+           .one('stores', $rootScope.currentStore.id)
+           .one('printers', printer.id)
+           .patch({ printer: printer });
+      });
     }
 
     destroy(printer) {
-        return Restangular
-          .one('companies', $rootScope.company.id)
-          .one('stores', $rootScope.currentStore.id)
-          .one('printers', printer.id)
-          .remove();
-      }
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .one('printers', printer.id)
+        .remove();
+    }
+
+    _serializeBeforeUpdate(printer) {
+      return new Promise((resolve, reject) => {
+        printer.settings_attributes = angular.copy(printer.settings);
+        delete printer.settings;
+
+        resolve(printer);
+      });
+    }
   }
 };
 

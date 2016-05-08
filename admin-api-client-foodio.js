@@ -1327,12 +1327,24 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
     }, {
       key: 'update',
       value: function update(printer) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('printers', printer.id).patch({ printer: printer });
+        this._serializeBeforeUpdate(printer, function (printer) {
+          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('printers', printer.id).patch({ printer: printer });
+        });
       }
     }, {
       key: 'destroy',
       value: function destroy(printer) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('printers', printer.id).remove();
+      }
+    }, {
+      key: '_serializeBeforeUpdate',
+      value: function _serializeBeforeUpdate(printer) {
+        return new Promise(function (resolve, reject) {
+          printer.settings_attributes = angular.copy(printer.settings);
+          delete printer.settings;
+
+          resolve(printer);
+        });
       }
     }]);
 
