@@ -45,7 +45,6 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     _serializeBeforeUpdate(printer) {
       return new Promise((resolve, reject) => {
         printer.settings_attributes = angular.copy(printer.settings);
-        delete printer.settings;
 
         return resolve(printer);
       });
