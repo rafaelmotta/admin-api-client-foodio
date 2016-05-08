@@ -25,7 +25,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     }
 
     update(printer) {
-      this._serializeBeforeUpdate(printer, (printer) => {
+      return this._serializeBeforeUpdate(printer, (printer) => {
         return Restangular
            .one('companies', $rootScope.company.id)
            .one('stores', $rootScope.currentStore.id)
@@ -47,7 +47,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
         printer.settings_attributes = angular.copy(printer.settings);
         delete printer.settings;
 
-        resolve(printer);
+        return resolve(printer);
       });
     }
   }
