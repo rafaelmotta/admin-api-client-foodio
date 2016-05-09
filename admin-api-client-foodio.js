@@ -1439,17 +1439,22 @@ var service = function service(Restangular, $rootScope) {
     _createClass(ProductCategoryApi, [{
       key: 'fetch',
       value: function fetch() {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories').get();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').get();
       }
     }, {
-      key: 'fetchWithProducts',
-      value: function fetchWithProducts() {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories').one('product_subcategories').one('products').get();
+      key: 'create',
+      value: function create(productCategory) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('product_categories', { product_category: productCategory });
       }
     }, {
-      key: 'show',
-      value: function show(productCategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).get();
+      key: 'update',
+      value: function update(productCategory) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).patch({ product_category: productCategory });
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy(productCategory) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).destroy();
       }
     }]);
 

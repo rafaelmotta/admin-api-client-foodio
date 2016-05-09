@@ -5,24 +5,32 @@ let service = (Restangular, $rootScope) => {
     fetch() {
       return Restangular
         .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('product_categories')
         .get();
     }
 
-    fetchWithProducts() {
+    create(productCategory) {
       return Restangular
         .one('companies', $rootScope.company.id)
-        .one('product_categories')
-        .one('product_subcategories')
-        .one('products')
-        .get();
+        .one('stores', $rootScope.currentStore.id)
+        .post('product_categories', { product_category: productCategory });
     }
 
-    show(productCategory) {
+    update(productCategory) {
       return Restangular
         .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('product_categories', productCategory.id)
-        .get();
+        .patch({ product_category: productCategory });
+    }
+
+    destroy(productCategory) {
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .one('product_categories', productCategory.id)
+        .destroy();
     }
   }
 };
