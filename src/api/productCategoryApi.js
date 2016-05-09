@@ -15,7 +15,8 @@ let service = (Restangular, $rootScope) => {
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
         .one('product_categories')
-        .one('product_subcategories');
+        .one('product_subcategories')
+        .get();
     }
 
     show(productCategory) {

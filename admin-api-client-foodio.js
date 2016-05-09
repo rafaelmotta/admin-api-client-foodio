@@ -1444,7 +1444,7 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'fetchWithSubcategories',
       value: function fetchWithSubcategories() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').one('product_subcategories');
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').one('product_subcategories').get();
       }
     }, {
       key: 'show',
