@@ -30,7 +30,7 @@ let service = (Restangular, $rootScope) => {
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
         .one('product_categories', productCategory.id)
-        .destroy();
+        .remove();
     }
   }
 };

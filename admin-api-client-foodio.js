@@ -1454,7 +1454,7 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'destroy',
       value: function destroy(productCategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).destroy();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).remove();
       }
     }]);
 
