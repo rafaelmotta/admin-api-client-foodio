@@ -1442,6 +1442,11 @@ var service = function service(Restangular, $rootScope) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').get();
       }
     }, {
+      key: 'fetchWithSubcategories',
+      value: function fetchWithSubcategories() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').one('product_subcategories');
+      }
+    }, {
       key: 'show',
       value: function show(productCategory) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).get();
@@ -1483,24 +1488,24 @@ var service = function service(Restangular, $rootScope) {
     }
 
     _createClass(ProductSubcategoryApi, [{
+      key: 'show',
+      value: function show(productCategory, productSubcategory) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id);
+      }
+    }, {
       key: 'create',
       value: function create(productCategory, productSubcategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).post('product_subcategories', { product_subcategory: productSubcategory });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).post('product_subcategories', { product_subcategory: productSubcategory });
       }
     }, {
       key: 'update',
       value: function update(productCategory, productSubcategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).patch({ product_subcategory: productSubcategory });
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).patch({ product_subcategory: productSubcategory });
       }
     }, {
       key: 'destroy',
       value: function destroy(productCategory, productSubcategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).remove();
-      }
-    }, {
-      key: 'fetch',
-      value: function fetch(productCategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.type).one('product_subcategories').one('store_products').get();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productCategory.id).remove();
       }
     }]);
 

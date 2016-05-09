@@ -10,6 +10,14 @@ let service = (Restangular, $rootScope) => {
         .get();
     }
 
+    fetchWithSubcategories() {
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .one('product_categories')
+        .one('product_subcategories');
+    }
+
     show(productCategory) {
       return Restangular
         .one('companies', $rootScope.company.id)
