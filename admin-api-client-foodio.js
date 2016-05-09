@@ -1191,7 +1191,7 @@ var service = function service(Restangular, $rootScope) {
       }
     }, {
       key: 'show',
-      value: function show() {
+      value: function show(page) {
         return Restangular.one('companies', $rootScope.company.id).one('pages', page.id).get();
       }
     }, {

@@ -9,7 +9,7 @@ let service = (Restangular, $rootScope) => {
         .get();
     }
 
-    show() {
+    show(page) {
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('pages', page.id)
