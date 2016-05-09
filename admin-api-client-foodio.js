@@ -1442,6 +1442,11 @@ var service = function service(Restangular, $rootScope) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').get();
       }
     }, {
+      key: 'show',
+      value: function show(productCategory) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).get();
+      }
+    }, {
       key: 'create',
       value: function create(productCategory) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('product_categories', { product_category: productCategory });
