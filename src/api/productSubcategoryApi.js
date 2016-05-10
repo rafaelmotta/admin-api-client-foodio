@@ -32,7 +32,7 @@ let service = (Restangular, $rootScope) => {
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
         .one('product_categories', productCategory.id)
-        .one('product_subcategories', productCategory.id)
+        .one('product_subcategories', productSubcategory.id)
         .remove();
     }
   }
