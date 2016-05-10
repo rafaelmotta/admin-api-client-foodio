@@ -20,6 +20,8 @@ let service = (Restangular, $rootScope) => {
     }
 
     update(productCategory, productSubcategory) {
+      productSubcategory.product_category_id = productSubcategory.product_category.id;
+
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
