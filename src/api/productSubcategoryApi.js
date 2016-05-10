@@ -8,6 +8,7 @@ let service = (Restangular, $rootScope) => {
         .one('stores', $rootScope.currentStore.id)
         .one('product_categories', productCategory.id)
         .one('product_subcategories', productSubcategory.id)
+        .get();
     }
 
     create(productCategory, productSubcategory) {

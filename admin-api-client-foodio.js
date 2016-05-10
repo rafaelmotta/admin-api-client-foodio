@@ -1490,7 +1490,7 @@ var service = function service(Restangular, $rootScope) {
     _createClass(ProductSubcategoryApi, [{
       key: 'show',
       value: function show(productCategory, productSubcategory) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id);
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).get();
       }
     }, {
       key: 'create',
