@@ -77,6 +77,13 @@ var service = function service(Restangular, $rootScope) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories').get();
       }
 
+      // GET admin/companies/:company_id/stores/:store_id/addon_categories/:id
+    }, {
+      key: 'show',
+      value: function show(addonCategory) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).get();
+      }
+
       // POST admin/companies/:company_id/stores/:store_id/addon_categories
     }, {
       key: 'create',
