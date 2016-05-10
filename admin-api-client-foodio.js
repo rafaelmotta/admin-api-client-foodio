@@ -40,7 +40,7 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'show',
       value: function show(addonCategory, addon) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).one('addons', addon.id);
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).one('addons', addon.id).get();
       }
 
       // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons/:id

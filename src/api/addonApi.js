@@ -17,6 +17,7 @@ let service = (Restangular, $rootScope) => {
         .one('stores', $rootScope.currentStore.id)
         .one('addon_categories', addonCategory.id)
         .one('addons', addon.id)
+        .get();
     }
 
     // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons/:id
