@@ -38,6 +38,13 @@ var service = function service(Restangular, $rootScope) {
 
       // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons/:id
     }, {
+      key: 'show',
+      value: function show(addonCategory, addon) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).one('addons', addon.id);
+      }
+
+      // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons/:id
+    }, {
       key: 'update',
       value: function update(addonCategory, addon) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).one('addons', addon.id).patch({ addon: addon });
