@@ -19,7 +19,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available']
+          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id']
         });
       } else {
         return Restangular
@@ -32,6 +32,8 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     }
 
     update(productCategory, productSubcategory, product) {
+      product.product_subcategory_id = product.product_subcategory.id;
+
       if(angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
         return this.requestWithImage({
           url: `companies/${$rootScope.company.id}/stores/${$rootScope.currentStore.id}/product_categories/${productCategory.id}/product_subcategories/${productSubcategory.id}/products/${product.id}`,
@@ -39,7 +41,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available']
+          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id']
         });
       } else {
         return Restangular
