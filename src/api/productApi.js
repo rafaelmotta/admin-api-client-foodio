@@ -19,7 +19,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
+          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available']
         });
       } else {
         return Restangular
@@ -39,7 +39,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
+          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available']
         });
       } else {
         return Restangular

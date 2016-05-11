@@ -1404,7 +1404,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
+            extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available']
           });
         } else {
           return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
@@ -1420,7 +1420,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
+            extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available']
           });
         } else {
           return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
