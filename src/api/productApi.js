@@ -12,6 +12,16 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     }
 
     create(productCategory, productSubcategory, product) {
+      product.product_addon_categories_attributes = [];
+
+      for(let i in product.product_addon_categories) {
+        product.product_addon_categories_attributes.push(product.product_addon_categories[i]);
+
+        for(let j in product.product_addon_categories[i].product_addons) {
+          product.product_addon_categories_attributes[product.product_addon_categories_attributes - 1].push(product.product_addon_categories[i].product_addons[j]);
+        }
+      }
+
       if(angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
         return this.requestWithImage({
           url: `companies/${$rootScope.company.id}/stores/${$rootScope.currentStore.id}/product_categories/${productCategory.id}/product_subcategories/${productSubcategory.id}/products`,
@@ -19,7 +29,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id']
+          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
         });
       } else {
         return Restangular
@@ -41,7 +51,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id']
+          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
         });
       } else {
         return Restangular
