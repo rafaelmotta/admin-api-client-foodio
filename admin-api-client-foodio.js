@@ -47,6 +47,8 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'update',
       value: function update(addonCategory, addon) {
+        addon.addon_category_id = addon.addon_category.id;
+
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('addon_categories', addonCategory.id).one('addons', addon.id).patch({ addon: addon });
       }
 
