@@ -4,6 +4,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     show(productCategory, productSubcategory, product) {
       return Restangular
         .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
         .one('product_categories', productCategory.id)
         .one('product_subcategories', productSubcategory.id)
         .one('products', product.id)
@@ -13,7 +14,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     create(productCategory, productSubcategory, product) {
       if(angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
         return this.requestWithImage({
-          url: `companies/${$rootScope.company.id}/product_categories/${productCategory.id}/product_subcategories/${productSubcategory.id}/products`,
+          url: `companies/${$rootScope.company.id}/stores/${$rootScope.store.id}/product_categories/${productCategory.id}/product_subcategories/${productSubcategory.id}/products`,
           method: 'POST',
           data: product,
           key: 'product',
@@ -23,6 +24,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
       } else {
         return Restangular
           .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('product_categories', productCategory.id)
           .one('product_subcategories', productSubcategory.id)
           .post('products', { product: product });
@@ -32,7 +34,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     update(productCategory, productSubcategory, product) {
       if(angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
         return this.requestWithImage({
-          url: `companies/${$rootScope.company.id}/product_categories/${productCategory.id}/product_subcategories/${productSubcategory.id}/products/${product.id}`,
+          url: `companies/${$rootScope.company.id}/stores/${$rootScope.store.id}/product_categories/${productCategory.id}/product_subcategories/${productSubcategory.id}/products/${product.id}`,
           method: 'PATCH',
           data: product,
           key: 'product',
@@ -42,6 +44,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
       } else {
         return Restangular
           .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('product_categories', productCategory.id)
           .one('product_subcategories', productSubcategory.id)
           .one('products', product.id)
@@ -52,6 +55,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     destroy(productCategory, productSubcategory, product) {
         return Restangular
           .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
           .one('product_categories', productCategory.id)
           .one('product_subcategories', productSubcategory.id)
           .one('products', product.id)

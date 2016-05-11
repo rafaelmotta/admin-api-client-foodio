@@ -1392,14 +1392,14 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
     _createClass(ProductApi, [{
       key: 'show',
       value: function show(productCategory, productSubcategory, product) {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).get();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).get();
       }
     }, {
       key: 'create',
       value: function create(productCategory, productSubcategory, product) {
         if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
           return this.requestWithImage({
-            url: 'companies/' + $rootScope.company.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products',
+            url: 'companies/' + $rootScope.company.id + '/stores/' + $rootScope.store.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products',
             method: 'POST',
             data: product,
             key: 'product',
@@ -1407,7 +1407,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
           });
         } else {
-          return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
+          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
         }
       }
     }, {
@@ -1415,7 +1415,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
       value: function update(productCategory, productSubcategory, product) {
         if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
           return this.requestWithImage({
-            url: 'companies/' + $rootScope.company.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products/' + product.id,
+            url: 'companies/' + $rootScope.company.id + '/stores/' + $rootScope.store.id + '/product_categories/' + productCategory.id + '/product_subcategories/' + productSubcategory.id + '/products/' + product.id,
             method: 'PATCH',
             data: product,
             key: 'product',
@@ -1423,13 +1423,13 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             extraKeys: ['name', 'title', 'admin_only', 'description', 'order', 'base_price', 'stores', 'addon_categories', 'change_img_on_hover']
           });
         } else {
-          return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
+          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
         }
       }
     }, {
       key: 'destroy',
       value: function destroy(productCategory, productSubcategory, product) {
-        return Restangular.one('companies', $rootScope.company.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).remove();
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).remove();
       }
     }]);
 
@@ -1461,6 +1461,11 @@ var service = function service(Restangular, $rootScope) {
       key: 'fetchWithSubcategories',
       value: function fetchWithSubcategories() {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').one('product_subcategories').get();
+      }
+    }, {
+      key: 'fetchWithProducts',
+      value: function fetchWithProducts() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories').one('product_subcategories').one('products').get();
       }
     }, {
       key: 'show',
