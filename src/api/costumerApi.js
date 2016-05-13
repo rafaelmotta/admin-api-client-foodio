@@ -10,6 +10,14 @@ let service = (Restangular, $rootScope) => {
         .get(params);
     }
 
+    update(costumer) {
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .one('costumers', costumer.id)
+        .patch({ costumer: costumer });
+    }
+
     show(costumer, params = {}) {
       return Restangular
         .one('companies', $rootScope.company.id)
@@ -24,15 +32,6 @@ let service = (Restangular, $rootScope) => {
         .one('stores', $rootScope.currentStore.id)
         .post('costumers', { costumer: costumer });
     }
-
-    update(costumer) {
-      return Restangular
-        .one('companies', $rootScope.company.id)
-        .one('stores', $rootScope.currentStore.id)
-        .one('costumers', costumer.id)
-        .patch({ costumer: costumer });
-    }
-
   }
 };
 

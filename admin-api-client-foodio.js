@@ -524,6 +524,11 @@ var service = function service(Restangular, $rootScope) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('costumers').get(params);
       }
     }, {
+      key: 'update',
+      value: function update(costumer) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('costumers', costumer.id).patch({ costumer: costumer });
+      }
+    }, {
       key: 'show',
       value: function show(costumer) {
         var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
@@ -534,11 +539,6 @@ var service = function service(Restangular, $rootScope) {
       key: 'create',
       value: function create(costumer) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('costumers', { costumer: costumer });
-      }
-    }, {
-      key: 'update',
-      value: function update(costumer) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('costumers', costumer.id).patch({ costumer: costumer });
       }
     }]);
 
