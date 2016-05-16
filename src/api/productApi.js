@@ -53,7 +53,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     }
 
     update(productCategory, productSubcategory, product) {
-      if(product.product_subcategory.id) {
+      if(product.product_subcategory && product.product_subcategory.id) {
         product.product_subcategory_id = product.product_subcategory.id;
       }
 

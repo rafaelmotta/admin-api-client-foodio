@@ -1434,7 +1434,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
     }, {
       key: 'update',
       value: function update(productCategory, productSubcategory, product) {
-        if (product.product_subcategory.id) {
+        if (product.product_subcategory && product.product_subcategory.id) {
           product.product_subcategory_id = product.product_subcategory.id;
         }
 
