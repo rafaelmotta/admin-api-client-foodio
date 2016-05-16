@@ -1400,11 +1400,22 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
         product.product_addon_categories_attributes = [];
 
         for (var i in product.product_addon_categories) {
-          product.product_addon_categories_attributes.push(product.product_addon_categories[i]);
+          var product_addons = [];
 
           for (var j in product.product_addon_categories[i].product_addons) {
-            product.product_addon_categories_attributes[product.product_addon_categories_attributes - 1].push(product.product_addon_categories[i].product_addons[j]);
+            product_addons.push({
+              addon_id: product.product_addon_categories[i].product_addons[j].id
+            });
           }
+
+          product.product_addon_categories_attributes.push({
+            addon_category_id: product.product_addon_categories[i].id,
+            order: parseInt(i, 10) + 1,
+            max: product.product_addon_categories[i].max || null,
+            min: product.product_addon_categories[i].min || null,
+            auto_fill: product.product_addon_categories[i].auto_fill || false,
+            product_addons_attributes: product_addons
+          });
         }
 
         if (angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
