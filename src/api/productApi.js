@@ -53,7 +53,30 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
     }
 
     update(productCategory, productSubcategory, product) {
-      product.product_subcategory_id = product.product_subcategory.id;
+      if(product.product_subcategory.id) {
+        product.product_subcategory_id = product.product_subcategory.id;
+      }
+
+      product.product_addon_categories_attributes = [];
+
+      for (var i in product.product_addon_categories) {
+        var product_addons = [];
+
+        for (var j in product.product_addon_categories[i].product_addons) {
+          product_addons.push({
+            addon_id: product.product_addon_categories[i].product_addons[j].id
+          });
+        }
+
+        product.product_addon_categories_attributes.push({
+          addon_category_id: product.product_addon_categories[i].addon_category.id,
+          order: parseInt(i, 10) + 1,
+          max: product.product_addon_categories[i].max || null,
+          min: product.product_addon_categories[i].min || null,
+          auto_fill: product.product_addon_categories[i].auto_fill || false,
+          product_addons_attributes: product_addons
+        });
+      }
 
       if(angular.isArray(product.img) && product.img[0] || angular.isArray(product.img_hover) && product.img_hover[0]) {
         return this.requestWithImage({
