@@ -22,7 +22,9 @@ let service = (Restangular, $rootScope) => {
 
     // GET /admin/companies/:company_id/stores/:store_id/addon_categories/:addon_category_id/addons/:id
     update(addonCategory, addon) {
-      addon.addon_category_id = addon.addon_category.id;
+      if(addon.addon_category && addon.addon_category.id) {
+        addon.addon_category_id = addon.addon_category.id;
+      }
 
       return Restangular
         .one('companies', $rootScope.company.id)
