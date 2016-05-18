@@ -969,7 +969,12 @@ var service = function service(Restangular, $rootScope) {
       value: function fetch() {
         var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('menu').get(params);
+        return PublicRestangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('menu').get(params);
+      }
+    }, {
+      key: 'show',
+      value: function show(product) {
+        return PublicRestangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('menu', product.id);
       }
     }]);
 
