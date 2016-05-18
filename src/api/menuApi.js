@@ -1,4 +1,4 @@
-let service = (Restangular, $rootScope) => {
+let service = (PublicRestangular, $rootScope) => {
 
   return new class MenuApi {
 
@@ -19,5 +19,5 @@ let service = (Restangular, $rootScope) => {
   }
 };
 
-service.$inject = ['Restangular', '$rootScope'];
+service.$inject = ['PublicRestangular', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('menuApi', service);
