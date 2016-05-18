@@ -974,7 +974,7 @@ var service = function service(PublicRestangular, $rootScope) {
     }, {
       key: 'show',
       value: function show(product) {
-        return PublicRestangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('menu', product.id);
+        return PublicRestangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('menu', product.id).get();
       }
     }]);
 

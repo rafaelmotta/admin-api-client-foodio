@@ -15,6 +15,7 @@ let service = (PublicRestangular, $rootScope) => {
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
         .one('menu', product.id)
+        .get();
     }
   }
 };
