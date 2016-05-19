@@ -21,6 +21,15 @@ let service = (Restangular, $rootScope) => {
         .one('cart')
         .get();
     }
+
+    update(cart) {
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .one('me')
+        .one('cart')
+        .patch({ cart: cart });
+    }
   }
 };
 

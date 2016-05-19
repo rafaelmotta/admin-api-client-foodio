@@ -228,6 +228,11 @@ var service = function service(Restangular, $rootScope) {
       value: function create() {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').get();
       }
+    }, {
+      key: 'update',
+      value: function update(cart) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').patch({ cart: cart });
+      }
     }]);
 
     return CartApi;
