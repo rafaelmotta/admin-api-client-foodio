@@ -284,24 +284,27 @@ var service = function service($q, Restangular, $rootScope) {
       value: function _serialize(cartItem) {
         return new Promise(function (resolve, reject) {
           var toPut = [];
-          var toRemove = [];
 
-          for (var i in cartItem.cart_item_addons_to_put) {
-            var addon = cartItem.cart_item_addons_to_put[i];
-            toPut.push({ id: addon.id });
-          }
+          for (var i in cartItem.cart_item_addons) {
+            var a = cartItem.cart_item_addons[i];
 
-          for (var i in cartItem.cart_item_addons_to_remove) {
-            var addon = cartItem.cart_item_addons_to_remove[i];
-            toRemove.push({ id: addon.id });
+            if (a.id && a.price) {
+              toPut.push({ id: a.id });
+            } else {
+              for (var j in a) {
+                var addon = a[j];
+                if (addon.selected) {
+                  toPut.push({ id: a.id });
+                }
+              }
+            }
           }
 
           var data = {
             amount: cartItem.amount,
             note: cartItem.note,
             product_id: cartItem.product.id,
-            cart_item_addons_to_put_attributes: toPut,
-            cart_item_addons_to_remove_attributes: toRemove
+            cart_item_addons_to_put_attributes: toPut
           };
 
           resolve(data);
