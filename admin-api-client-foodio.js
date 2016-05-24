@@ -294,7 +294,7 @@ var service = function service($q, Restangular, $rootScope) {
               for (var j in a) {
                 var addon = a[j];
                 if (addon.selected) {
-                  toPut.push({ id: a.id });
+                  toPut.push({ id: addon.id });
                 }
               }
             }

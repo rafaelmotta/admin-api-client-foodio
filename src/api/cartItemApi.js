@@ -51,7 +51,7 @@ let service = ($q, Restangular, $rootScope) => {
             for(let j in a) {
               let addon = a[j];
               if(addon.selected) {
-                toPut.push({ id: a.id });
+                toPut.push({ id: addon.id });
               }
             }
           }
