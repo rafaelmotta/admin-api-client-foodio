@@ -899,6 +899,10 @@ var service = function service(Restangular, DeviseBase) {
     _createClass(LoginApi, [{
       key: 'loginWithEmail',
       value: function loginWithEmail(employee) {
+        if (employee.store && employee.store.id) {
+          employee.store_id = employee.store.id;
+        }
+
         return Restangular.service(this.deviseBaseUrl + '/sign_in').post({ employee: employee });
       }
     }]);
