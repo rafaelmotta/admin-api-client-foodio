@@ -1425,6 +1425,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
       key: 'create',
       value: function create(productCategory, productSubcategory, product) {
         product.product_addon_categories_attributes = [];
+        product.bonifications_attributes = angular.copy(product.bonifications);
 
         for (var i in product.product_addon_categories) {
           var product_addons = [];
@@ -1466,6 +1467,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
         }
 
         product.product_addon_categories_attributes = [];
+        product.bonifications_attributes = angular.copy(product.bonifications);
 
         for (var i in product.product_addon_categories) {
           var product_addons = [];
