@@ -49,7 +49,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           auto_select: b.auto_select,
           amount: b.amount,
           bonification: {
-            id: b.id
+            id: b.bonification.id
           }
         });
       }
@@ -107,7 +107,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           auto_select: b.auto_select,
           amount: b.amount,
           bonification: {
-            id: b.id
+            id: b.bonification.id
           }
         });
       }
