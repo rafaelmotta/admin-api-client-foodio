@@ -48,7 +48,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
         product.bonifications_attributes.push({
           auto_select: b.auto_select,
           amount: b.amount,
-          bonification: {
+          bonification_attributes: {
             id: b.bonification.id
           }
         });
@@ -106,7 +106,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
         product.bonifications_attributes.push({
           auto_select: b.auto_select,
           amount: b.amount,
-          bonification: {
+          bonification_attributes: {
             id: b.bonification.id
           }
         });
