@@ -1425,7 +1425,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
       key: 'create',
       value: function create(productCategory, productSubcategory, product) {
         product.product_addon_categories_attributes = [];
-        product.bonifications_attributes = angular.copy(product.bonifications);
+        product.bonifications_attributes = [];
 
         for (var i in product.product_addon_categories) {
           var product_addons = [];
@@ -1443,6 +1443,18 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             min: product.product_addon_categories[i].min || null,
             auto_fill: product.product_addon_categories[i].auto_fill || false,
             product_addons_attributes: product_addons
+          });
+        }
+
+        for (var _i in product.bonifications) {
+          var b = product.bonifications[_i];
+
+          product.bonifications_attributes.push({
+            auto_select: b.auto_select,
+            amount: b.amount,
+            bonification: {
+              id: b.id
+            }
           });
         }
 
@@ -1467,7 +1479,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
         }
 
         product.product_addon_categories_attributes = [];
-        product.bonifications_attributes = angular.copy(product.bonifications);
+        product.bonifications_attributes = [];
 
         for (var i in product.product_addon_categories) {
           var product_addons = [];
@@ -1485,6 +1497,18 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             min: product.product_addon_categories[i].min || null,
             auto_fill: product.product_addon_categories[i].auto_fill || false,
             product_addons_attributes: product_addons
+          });
+        }
+
+        for (var _i2 in product.bonifications) {
+          var b = product.bonifications[_i2];
+
+          product.bonifications_attributes.push({
+            auto_select: b.auto_select,
+            amount: b.amount,
+            bonification: {
+              id: b.id
+            }
           });
         }
 

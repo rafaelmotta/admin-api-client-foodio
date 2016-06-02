@@ -21,7 +21,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
 
     create(productCategory, productSubcategory, product) {
       product.product_addon_categories_attributes = [];
-      product.bonifications_attributes = angular.copy(product.bonifications);
+      product.bonifications_attributes = [];
 
       for (var i in product.product_addon_categories) {
         let product_addons = [];
@@ -39,6 +39,18 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           min: product.product_addon_categories[i].min || null,
           auto_fill: product.product_addon_categories[i].auto_fill || false ,
           product_addons_attributes: product_addons,
+        });
+      }
+
+      for(let i in product.bonifications) {
+        let b = product.bonifications[i];
+
+        product.bonifications_attributes.push({
+          auto_select: b.auto_select,
+          amount: b.amount,
+          bonification: {
+            id: b.id
+          }
         });
       }
 
@@ -67,8 +79,8 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
       }
 
       product.product_addon_categories_attributes = [];
-      product.bonifications_attributes = angular.copy(product.bonifications);
-      
+      product.bonifications_attributes = [];
+
       for (var i in product.product_addon_categories) {
         var product_addons = [];
 
@@ -85,6 +97,18 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           min: product.product_addon_categories[i].min || null,
           auto_fill: product.product_addon_categories[i].auto_fill || false,
           product_addons_attributes: product_addons
+        });
+      }
+
+      for(let i in product.bonifications) {
+        let b = product.bonifications[i];
+
+        product.bonifications_attributes.push({
+          auto_select: b.auto_select,
+          amount: b.amount,
+          bonification: {
+            id: b.id
+          }
         });
       }
 
