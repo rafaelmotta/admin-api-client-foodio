@@ -59,7 +59,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
+          extraKeys: ['name', 'subtitle', 'label', 'hide_on_kitchen_card', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
         });
       } else {
         return Restangular
@@ -115,7 +115,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           data: product,
           key: 'product',
           imgKeys: ['img', 'img_hover'],
-          extraKeys: ['name', 'subtitle', 'label', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
+          extraKeys: ['name', 'subtitle', 'label', 'hide_on_kitchen_card', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
         });
       } else {
         return Restangular
