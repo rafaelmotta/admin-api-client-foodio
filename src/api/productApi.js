@@ -1,12 +1,12 @@
 let service = (Restangular, ApiBase, $q, $rootScope) => {
   return new class ProductApi extends ApiBase {
 
-    fetchBonifications() {
+    fetchBonificables() {
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
         .one('products')
-        .one('bonifications')
+        .one('bonificables')
         .get();
     }
 

@@ -1412,9 +1412,9 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
     }
 
     _createClass(ProductApi, [{
-      key: 'fetchBonifications',
-      value: function fetchBonifications() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('products').one('bonifications').get();
+      key: 'fetchBonificables',
+      value: function fetchBonificables() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('products').one('bonificables').get();
       }
     }, {
       key: 'show',
