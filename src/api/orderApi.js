@@ -54,6 +54,7 @@ let service = ($q, Restangular, $rootScope) => {
           order_type_id: order.orderType.id,
           note: order.note || null,
           change: order.change || null,
+          admin_discount: order.admin_discount || null,
           costumer_id: (order.costumer && order.costumer.id) ? order.costumer.id : null,
           address_id: (order.address && order.address.id) ? order.address.id : null
         };
