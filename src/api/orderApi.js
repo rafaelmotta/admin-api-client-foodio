@@ -79,6 +79,11 @@ let service = ($q, Restangular, $rootScope) => {
         if(order.courier) {
           order.courier_id = order.courier.id;
         }
+
+        if(order.paymentMethod) {
+          order.payment_method_id = order.paymentMethod.id;
+        }
+
         if(order.address) {
           order.address_id = order.address.id;
         }
