@@ -215,23 +215,11 @@ var service = function service(Restangular, $rootScope) {
     }
 
     _createClass(CartApi, [{
-      key: 'fetch',
+      key: 'show',
 
-      // GET admin/companies/:company_id/stores/:store_id/me/cart
-      value: function fetch() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').get();
-      }
-
-      // POST admin/companies/:company_id/stores/:store_id/me/cart
-    }, {
-      key: 'create',
-      value: function create() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').get();
-      }
-    }, {
-      key: 'update',
-      value: function update(cart) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').patch({ cart: cart });
+      // GET admin/companies/:company_id/stores/:store_id/carts/:id
+      value: function show(cart) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts', cart.id).get();
       }
     }]);
 
@@ -966,6 +954,46 @@ var service = function service(Restangular, ApiBase, $rootScope) {
 
 service.$inject = ['Restangular', 'ApiBase', '$rootScope'];
 angular.module('admin.api.client.foodio').factory('meApi', service);
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var service = function service(Restangular, $rootScope) {
+
+  return new ((function () {
+    function MeCartApi() {
+      _classCallCheck(this, MeCartApi);
+    }
+
+    _createClass(MeCartApi, [{
+      key: 'fetch',
+
+      // GET admin/companies/:company_id/stores/:store_id/me/cart
+      value: function fetch() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').get();
+      }
+
+      // POST admin/companies/:company_id/stores/:store_id/me/cart
+    }, {
+      key: 'create',
+      value: function create() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').get();
+      }
+    }, {
+      key: 'update',
+      value: function update(cart) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').patch({ cart: cart });
+      }
+    }]);
+
+    return MeCartApi;
+  })())();
+};
+
+service.$inject = ['Restangular', '$rootScope'];
+angular.module('admin.api.client.foodio').factory('meCartApi', service);
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();

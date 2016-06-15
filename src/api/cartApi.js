@@ -2,33 +2,13 @@ let service = (Restangular, $rootScope) => {
 
   return new class CartApi {
 
-    // GET admin/companies/:company_id/stores/:store_id/me/cart
-    fetch() {
+    // GET admin/companies/:company_id/stores/:store_id/carts/:id
+    show(cart) {
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
-        .one('me')
-        .one('cart')
+        .one('carts', cart.id)
         .get();
-    }
-
-    // POST admin/companies/:company_id/stores/:store_id/me/cart
-    create() {
-      return Restangular
-        .one('companies', $rootScope.company.id)
-        .one('stores', $rootScope.currentStore.id)
-        .one('me')
-        .one('cart')
-        .get();
-    }
-
-    update(cart) {
-      return Restangular
-        .one('companies', $rootScope.company.id)
-        .one('stores', $rootScope.currentStore.id)
-        .one('me')
-        .one('cart')
-        .patch({ cart: cart });
     }
   }
 };
