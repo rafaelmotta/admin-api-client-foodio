@@ -50,8 +50,8 @@ let service = ($q, Restangular, $rootScope) => {
       return $q((resolve, reject) => {
         let data = {
           cart_id: order.cart.id,
-          payment_method_id: order.paymentMethod.id,
-          order_type_id: order.orderType.id,
+          payment_method_id: order.payment_method.id,
+          order_type_id: order.order_type.id,
           note: order.note || null,
           change: order.change || null,
           admin_discount: order.admin_discount || null,
@@ -81,7 +81,11 @@ let service = ($q, Restangular, $rootScope) => {
         }
 
         if(order.paymentMethod) {
-          order.payment_method_id = order.paymentMethod.id;
+          order.payment_method_id = order.payment_method.id;
+        }
+
+        if(order.cart) {
+          order.cart_id = order.cart.id;
         }
 
         if(order.address) {
