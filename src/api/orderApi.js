@@ -80,7 +80,7 @@ let service = ($q, Restangular, $rootScope) => {
           order.courier_id = order.courier.id;
         }
 
-        if(order.paymentMethod) {
+        if(order.payment_method) {
           order.payment_method_id = order.payment_method.id;
         }
 

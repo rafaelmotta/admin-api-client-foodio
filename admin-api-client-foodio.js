@@ -246,26 +246,26 @@ var service = function service($q, Restangular, $rootScope) {
       key: 'create',
 
       // POST admin/companies/:company_id/stores/:store_id/me/cart/cart_items
-      value: function create(data) {
+      value: function create(cart, data) {
         return this._serialize(data).then(function (serializedData) {
-          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').post('cart_items', { cart_item: serializedData });
+          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts', cart.id).post('cart_items', { cart_item: serializedData });
         });
       }
 
       // PATCH admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
     }, {
       key: 'update',
-      value: function update(data) {
+      value: function update(cart, data) {
         return this._serialize(data).then(function (serializedData) {
-          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').one('cart_items', data.id).patch({ cart_item: serializedData });
+          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts', cart.id).one('cart_items', data.id).patch({ cart_item: serializedData });
         });
       }
 
       // DELETE admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
     }, {
       key: 'destroy',
-      value: function destroy(data) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('me').one('cart').one('cart_items', data.id).remove();
+      value: function destroy(cart, data) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts', cart.id).one('cart_items', data.id).remove();
       }
     }, {
       key: '_serialize',
@@ -1168,7 +1168,7 @@ var service = function service($q, Restangular, $rootScope) {
             order.courier_id = order.courier.id;
           }
 
-          if (order.paymentMethod) {
+          if (order.payment_method) {
             order.payment_method_id = order.payment_method.id;
           }
 

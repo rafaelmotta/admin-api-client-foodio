@@ -3,37 +3,34 @@ let service = ($q, Restangular, $rootScope) => {
   return new class CartItemApi {
 
     // POST admin/companies/:company_id/stores/:store_id/me/cart/cart_items
-    create(data) {
+    create(cart, data) {
       return this._serialize(data).then((serializedData) => {
         return Restangular
           .one('companies', $rootScope.company.id)
           .one('stores', $rootScope.currentStore.id)
-          .one('me')
-          .one('cart')
+          .one('carts', cart.id)
           .post('cart_items', { cart_item: serializedData });
       });
     }
 
     // PATCH admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
-    update(data) {
+    update(cart, data) {
       return this._serialize(data).then((serializedData) => {
         return Restangular
           .one('companies', $rootScope.company.id)
           .one('stores', $rootScope.currentStore.id)
-          .one('me')
-          .one('cart')
+          .one('carts', cart.id)
           .one('cart_items', data.id)
           .patch({ cart_item: serializedData });
       });
     }
 
     // DELETE admin/companies/:company_id/stores/:store_id/me/cart/cart_items/:cart_item_id
-    destroy(data) {
+    destroy(cart, data) {
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
-        .one('me')
-        .one('cart')
+        .one('carts', cart.id)
         .one('cart_items', data.id)
         .remove();
     }
