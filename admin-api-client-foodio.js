@@ -215,9 +215,16 @@ var service = function service(Restangular, $rootScope) {
     }
 
     _createClass(CartApi, [{
-      key: 'show',
+      key: 'new',
+
+      // GET admin/companies/:company_id/stores/:store_id/carts
+      value: function _new() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts').one('new').get();
+      }
 
       // GET admin/companies/:company_id/stores/:store_id/carts/:id
+    }, {
+      key: 'show',
       value: function show(cart) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts', cart.id).get();
       }
