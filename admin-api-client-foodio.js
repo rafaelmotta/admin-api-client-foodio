@@ -228,6 +228,13 @@ var service = function service(Restangular, $rootScope) {
       value: function show(cart) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts', cart.id).get();
       }
+
+      // GET admin/companies/:company_id/stores/:store_id/carts/:id/clone
+    }, {
+      key: 'clone',
+      value: function clone(cart) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('carts', cart.id).one('clone').get();
+      }
     }]);
 
     return CartApi;
