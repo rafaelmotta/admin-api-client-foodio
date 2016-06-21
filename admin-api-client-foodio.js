@@ -1240,13 +1240,6 @@ var service = function service(Restangular, $q, $rootScope) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('order_types', { order_type: orderType });
       }
 
-      // PUT admin/companies/:company_id/stores/:store_id/order_types/:id
-    }, {
-      key: 'update',
-      value: function update(orderType) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('order_types', orderType.id).patch({ order_type: orderType });
-      }
-
       // DELETE admin/companies/:company_id/stores/:store_id/order_types/:id
     }, {
       key: 'destroy',

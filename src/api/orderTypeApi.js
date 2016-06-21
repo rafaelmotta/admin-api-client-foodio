@@ -29,15 +29,6 @@ let service = (Restangular, $q, $rootScope) => {
         .post('order_types', { order_type: orderType });
     }
 
-    // PUT admin/companies/:company_id/stores/:store_id/order_types/:id
-    update(orderType) {
-      return Restangular
-        .one('companies', $rootScope.company.id)
-        .one('stores', $rootScope.currentStore.id)
-        .one('order_types', orderType.id)
-        .patch({ order_type: orderType });
-    }
-
     // DELETE admin/companies/:company_id/stores/:store_id/order_types/:id
     destroy(orderType) {
       return Restangular
