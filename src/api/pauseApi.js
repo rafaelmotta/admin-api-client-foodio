@@ -3,10 +3,12 @@ let service = (Restangular, $rootScope) => {
   return new class PauseApi {
 
     create(pause) {
-      return Restangular
-        .one('companies', $rootScope.company.id)
-        .one('stores', $rootScope.currentStore.id)
-        .post('pauses', { pause: pause });
+      this._serializeBeforeCreate(pause).then((pause) => {
+        return Restangular
+          .one('companies', $rootScope.company.id)
+          .one('stores', $rootScope.currentStore.id)
+          .post('pauses', { pause: pause });
+      });
     }
 
     destroy(pause) {
@@ -15,6 +17,17 @@ let service = (Restangular, $rootScope) => {
         .one('stores', $rootScope.currentStore.id)
         .one('pauses', pause.id)
         .remove();
+    }
+
+    _serializeBeforeCreate(pause) {
+      return new Promise((resolve, reject) => {
+        let data = {
+          reason: pause.reason.alias,
+          description: pause.description
+        };
+
+        resolve(data);
+      });
     }
   }
 };

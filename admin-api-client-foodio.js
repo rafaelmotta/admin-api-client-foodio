@@ -1322,12 +1322,26 @@ var service = function service(Restangular, $rootScope) {
     _createClass(PauseApi, [{
       key: 'create',
       value: function create(pause) {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('pauses', { pause: pause });
+        this._serializeBeforeCreate(pause).then(function (pause) {
+          return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('pauses', { pause: pause });
+        });
       }
     }, {
       key: 'destroy',
       value: function destroy(pause) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('pauses', pause.id).remove();
+      }
+    }, {
+      key: '_serializeBeforeCreate',
+      value: function _serializeBeforeCreate(pause) {
+        return new Promise(function (resolve, reject) {
+          var data = {
+            reason: pause.reason.alias,
+            description: pause.description
+          };
+
+          resolve(data);
+        });
       }
     }]);
 
