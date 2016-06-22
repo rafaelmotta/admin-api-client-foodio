@@ -1200,7 +1200,7 @@ var service = function service($q, Restangular, $rootScope) {
             data.address_id = order.address.id;
           }
 
-          return resolve(order);
+          return resolve(data);
         });
       }
     }]);
