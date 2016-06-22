@@ -1178,20 +1178,26 @@ var service = function service($q, Restangular, $rootScope) {
       value: function _serializeBeforeUpdate(order) {
         return $q(function (resolve, reject) {
 
+          var data = {
+            id: order.id,
+            change: order.change,
+            status: order.status
+          };
+
           if (order.courier) {
-            order.courier_id = order.courier.id;
+            data.courier_id = order.courier.id;
           }
 
           if (order.payment_method) {
-            order.payment_method_id = order.payment_method.id;
+            data.payment_method_id = order.payment_method.id;
           }
 
           if (order.cart) {
-            order.cart_id = order.cart.id;
+            data.cart_id = order.cart.id;
           }
 
           if (order.address) {
-            order.address_id = order.address.id;
+            data.address_id = order.address.id;
           }
 
           return resolve(order);
