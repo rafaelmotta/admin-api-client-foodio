@@ -1322,7 +1322,7 @@ var service = function service(Restangular, $rootScope) {
     _createClass(PauseApi, [{
       key: 'create',
       value: function create(pause) {
-        this._serializeBeforeCreate(pause).then(function (serializedData) {
+        return this._serializeBeforeCreate(pause).then(function (serializedData) {
           return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('pauses', { pause: serializedData });
         });
       }
@@ -1340,7 +1340,7 @@ var service = function service(Restangular, $rootScope) {
             description: pause.description
           };
 
-          resolve(data);
+          return resolve(data);
         });
       }
     }]);

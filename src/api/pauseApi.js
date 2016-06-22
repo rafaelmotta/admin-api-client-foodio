@@ -3,7 +3,7 @@ let service = (Restangular, $rootScope) => {
   return new class PauseApi {
 
     create(pause) {
-      this._serializeBeforeCreate(pause).then((serializedData) => {
+      return this._serializeBeforeCreate(pause).then((serializedData) => {
         return Restangular
           .one('companies', $rootScope.company.id)
           .one('stores', $rootScope.currentStore.id)
@@ -26,7 +26,7 @@ let service = (Restangular, $rootScope) => {
           description: pause.description
         };
 
-        resolve(data);
+        return resolve(data);
       });
     }
   }
