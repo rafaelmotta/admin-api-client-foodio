@@ -58,7 +58,8 @@ let service = ($q, Restangular, $rootScope) => {
           amount: cartItem.amount,
           note: cartItem.note,
           product_id: cartItem.product.id,
-          cart_item_addons_to_put_attributes: toPut
+          cart_item_addons_to_put_attributes: toPut,
+          bonificable: cartItem.bonificable
         };
 
         resolve(data);
