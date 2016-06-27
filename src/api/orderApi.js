@@ -79,7 +79,9 @@ let service = ($q, Restangular, $rootScope) => {
         let data = {
           id: order.id,
           change: order.change,
-          status: order.status
+          status: order.status,
+          error_reason_msg: order.error_reason_msg,
+          delayed_msg: order.delayed_msg
         };
 
         if(order.courier) {
