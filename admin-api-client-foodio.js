@@ -1531,7 +1531,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'subtitle', 'label', 'hide_on_kitchen_card', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
+            extraKeys: ['name', 'subtitle', 'label', 'hide_on_kitchen_card', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'enable_to_change_in_club', 'club_price', 'club_points', 'product_subcategory_id', 'product_addon_categories_attributes']
           });
         } else {
           return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).post('products', { product: product });
@@ -1583,7 +1583,7 @@ var service = function service(Restangular, ApiBase, $q, $rootScope) {
             data: product,
             key: 'product',
             imgKeys: ['img', 'img_hover'],
-            extraKeys: ['name', 'subtitle', 'label', 'hide_on_kitchen_card', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'product_subcategory_id', 'product_addon_categories_attributes']
+            extraKeys: ['name', 'subtitle', 'label', 'hide_on_kitchen_card', 'admin_only', 'order', 'description', 'price', 'in_promotion', 'old_price', 'change_img_on_hover', 'available', 'enable_to_change_in_club', 'club_price', 'club_points', 'product_subcategory_id', 'product_addon_categories_attributes']
           });
         } else {
           return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('product_categories', productCategory.id).one('product_subcategories', productSubcategory.id).one('products', product.id).patch({ product: product });
@@ -1716,8 +1716,17 @@ var service = function service(Restangular, $rootScope) {
 
     _createClass(RatingApi, [{
       key: 'fetch',
+
+      // GET /companies/:company_id/stores/:store_id/ratings
       value: function fetch(params) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('ratings').get(params);
+      }
+
+      // PATCH /companies/:company_id/stores/:store_id/ratings/:id
+    }, {
+      key: 'update',
+      value: function update(rating) {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('ratings', rating.id).patch({ rating: rating });
       }
     }]);
 
