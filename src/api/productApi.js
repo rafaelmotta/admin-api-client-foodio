@@ -64,7 +64,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
                       'hide_on_kitchen_card', 'admin_only', 'order',
                       'description', 'price', 'in_promotion',
                       'old_price', 'change_img_on_hover', 'available',
-                      'enable_to_change_in_club', 'club_price', 'club_points',
+                      'enable_to_change_in_club', 'club_price', 'club_points', 'bonifications_attributes',
                       'product_subcategory_id', 'product_addon_categories_attributes']
         });
       } else {
@@ -125,7 +125,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
                       'hide_on_kitchen_card', 'admin_only', 'order',
                       'description', 'price', 'in_promotion',
                       'old_price', 'change_img_on_hover', 'available',
-                      'enable_to_change_in_club', 'club_price', 'club_points',
+                      'enable_to_change_in_club', 'club_price', 'club_points', 'bonifications_attributes',
                       'product_subcategory_id', 'product_addon_categories_attributes']
         });
       } else {
