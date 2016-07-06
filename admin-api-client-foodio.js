@@ -290,7 +290,7 @@ var service = function service($q, Restangular, $rootScope) {
           for (var i in cartItem.cart_item_addons) {
             var a = cartItem.cart_item_addons[i];
 
-            if (a.id && a.price) {
+            if (a.id && a.price !== null) {
               toPut.push({ product_addon_id: a.id });
             } else {
               for (var j in a) {
