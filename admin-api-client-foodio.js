@@ -1734,6 +1734,10 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'update',
       value: function update(rating) {
+        if (rating.coupon && rating.coupon.id) {
+          rating.coupon_id = rating.coupon.id;
+        }
+
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('ratings', rating.id).patch({ rating: rating });
       }
     }]);

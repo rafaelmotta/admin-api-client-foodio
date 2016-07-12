@@ -13,6 +13,10 @@ let service = (Restangular, $rootScope) => {
 
     // PATCH /companies/:company_id/stores/:store_id/ratings/:id
     update(rating) {
+      if(rating.coupon && rating.coupon.id) {
+        rating.coupon_id = rating.coupon.id;  
+      }
+
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
