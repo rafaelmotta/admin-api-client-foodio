@@ -19,26 +19,30 @@ let service = (Restangular, $rootScope) => {
     }
 
     create(coupon) {
-      let conditions = angular.copy(coupon.conditions);
-      coupon.coupon_conditions_attributes = [];
+      let data = angular.copy(coupon);
+      data.coupon_conditions_attributes = [];
 
-      for(let i in conditions) {
-        if(conditions[i].itens.length) {
-          for(let j in conditions[i].itens) {
-            let type = conditions[i].type;
-            let id = conditions[i].itens[j].id;
+      for(let i in coupon.conditions) {
+        if(coupon.conditions[i].itens.length) {
+          for(let j in coupon.conditions[i].itens) {
+            let type = coupon.conditions[i].type;
+            let id = coupon.conditions[i].itens[j].id;
 
             if(id) {
-              coupon.coupon_conditions_attributes.push({ targetable_type: type, targetable_id: id });
+              data.coupon_conditions_attributes.push({
+                targetable_type: type, targetable_id: id
+              });
             }
           }
         }
       }
 
+      delete data.conditions;
+
       return Restangular
         .one('companies', $rootScope.company.id)
         .one('stores', $rootScope.currentStore.id)
-        .post('coupons', { coupon: coupon });
+        .post('coupons', { coupon: data });
     }
 
     destroy(coupon) {

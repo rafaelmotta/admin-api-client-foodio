@@ -616,23 +616,27 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'create',
       value: function create(coupon) {
-        var conditions = angular.copy(coupon.conditions);
-        coupon.coupon_conditions_attributes = [];
+        var data = angular.copy(coupon);
+        data.coupon_conditions_attributes = [];
 
-        for (var i in conditions) {
-          if (conditions[i].itens.length) {
-            for (var j in conditions[i].itens) {
-              var type = conditions[i].type;
-              var id = conditions[i].itens[j].id;
+        for (var i in coupon.conditions) {
+          if (coupon.conditions[i].itens.length) {
+            for (var j in coupon.conditions[i].itens) {
+              var type = coupon.conditions[i].type;
+              var id = coupon.conditions[i].itens[j].id;
 
               if (id) {
-                coupon.coupon_conditions_attributes.push({ targetable_type: type, targetable_id: id });
+                data.coupon_conditions_attributes.push({
+                  targetable_type: type, targetable_id: id
+                });
               }
             }
           }
         }
 
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('coupons', { coupon: coupon });
+        delete data.conditions;
+
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('coupons', { coupon: data });
       }
     }, {
       key: 'destroy',
