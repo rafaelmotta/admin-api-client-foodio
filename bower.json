@@ -1,11 +1,11 @@
 {
-  "name": "admin-api-client-foodio",
+  "name": "api-admin",
   "version": "0.0.1",
   "authors": [
     "Rafael Motta <rafaelmotta021@gmail.com>"
   ],
-  "description": "AngularJS rest cient for foodio admin",
-  "main": "api-admin",
+  "description": "AngularJS REST client for Its delivery admin API",
+  "main": "api-admin.js",
   "moduleType": [
     "es6"
   ],

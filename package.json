@@ -1,8 +1,8 @@
 {
-  "name": "foodio-api-client-admin",
+  "name": "api-admin",
   "version": "0.0.1",
-  "description": "AngularJS rest cient for foodio admin",
-  "main": "./admin-api-client-foodio.js",
+  "description": "AngularJS REST client for Its delivery admin API",
+  "main": "./api-admin.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
