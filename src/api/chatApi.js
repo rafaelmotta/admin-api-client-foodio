@@ -14,4 +14,4 @@ let service = (Restangular, $rootScope) => {
 };
 
 service.$inject = ['Restangular', '$rootScope'];
-angular.module('admin.api.client.foodio').factory('chatApi', service);
+angular.module('itsdelivery-api-admin').factory('chatApi', service);

@@ -6,4 +6,4 @@ let service = () => {
   };
 };
 
-angular.module('admin.api.client.foodio').factory('DeviseBase', service);
+angular.module('itsdelivery-api-admin').factory('DeviseBase', service);

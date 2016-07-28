@@ -1,11 +1,11 @@
-let app = angular.module('admin.api.client.foodio', ['constants.foodio']);
+let app = angular.module('itsdelivery-api-admin', ['constants.foodio']);
 
 let adminRestangular = (constants, RestangularProvider) => {
   return RestangularProvider.setBaseUrl(`${constants.api}/admin`);
 };
 
 adminRestangular.$inject = ['constants', 'RestangularProvider']
-angular.module('admin.api.client.foodio').config(adminRestangular);
+angular.module('itsdelivery-api-admin').config(adminRestangular);
 
 
 let publicRestangular = (constants, Restangular) => {

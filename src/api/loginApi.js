@@ -15,4 +15,4 @@ let service = (Restangular, DeviseBase) => {
 };
 
 service.$inject = ['Restangular', 'DeviseBase'];
-angular.module('admin.api.client.foodio').factory('loginApi', service);
+angular.module('itsdelivery-api-admin').factory('loginApi', service);
