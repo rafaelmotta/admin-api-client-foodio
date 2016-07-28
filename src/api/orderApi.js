@@ -81,7 +81,8 @@ let service = ($q, Restangular, $rootScope) => {
           change: order.change,
           status: order.status,
           error_reason_msg: order.error_reason_msg,
-          delayed_msg: order.delayed_msg
+          delayed_msg: order.delayed_msg,
+          admin_discount: order.admin_discount || null
         };
 
         if(order.courier) {
