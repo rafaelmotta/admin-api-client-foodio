@@ -570,7 +570,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var service = function service(PublicRetangular, $rootScope) {
+var service = function service(PublicRestangular, $rootScope) {
   return new ((function () {
     function CostumerInterestApi() {
       _classCallCheck(this, CostumerInterestApi);
@@ -581,7 +581,7 @@ var service = function service(PublicRetangular, $rootScope) {
 
       // POST /costumer_interests
       value: function create(costumer_interest) {
-        return PublicRetangular.post('costumer_interests', { costumer_interest: costumer_interest });
+        return PublicRestangular.post('costumer_interests', { costumer_interest: costumer_interest });
       }
     }]);
 
@@ -589,7 +589,7 @@ var service = function service(PublicRetangular, $rootScope) {
   })())();
 };
 
-service.$inject = ['PublicRetangular', '$rootScope'];
+service.$inject = ['PublicRestangular', '$rootScope'];
 angular.module('itsdelivery-api-admin').factory('costumerInterestApi', service);
 'use strict';
 
