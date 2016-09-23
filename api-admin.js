@@ -570,6 +570,33 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+var service = function service(PublicRetangular, $rootScope) {
+  return new ((function () {
+    function CostumerInterestApi() {
+      _classCallCheck(this, CostumerInterestApi);
+    }
+
+    _createClass(CostumerInterestApi, [{
+      key: 'create',
+
+      // POST /costumer_interests
+      value: function create(costumer_interest) {
+        return PublicRetangular.post('costumer_interests', { costumer_interest: costumer_interest });
+      }
+    }]);
+
+    return CostumerInterestApi;
+  })())();
+};
+
+service.$inject = ['PublicRetangular', '$rootScope'];
+angular.module('itsdelivery-api-admin').factory('costumerInterestApi', service);
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 var service = function service(Restangular, $rootScope) {
 
   return new ((function () {
