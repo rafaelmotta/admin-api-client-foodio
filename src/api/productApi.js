@@ -39,6 +39,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           max: product.product_addon_categories[i].max || null,
           min: product.product_addon_categories[i].min || null,
           auto_fill: product.product_addon_categories[i].auto_fill || false ,
+          allow_amount: product.product_addon_categories[i].allow_amount || false,
           product_addons_attributes: product_addons,
         });
       }
@@ -100,6 +101,7 @@ let service = (Restangular, ApiBase, $q, $rootScope) => {
           max: product.product_addon_categories[i].max || null,
           min: product.product_addon_categories[i].min || null,
           auto_fill: product.product_addon_categories[i].auto_fill || false,
+          allow_amount: product.product_addon_categories[i].allow_amount || false,
           product_addons_attributes: product_addons
         });
       }
