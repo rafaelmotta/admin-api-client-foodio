@@ -47,19 +47,22 @@ let service = ($q, Restangular, $rootScope) => {
           } else {
             for(let j in a) {
               let addon = a[j];
-              if(addon.selected) {
-                toPut.push({ product_addon_id: addon.id });
+              if (addon.amount > 0) {
+                toPut.push({
+                  product_addon_id: addon.id,
+                  amount: addon.amount
+                });
               }
             }
           }
         }
 
         let data = {
+          bonificable: cartItem.bonificable,
           amount: cartItem.amount,
           note: cartItem.note,
           product_id: cartItem.product.id,
-          cart_item_addons_to_put_attributes: toPut,
-          bonificable: cartItem.bonificable
+          cart_item_addons_to_put_attributes: toPut
         };
 
         resolve(data);
