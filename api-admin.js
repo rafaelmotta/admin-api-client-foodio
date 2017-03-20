@@ -559,6 +559,11 @@ var service = function service(Restangular, $rootScope) {
       value: function create(costumer) {
         return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).post('costumers', { costumer: costumer });
       }
+    }, {
+      key: 'export',
+      value: function _export() {
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('costumers').get('export');
+      }
     }]);
 
     return CostumerApi;

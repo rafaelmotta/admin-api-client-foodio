@@ -32,6 +32,14 @@ let service = (Restangular, $rootScope) => {
         .one('stores', $rootScope.currentStore.id)
         .post('costumers', { costumer: costumer });
     }
+
+    export() {
+      return Restangular
+        .one('companies', $rootScope.company.id)
+        .one('stores', $rootScope.currentStore.id)
+        .one('costumers')
+        .get('export');
+    }
   }
 };
 
