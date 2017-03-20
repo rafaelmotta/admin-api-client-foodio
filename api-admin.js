@@ -562,7 +562,7 @@ var service = function service(Restangular, $rootScope) {
     }, {
       key: 'export',
       value: function _export() {
-        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('costumers').get('export');
+        return Restangular.one('companies', $rootScope.company.id).one('stores', $rootScope.currentStore.id).one('costumers').one('export').get();
       }
     }]);
 
